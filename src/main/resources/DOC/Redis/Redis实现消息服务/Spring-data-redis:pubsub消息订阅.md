@@ -42,7 +42,6 @@ byName : 根据`属性名`自动装配。
 </bean>
 
 <!--
-下面也可以使用:
 <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
     <property name="connectionFactory" ref="jedisConnFactory" />
 </bean>
