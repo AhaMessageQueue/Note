@@ -218,7 +218,11 @@ OK
 ```
 从输出可以看出，之前指定的通配符为*，通配任何通道；之后是实际的通道名称：__keyevent@0__:expired，这里我们可以看到订阅收到了一个keyevent位于数据库0，事件类型为：expired，是一个过期事件；最后是chaijunkun，这个是过期数据的key。
 在官方文档中，keyevent通道的格式永远是这样的：
-`__keyevent@<db>__:prefix`
+```
+__keyevent@<db>__:prefix
+```
 对于数据过期事件，我们在绑定订阅时通配模板也可以精确地写成：
-`__keyevent@*__:expired`
+```
+__keyevent@*__:expired
+```
 通过示例代码，我们可以看到确实印证了之前的构想，实现了数据过期的事件触发（event）或者说回调（callback）
