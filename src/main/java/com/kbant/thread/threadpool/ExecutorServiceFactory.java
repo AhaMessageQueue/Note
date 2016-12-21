@@ -1,4 +1,4 @@
-package com.kbant.note.threadpool;
+package com.kbant.thread.threadpool;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
