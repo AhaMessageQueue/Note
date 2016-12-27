@@ -52,7 +52,7 @@
 - [Redis安装部署](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Redis/Redis%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2.md)
 - [spring-data-redis之RedisTemplate操作redis相关用法](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Redis/spring-data-redis%E4%B9%8BRedisTemplate%E6%93%8D%E4%BD%9Credis%E7%9B%B8%E5%85%B3%E7%94%A8%E6%B3%95.md)
 
-##### [COMMANDS](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Redis/COMMANDS)
+##### 1.[COMMANDS](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Redis/COMMANDS)
 
 ###### [发布订阅](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Redis/COMMANDS/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85)
 
@@ -64,11 +64,11 @@
 - [UNSUBSCRIBE](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Redis/COMMANDS/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/UNSUBSCRIBE.md)
 - [发布与订阅](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Redis/COMMANDS/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%AE%A2%E9%98%85.md)
 
-##### [Redis分布式锁](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Redis/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81)
+##### 2.[Redis分布式锁](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Redis/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81)
 
 - [基于Redis实现分布式锁](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Redis/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/%E5%9F%BA%E4%BA%8ERedis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81.md)
 
-##### [Redis实现消息服务](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Redis/Redis%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E6%9C%8D%E5%8A%A1)
+##### 3.[Redis实现消息服务](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Redis/Redis%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E6%9C%8D%E5%8A%A1)
 
 - [Redis实现消息订阅发布](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Redis/Redis%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E6%9C%8D%E5%8A%A1/Redis%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E5%8F%91%E5%B8%83.md)
 - [Redis键空间通知](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Redis/Redis%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E6%9C%8D%E5%8A%A1/Redis%E9%94%AE%E7%A9%BA%E9%97%B4%E9%80%9A%E7%9F%A5.md)
