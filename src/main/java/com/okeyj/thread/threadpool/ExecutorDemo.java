@@ -1,4 +1,4 @@
-package com.kbant.thread.threadpool;
+package com.okeyj.thread.threadpool;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -46,7 +46,6 @@ public class ExecutorDemo {
             this.taskName = taskName;
         }
 
-        @Override
         public Object call() throws Exception {
 
             //Java 6/7最佳的休眠方法为TimeUnit.MILLISECONDS.sleep(100);
@@ -68,7 +67,6 @@ public class ExecutorDemo {
             this.taskName = taskName;
         }
 
-        @Override
         public void run() {
 
             //Java 6/7最佳的休眠方法为TimeUnit.MILLISECONDS.sleep(100);

@@ -1,4 +1,4 @@
-package com.kbant.thread.threadpool;
+package com.okeyj.thread.threadpool;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

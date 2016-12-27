@@ -1,4 +1,4 @@
-package com.kbant.thread.threadpool;
+package com.okeyj.thread.threadpool;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
