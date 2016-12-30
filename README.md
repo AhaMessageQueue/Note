@@ -19,6 +19,7 @@
 ### [Linux](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Linux)
 
 - [Fedora20下安装deb包方法](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Linux/Fedora20%E4%B8%8B%E5%AE%89%E8%A3%85deb%E5%8C%85%E6%96%B9%E6%B3%95.md)
+- [Curl之PostJson](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Linux/Curl之PostJson.md)
 
 ### [Log](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Log)
 
@@ -83,6 +84,7 @@
 - [@Conumes和@Produces](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Spring/@Conumes和@Produces.md)
 - [header中Content-Disposition的作用](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Spring/header中Content-Disposition的作用.md)
 - [SpringMVC实现文件下载](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Spring/SpringMVC实现文件下载.md)
+- [Java监测方法运行时间效率方法](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Spring/Java监测方法运行时间效率方法.md)
 
 ### [wechat](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat)
 
