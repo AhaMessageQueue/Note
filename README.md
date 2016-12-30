@@ -84,6 +84,13 @@
 - [header中Content-Disposition的作用](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Spring/header中Content-Disposition的作用.md)
 - [SpringMVC实现文件下载](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Spring/SpringMVC实现文件下载.md)
 
+### [wechat](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat)
+
+#### [功能-模版消息](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat/功能-模版消息)
+
+- [待办事项提醒](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat/功能-模版消息/待办事项提醒.md)
+- [模板消息接口文档](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat/功能-模版消息/模板消息接口文档.md)
+
 ## [代码](https://github.com/OkeyJ/note/tree/master/src/main/java)
 
 ### [线程池](https://github.com/OkeyJ/note/tree/master/src/main/java/com/okeyj/thread/threadpool)
