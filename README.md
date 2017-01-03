@@ -85,6 +85,8 @@
 - [header中Content-Disposition的作用](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Spring/header中Content-Disposition的作用.md)
 - [SpringMVC实现文件下载](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Spring/SpringMVC实现文件下载.md)
 - [Java监测方法运行时间效率方法](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Spring/Java监测方法运行时间效率方法.md)
+- [SpringMVC介绍之Validation](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Spring/SpringMVC介绍之Validation.md)
+- [SpringMVC验证框架Validation自定义注解实现传递参数到国际化资源文件](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Spring/SpringMVC验证框架Validation自定义注解实现传递参数到国际化资源文件.md)
 
 ### [wechat](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat)
 
