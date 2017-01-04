@@ -95,6 +95,17 @@
 - [待办事项提醒](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat/功能-模版消息/待办事项提醒.md)
 - [模板消息接口文档](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat/功能-模版消息/模板消息接口文档.md)
 
+### [Mongo](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Mongo)
+
+- [MongoDB_Map_Reduce](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Mongo/MongoDB_Map_Reduce.md)
+- [mongodb数据的导出和远程导入](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Mongo/mongodb数据的导出和远程导入.md)
+
+### [Hadoop](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Hadoop)
+
+- [Hadoop学习笔记：MapReduce框架详解](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Hadoop/Hadoop学习笔记：MapReduce框架详解.md)
+- [MapReduce原理与设计思想](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Hadoop/MapReduce原理与设计思想.md)
+- [分布式文件系统HDFS中Block介绍](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Hadoop/分布式文件系统HDFS中Block介绍.md)
+
 ## [代码](https://github.com/OkeyJ/note/tree/master/src/main/java)
 
 ### [线程池](https://github.com/OkeyJ/note/tree/master/src/main/java/com/okeyj/thread/threadpool)
