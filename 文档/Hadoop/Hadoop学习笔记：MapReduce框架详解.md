@@ -95,31 +95,6 @@ public class WordCount {
 }
 ```
 
-
-    首页
-    最新文章
-    IT 职场
-    前端
-    后端
-    移动端
-    数据库
-    运维
-    其他技术
-
-伯乐在线 > 首页 > 所有文章 > IT技术 > Hadoop学习笔记：MapReduce框架详解
-Hadoop学习笔记：MapReduce框架详解
-
-2015/02/05 · IT技术 · 3 评论 · Hadoop, MapReduce
-分享到：
-96
-
-    React Native快速开发 厕所在哪App LBS定位 框架封装
-    高性能可扩展MySQL数据库设计及架构优化 电商项目
-    强力django+杀手级xadmin打造上线标准的在线教育平台
-    React Native贯穿全栈开发App
-
-原文出处： 夏天的森林
-
 开始聊mapreduce，mapreduce是hadoop的计算框架，我学hadoop是从hive开始入手，再到hdfs，当我学习hdfs时候，就感觉到hdfs和mapreduce关系的紧密。这个可能是我做技术研究的思路有关，我开始学习某一套技术总是想着这套技术到底能干什么，只有当我真正理解了这套技术解决了什么问题时候，我后续的学习就能逐步的加快，而学习hdfs时候我就发现，要理解hadoop框架的意义，hdfs和mapreduce是密不可分，所以当我写分布式文件系统时候，总是感觉自己的理解肤浅，今天我开始写mapreduce了，今天写文章时候比上周要进步多，不过到底能不能写好本文了，只有试试再说了。
 Mapreduce初析
 
