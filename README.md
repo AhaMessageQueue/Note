@@ -6,6 +6,7 @@
 
 - [发布Maven构件到中央仓库](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Git/%E5%8F%91%E5%B8%83Maven%E6%9E%84%E4%BB%B6%E5%88%B0%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93.md)
 - [将Smart构建发布到中央仓库](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Git/%E5%B0%86Smart%E6%9E%84%E5%BB%BA%E5%8F%91%E5%B8%83%E5%88%B0%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93.md)
+- [Git详解之一Git起步](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Git/Git详解之一Git起步.md)
 
 ### [Joda-Time](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Joda-Time)
 
