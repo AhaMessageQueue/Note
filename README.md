@@ -99,6 +99,10 @@
 
 - [MongoDB_Map_Reduce](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Mongo/MongoDB_Map_Reduce.md)
 - [mongodb数据的导出和远程导入](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Mongo/mongodb数据的导出和远程导入.md)
+- [MongoDB备份(mongodump)与恢复(mongorestore)](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Mongo/MongoDB备份(mongodump)与恢复(mongorestore).md)
+- [MongoDB删除文档](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Mongo/MongoDB删除文档.md)
+- [MongoDB查询文档](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Mongo/MongoDB查询文档.md)
+- [MongoDB的多表关联操作](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Mongo/MongoDB的多表关联操作.md)
 
 ### [Hadoop](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Hadoop)
 
