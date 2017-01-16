@@ -8,6 +8,10 @@
 - [将Smart构建发布到中央仓库](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Git/%E5%B0%86Smart%E6%9E%84%E5%BB%BA%E5%8F%91%E5%B8%83%E5%88%B0%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93.md)
 - [Git详解之一Git起步](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Git/Git详解之一Git起步.md)
 
+### [JavaScript](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/JavaScript)
+
+- [JavaScript_prototype_属性](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/JavaScript/JavaScript_prototype_属性.md)
+
 ### [Joda-Time](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Joda-Time)
 
 - [Java日期计算之Joda-Time](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Joda-Time/Java%E6%97%A5%E6%9C%9F%E8%AE%A1%E7%AE%97%E4%B9%8BJoda-Time.md)
@@ -88,6 +92,7 @@
 - [Java监测方法运行时间效率方法](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Spring/Java监测方法运行时间效率方法.md)
 - [SpringMVC介绍之Validation](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Spring/SpringMVC介绍之Validation.md)
 - [SpringMVC验证框架Validation自定义注解实现传递参数到国际化资源文件](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Spring/SpringMVC验证框架Validation自定义注解实现传递参数到国际化资源文件.md)
+- [关于Spring无法通过注解注入xml配置的bean](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Spring/关于Spring无法通过注解注入xml配置的bean.md)
 
 ### [wechat](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat)
 
@@ -104,6 +109,7 @@
 - [MongoDB删除文档](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Mongo/MongoDB删除文档.md)
 - [MongoDB查询文档](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Mongo/MongoDB查询文档.md)
 - [MongoDB的多表关联操作](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Mongo/MongoDB的多表关联操作.md)
+- [Spring_Data_MongoDB之_id和类型映射](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Mongo/Spring_Data_MongoDB之_id和类型映射.md)
 
 ### [Hadoop](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Hadoop)
 

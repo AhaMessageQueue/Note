@@ -175,7 +175,27 @@ String s4 = dateTime.toString("yyyy/MM/dd HH:mm ZZZZ");
 String s5 = dateTime.toString("yyyy/MM/dd HH:mm Z");
 ```
 
+# 解析字符串
+```
+DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+DateTime dateTime = DateTime.parse("2015-12-21 23:22:45", format);
+System.out.println(dateTime.toString("yyyy/MM/dd HH:mm:ss EE"));
+```
 
-Jodd的JDateTime也提供了很不错的时间API。
+# 时区
+```
+//默认设置为日本时间
+DateTimeZone.setDefault(DateTimeZone.forID("Asia/Tokyo"));
+DateTime dt1 = new DateTime();
+System.out.println(dt1.toString("yyyy-MM-dd HH:mm:ss"));
 
-参考资料：http://www.ibm.com/developerworks/cn/java/j-jodatime.html
+//伦敦时间
+DateTime dt2 = new DateTime(DateTimeZone.forID("Europe/London"));
+System.out.println(dt2.toString("yyyy-MM-dd HH:mm:ss"));
+```
+
+Joda的DateTime也提供了很不错的时间API。
+
+参考链接：
+http://www.joda.org/joda-time/quickstart.html
+http://www.ibm.com/developerworks/cn/java/j-jodatime.html
