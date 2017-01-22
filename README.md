@@ -96,10 +96,19 @@
 
 ### [wechat](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat)
 
+- [不同场景下的ACCESS_TOKEN](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat/不同场景下的ACCESS_TOKEN.md)
+
+#### [公众号第三方平台](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat/公众号第三方平台)
+
+- [创建公众号第三方平台](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat/公众号第三方平台/创建公众号第三方平台.md)
+- [授权流程技术说明](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat/公众号第三方平台/授权流程技术说明.md)
+
 #### [功能-模版消息](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat/功能-模版消息)
 
 - [待办事项提醒](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat/功能-模版消息/待办事项提醒.md)
 - [模板消息接口文档](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat/功能-模版消息/模板消息接口文档.md)
+
+
 
 ### [Mongo](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Mongo)
 
