@@ -120,6 +120,10 @@
 - [MongoDB的多表关联操作](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Mongo/MongoDB的多表关联操作.md)
 - [Spring_Data_MongoDB之_id和类型映射](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Mongo/Spring_Data_MongoDB之_id和类型映射.md)
 
+### [Mysql](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Mysql)
+
+- [在Orderby子句中使用CASE语句](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Mysql/在Orderby子句中使用CASE语句.md)
+
 ### [Hadoop](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Hadoop)
 
 - [Hadoop学习笔记：MapReduce框架详解](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Hadoop/Hadoop学习笔记：MapReduce框架详解.md)
