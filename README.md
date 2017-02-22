@@ -12,6 +12,12 @@
 
 - [JavaScript_prototype_属性](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/JavaScript/JavaScript_prototype_属性.md)
 
+### [JDO](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/JDO)
+
+- [DataNucleus配置使用](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/JDO/DataNucleus配置使用.md)
+- [JDO快速入门](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/JDO/JDO快速入门.md)
+- [DataNucleus之JDO操作示例](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/JDO/DataNucleus之JDO操作示例.md)
+
 ### [Joda-Time](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Joda-Time)
 
 - [Java日期计算之Joda-Time](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Joda-Time/Java%E6%97%A5%E6%9C%9F%E8%AE%A1%E7%AE%97%E4%B9%8BJoda-Time.md)
