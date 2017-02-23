@@ -14,9 +14,8 @@
 
 ### [JDO](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/JDO)
 
-- [DataNucleus配置使用](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/JDO/DataNucleus配置使用.md)
+- [DataNucleus配置和使用详解](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/JDO/DataNucleus配置和使用详解.md)
 - [JDO快速入门](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/JDO/JDO快速入门.md)
-- [DataNucleus之JDO操作示例](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/JDO/DataNucleus之JDO操作示例.md)
 
 ### [Joda-Time](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Joda-Time)
 
