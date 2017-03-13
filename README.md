@@ -31,14 +31,17 @@
 - [Fedora20下安装deb包方法](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Linux/Fedora20%E4%B8%8B%E5%AE%89%E8%A3%85deb%E5%8C%85%E6%96%B9%E6%B3%95.md)
 - [Curl之PostJson](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Linux/Curl之PostJson.md)
 
-### [Log](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Log)
+### [Logging](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Logging)
 
-- [Logback--过滤器+补充](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Log/Logback--%E8%BF%87%E6%BB%A4%E5%99%A8%2B%E8%A1%A5%E5%85%85.md)
-- [Logback浅析](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Log/Logback%E6%B5%85%E6%9E%90.md)
+- [Java日志组件介绍（common-logging，log4j，slf4j，logback）](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Logging/Java日志组件介绍（common-logging，log4j，slf4j，logback）.md)
+- [Logback--过滤器+补充](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Logging/Logback--%E8%BF%87%E6%BB%A4%E5%99%A8%2B%E8%A1%A5%E5%85%85.md)
+- [Logback浅析](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Logging/Logback%E6%B5%85%E6%9E%90.md)
 
 ### [Maven](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Maven)
 
 - [apache maven-release-plugin 版本管理方式](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Maven/apache%20maven-release-plugin%20%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E6%96%B9%E5%BC%8F.md)
+- [maven-antrun-plugin](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Maven/maven-antrun-plugin.md)
+- [使用maven-war-plugin对Maven项目进行动态打包](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Maven/使用maven-war-plugin对Maven项目进行动态打包.md)
 
 ### [Mockito](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Mockito)
 
@@ -65,16 +68,6 @@
 
 #### [命令](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Redis/命令)
 
-###### [发布订阅](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Redis/COMMANDS/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85)
-
-- [PSUBSCRIBE](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Redis/命令/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/PSUBSCRIBE.md)
-- [PUBLISH](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Redis/命令/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/PUBLISH.md)
-- [PUBSUB](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Redis/命令/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/PUBSUB.md)
-- [PUNSUBSCRIBE](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Redis/命令/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/PUNSUBSCRIBE.md)
-- [SUBSCRIBE](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Redis/命令/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/SUBSCRIBE.md)
-- [UNSUBSCRIBE](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Redis/命令/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/UNSUBSCRIBE.md)
-- [发布与订阅](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Redis/命令/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%AE%A2%E9%98%85.md)
-
 #### [Redis分布式锁](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Redis/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81)
 
 - [基于Redis实现分布式锁](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Redis/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/%E5%9F%BA%E4%BA%8ERedis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81.md)
@@ -84,6 +77,18 @@
 - [Redis实现消息订阅发布](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Redis/Redis%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E6%9C%8D%E5%8A%A1/Redis%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E5%8F%91%E5%B8%83.md)
 - [Redis键空间通知](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Redis/Redis%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E6%9C%8D%E5%8A%A1/Redis%E9%94%AE%E7%A9%BA%E9%97%B4%E9%80%9A%E7%9F%A5.md)
 - [Spring-data-redis:pubsub消息订阅](https://github.com/OkeyJ/note/blob/master/%E6%96%87%E6%A1%A3/Redis/Redis%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E6%9C%8D%E5%8A%A1/Spring-data-redis:pubsub%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85.md)
+
+#### [基于Redis的分布式队列](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Redis/基于Redis的分布式队列)
+
+- [基于Redis实现分布式消息队列（一）–缘起](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Redis/基于Redis的分布式队列/基于Redis实现分布式消息队列（一）–缘起.md)
+- [基于Redis实现分布式消息队列（二）–分布式消息队列功能设计](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Redis/基于Redis的分布式队列/基于Redis实现分布式消息队列（二）–分布式消息队列功能设计.md)
+- [基于Redis实现分布式消息队列（三）–Redis功能分析](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Redis/基于Redis的分布式队列/基于Redis实现分布式消息队列（三）–Redis功能分析.md)
+- [基于Redis实现分布式消息队列（四）–代码实现](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Redis/基于Redis的分布式队列/基于Redis实现分布式消息队列（四）–代码实现.md)
+
+### [Restful](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Restful)
+
+- [Spring集成Jersey开发](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Restful/Spring集成Jersey开发.md)
+- [Jersey+Spring构建RESTful Web服务](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Restful/Jersey+Spring构建RESTful Web服务.md)
 
 ### [Retrofit](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Retrofit)
 
@@ -98,20 +103,21 @@
 - [SpringMVC介绍之Validation](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Spring/SpringMVC介绍之Validation.md)
 - [SpringMVC验证框架Validation自定义注解实现传递参数到国际化资源文件](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Spring/SpringMVC验证框架Validation自定义注解实现传递参数到国际化资源文件.md)
 - [关于Spring无法通过注解注入xml配置的bean](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/Spring/关于Spring无法通过注解注入xml配置的bean.md)
+>该部分由于内容较多不在一一列出。
 
-### [wechat](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat)
+### [WeChat](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/WeChat)
 
-- [不同场景下的ACCESS_TOKEN](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat/不同场景下的ACCESS_TOKEN.md)
+- [不同场景下的ACCESS_TOKEN](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/WeChat/不同场景下的ACCESS_TOKEN.md)
 
-#### [公众号第三方平台](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat/公众号第三方平台)
+#### [公众号第三方平台](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/WeChat/公众号第三方平台)
 
-- [创建公众号第三方平台](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat/公众号第三方平台/创建公众号第三方平台.md)
-- [授权流程技术说明](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat/公众号第三方平台/授权流程技术说明.md)
+- [创建公众号第三方平台](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/WeChat/公众号第三方平台/创建公众号第三方平台.md)
+- [授权流程技术说明](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/WeChat/公众号第三方平台/授权流程技术说明.md)
 
-#### [功能-模版消息](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat/功能-模版消息)
+#### [功能-模版消息](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/WeChat/功能-模版消息)
 
-- [待办事项提醒](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat/功能-模版消息/待办事项提醒.md)
-- [模板消息接口文档](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/wechat/功能-模版消息/模板消息接口文档.md)
+- [待办事项提醒](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/WeChat/功能-模版消息/待办事项提醒.md)
+- [模板消息接口文档](https://github.com/OkeyJ/note/tree/master/%E6%96%87%E6%A1%A3/WeChat/功能-模版消息/模板消息接口文档.md)
 
 
 

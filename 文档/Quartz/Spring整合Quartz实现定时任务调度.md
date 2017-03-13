@@ -2,10 +2,16 @@ Spring 提供了几个帮助类用于在应用中做调度，包括JDK Timer类�
 
 # Quartz基础
 Quartz包括五种主要结构用于实现调度：
-
-Job接口 JobDetail类 Trigger 抽象类 Scheduler接口 SchedulerFactory 接口.
+```
+Job接口 
+JobDetail类 
+Trigger 抽象类 
+Scheduler接口 
+SchedulerFactory 接口.
+```
 Job接口表示一个作业(job)。一个作业专注做一件事。它的API非常简洁。
 只有一个execute方法，该方法在作业被执行时有Quartz调度。
+
 该方法有一个JobExecuteContext参数，可以通过该参数给execute()方法传递有用信息。
 
 ```
@@ -45,10 +51,10 @@ public class SimpleSchedule {
             scheduler.start();
 
             JobDetail jobDetail = new JobDetail("SimpleJob",null, SimpleJob.class);
-            Trigger simplerTrigger = TriggerUtils.makeSecondlyTrigger(10);
-            simplerTrigger.setName("SimpleTrigger");
+            Trigger simpleTrigger = TriggerUtils.makeSecondlyTrigger(10);
+            simpleTrigger.setName("SimpleTrigger");
 
-            scheduler.scheduleJob(jobDetail, simplerTrigger);
+            scheduler.scheduleJob(jobDetail, simpleTrigger);
         }catch (SchedulerException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -79,7 +85,7 @@ MethodInvokingJobDetailFactoryBean用于在类中调用任何对象的方法。
 # 尾注
 在Spring中使用Quartz而不是单独的一个应用的好处包括：
 
-将所有的任务调度设置放在同一个地方，是任务易于维护。
+将所有的任务调度设置放在同一个地方，使任务易于维护。
 只对Job编码，Trigger和Scheduler可以通过配置设置
 可以使用Pojo Java Bean执行job，而无需实现Job接口
 
