@@ -31,6 +31,64 @@ OkHttpClient.Builder builder = new OkHttpClient.Builder();
 ### 缓存机制
 无网络时，也能显示数据
 
+1. 先开启OkHttp缓存
+    ```
+    File httpCacheDirectory = new File(MyApp.mContext.getCacheDir(), "responses");
+    int cacheSize = 10 * 1024 * 1024; // 10 MiB
+    Cache cache = new Cache(httpCacheDirectory, cacheSize);
+    
+    OkHttpClient client = new OkHttpClient.Builder()
+           .addInterceptor(REWRITE_CACHE_CONTROL_INTERCEPTOR)
+           .cache(cache).build();
+    Retrofit retrofit = new Retrofit.Builder()
+           .baseUrl(BASE_URL)
+           .client(client)
+           .addConverterFactory(GsonConverterFactory.create())
+           .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+           .build();
+    ```
+    这一步是设置缓存路径，以及缓存大小，其中addInterceptor是我们第二步的内容。
+    
+2. 设置 OkHttp 拦截器
+    
+    - 设置拦截器
+    ```
+    Interceptor REWRITE_CACHE_CONTROL_INTERCEPTOR = chain -> {
+    
+        CacheControl.Builder cacheBuilder = new CacheControl.Builder();
+        cacheBuilder.maxAge(0, TimeUnit.SECONDS);
+        cacheBuilder.maxStale(365,TimeUnit.DAYS);
+        CacheControl cacheControl = cacheBuilder.build();
+        
+        Request request = chain.request();
+        if(!StateUtils.isNetworkAvailable(MyApp.mContext)){
+         request = request.newBuilder()
+                 .cacheControl(cacheControl)
+                 .build();
+        }
+        Response originalResponse = chain.proceed(request);
+        if (StateUtils.isNetworkAvailable(MyApp.mContext)) {
+         int maxAge = 0; // read from cache
+         return originalResponse.newBuilder()
+                 .removeHeader("Pragma")
+                 .header("Cache-Control", "public ,max-age=" + maxAge)
+                 .build();
+        } else {
+         int maxStale = 60 * 60 * 24 * 28; // tolerate 4-weeks stale
+         return originalResponse.newBuilder()
+                 .removeHeader("Pragma")
+                 .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
+                 .build();
+        }
+    };
+    ```
+    
+**`max-age`和`max-stale`的区别：**
+
+![](\images\max-age与max-stale含义.png)
+
+想了解更多[点击这里](http://www.cnblogs.com/_franky/archive/2011/11/23/2260109.html).
+
 ### 公共参数
 ```
 //公共参数

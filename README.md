@@ -8,6 +8,10 @@
 - [RSync实现文件备份同步](https://github.com/OkeyJ/note/tree/master/note/Git/RSync实现文件备份同步.md)
 - [带你走进rsync的世界](https://github.com/OkeyJ/note/tree/master/note/Git/带你走进rsync的世界.md)
 
+## [Java](https://github.com/OkeyJ/note/tree/master/note/Java)
+
+- [System.nanoTime与System.currentTimeMillis的区别](https://github.com/OkeyJ/note/tree/master/note/Java/System.nanoTime与System.currentTimeMillis的区别.md)
+
 ## [JavaScript](https://github.com/OkeyJ/note/tree/master/note/JavaScript)
 
 - [JavaScript_prototype_属性](https://github.com/OkeyJ/note/tree/master/note/JavaScript/JavaScript_prototype_属性.md)
@@ -104,6 +108,8 @@
 - [Retrofit用法详解.md](https://github.com/OkeyJ/note/tree/master/note/Retrofit/Retrofit用法详解.md)
 - [Retrofit配置.md](https://github.com/OkeyJ/note/tree/master/note/Retrofit/Retrofit配置.md)
 - [浅谈Retrofit封装-让框架更加简洁易用.md](https://github.com/OkeyJ/note/tree/master/note/Retrofit/浅谈Retrofit封装-让框架更加简洁易用.md)
+- [okhttp缓存浅析](https://github.com/OkeyJ/note/tree/master/note/Retrofit/okhttp缓存浅析.md)
+- [教你如何使用okhttp缓存.md](https://github.com/OkeyJ/note/tree/master/note/Retrofit/教你如何使用okhttp缓存)
 
 ## [Spring](https://github.com/OkeyJ/note/tree/master/note/Spring)
 
