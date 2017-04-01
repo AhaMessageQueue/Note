@@ -63,7 +63,7 @@
 
 ## [Nginx](https://github.com/OkeyJ/note/tree/master/note/Nginx)
 
-- [Nginx Location匹配规则](https://github.com/OkeyJ/note/tree/master/note/Nginx/Nginx Location匹配规则.md)
+- [Nginx之Location匹配规则](https://github.com/OkeyJ/note/tree/master/note/Nginx/Nginx之Location匹配规则.md)
 - [Nginx之proxy_redirect详解](https://github.com/OkeyJ/note/tree/master/note/Nginx/Nginx之proxy_redirect详解.md)
 - [Nginx安装与配置](https://github.com/OkeyJ/note/tree/master/note/Nginx/Nginx安装与配置.md)
 - [Nginx负载均衡配置](https://github.com/OkeyJ/note/tree/master/note/Nginx/Nginx负载均衡配置.md)
@@ -99,7 +99,7 @@
 ## [Restful](https://github.com/OkeyJ/note/tree/master/note/Restful)
 
 - [Spring集成Jersey开发](https://github.com/OkeyJ/note/tree/master/note/Restful/Spring集成Jersey开发.md)
-- [Jersey+Spring构建RESTful Web服务](https://github.com/OkeyJ/note/tree/master/note/Restful/Jersey+Spring构建RESTful Web服务.md)
+- [Jersey+Spring构建RESTfulWeb服务](https://github.com/OkeyJ/note/tree/master/note/Restful/Jersey+Spring构建RESTfulWeb服务.md)
 
 ## [Retrofit](https://github.com/OkeyJ/note/tree/master/note/Retrofit)
 
@@ -120,7 +120,7 @@
 - [SpringMVC介绍之Validation](https://github.com/OkeyJ/note/tree/master/note/Spring/SpringMVC介绍之Validation.md)
 - [SpringMVC验证框架Validation自定义注解实现传递参数到国际化资源文件](https://github.com/OkeyJ/note/tree/master/note/Spring/SpringMVC验证框架Validation自定义注解实现传递参数到国际化资源文件.md)
 - [关于Spring无法通过注解注入xml配置的bean](https://github.com/OkeyJ/note/tree/master/note/Spring/关于Spring无法通过注解注入xml配置的bean.md)
->该部分由于内容较多不在一一列出。
+>该部分由于内容较多不再一一列出。
 
 ## [WeChat](https://github.com/OkeyJ/note/tree/master/note/WeChat)
 
