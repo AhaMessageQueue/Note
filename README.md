@@ -136,6 +136,12 @@
 - [待办事项提醒](https://github.com/OkeyJ/note/tree/master/note/WeChat/功能-模版消息/待办事项提醒.md)
 - [模板消息接口文档](https://github.com/OkeyJ/note/tree/master/note/WeChat/功能-模版消息/模板消息接口文档.md)
 
+#### [加解密](https://github.com/OkeyJ/note/tree/master/note/WeChat/加解密)
+
+- [Base64编码](https://github.com/OkeyJ/note/tree/master/note/WeChat/加解密/Base64编码.md)
+- [消息加解密-技术方案](https://github.com/OkeyJ/note/tree/master/note/WeChat/加解密/消息加解密-技术方案.md)
+- [消息加解密-接入指引](https://github.com/OkeyJ/note/tree/master/note/WeChat/加解密/消息加解密-接入指引.md)
+- [消息加解密-方案概述](https://github.com/OkeyJ/note/tree/master/note/WeChat/加解密/消息加解密-方案概述.md)
 
 
 ## [Mongo](https://github.com/OkeyJ/note/tree/master/note/Mongo)
