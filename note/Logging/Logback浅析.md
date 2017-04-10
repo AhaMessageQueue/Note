@@ -43,7 +43,9 @@ Logback的过滤器基于三值逻辑（ternary logic），允许把它们组装
 Logback-classic提供两种类型的过滤器：常规过滤器和TuroboFilter过滤器。Logback整体流程：Logger 产生日志信息；Layout修饰这条msg的显示格式；Filter过滤显示的内容；Appender具体的显示，即保存这日志信息的地方。
 
 ### 具体使用案例
-Java项目中一般都会应用比如struts、spring、hibernate等开源框架，而这些框架很多是应用log4j记录日志的，所以我们考虑用log4j + slf4j + logback 。这样我们需要导入log4j-over-slf4j-1.6.4.jar 、logback-classic-1.0.1.jar 、logback-core-1.0.1.jar 、slf4j-api-1.6.4.jar ，如果你要用到EvaluatorFilter过滤器来过滤日志Msg中的特殊字符需要导入其依赖包 janino-2.3.2.jar。其logback.xml
+Java项目中一般都会应用比如struts、spring、hibernate等开源框架，而这些框架很多是应用log4j记录日志的，所以我们考虑用log4j + slf4j + logback 。
+这样我们需要导入log4j-over-slf4j-1.6.4.jar(将log4j桥接到slf4j，即将log4j的日历转发到slf4j输出，如果没有导入log4j包，则需要导入log4j Jar包) 、logback-classic-1.0.1.jar（logback-classic完整实现SLF4J API） 、logback-core-1.0.1.jar 、slf4j-api-1.6.4.jar ，
+如果你要用到EvaluatorFilter过滤器来过滤日志Msg中的特殊字符需要导入其依赖包 janino-2.3.2.jar。其logback.xml
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>

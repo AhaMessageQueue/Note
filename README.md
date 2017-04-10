@@ -41,6 +41,7 @@
 - [Java日志组件介绍（common-logging，log4j，slf4j，logback）](https://github.com/OkeyJ/note/tree/master/note/Logging/Java日志组件介绍（common-logging，log4j，slf4j，logback）.md)
 - [Logback--过滤器+补充](https://github.com/OkeyJ/note/blob/master/note/Logging/Logback--%E8%BF%87%E6%BB%A4%E5%99%A8%2B%E8%A1%A5%E5%85%85.md)
 - [Logback浅析](https://github.com/OkeyJ/note/blob/master/note/Logging/Logback%E6%B5%85%E6%9E%90.md)
+- [Logback日志系统配置攻略](https://github.com/OkeyJ/note/tree/master/note/Logging/Logback日志系统配置攻略.md)
 
 ## [Maven](https://github.com/OkeyJ/note/tree/master/note/Maven)
 
@@ -120,6 +121,7 @@
 - [SpringMVC介绍之Validation](https://github.com/OkeyJ/note/tree/master/note/Spring/SpringMVC介绍之Validation.md)
 - [SpringMVC验证框架Validation自定义注解实现传递参数到国际化资源文件](https://github.com/OkeyJ/note/tree/master/note/Spring/SpringMVC验证框架Validation自定义注解实现传递参数到国际化资源文件.md)
 - [关于Spring无法通过注解注入xml配置的bean](https://github.com/OkeyJ/note/tree/master/note/Spring/关于Spring无法通过注解注入xml配置的bean.md)
+- [Spring容器加载完毕做一件事情（利用ContextRefreshedEvent事件）](https://github.com/OkeyJ/note/tree/master/note/Spring/Spring容器加载完毕做一件事情（利用ContextRefreshedEvent事件）.md)
 >该部分由于内容较多不再一一列出。
 
 ## [WeChat](https://github.com/OkeyJ/note/tree/master/note/WeChat)

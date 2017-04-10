@@ -43,10 +43,10 @@ public class A {
 
 ## slf4j 与 common-logging 比较
 **common-logging**通过**动态查找的机制**，在程序运行时自动找出真正使用的日志库。
-由于它使用了ClassLoader寻找和载入底层的日志库， 导致了象OSGI这样的框架无法正常工作，因为OSGI的不同的插件使用自己的ClassLoader。 
+由于它使用了ClassLoader寻找和载入底层的日志库， 导致了像OSGI这样的框架无法正常工作，因为OSGI的不同的插件使用自己的ClassLoader。 
 OSGI的这种机制保证了插件互相独立，然而却使Apache Common-Logging无法工作。
 
-**slf4j**在**编译时静态绑定**真正的Log库,因此可以再OSGI中使用。
+**slf4j**在**编译时静态绑定**真正的Log库,因此可以在OSGI中使用。
 另外，SLF4J 支持参数化的log字符串，避免了之前为了减少字符串拼接的性能损耗而不得不写的if(logger.isDebugEnable())，
 现在你可以直接写：logger.debug(“current user is: {}”, user)。
 拼装消息被推迟到了它能够确定是不是要显示这条消息的时候，但是获取参数的代价并没有幸免。
@@ -59,7 +59,7 @@ Apache的一个开放源代码项目，通过使用Log4j，我们可以控制日
 ## LogBack 
 Logback是由log4j创始人设计的又一个开源日志组件。
 logback当前分成三个模块：logback-core,logback- classic和logback-access。logback-core是其它两个模块的基础模块。
-logback-classic是log4j的一个 改良版本。此外logback-classic完整实现SLF4J API使你可以很方便地更换成其它日志系统如log4j或JDK14 Logging。
+logback-classic是log4j的一个改良版本。此外logback-classic完整实现SLF4J API使你可以很方便地更换成其它日志系统如log4j或JDK14 Logging。
 logback-access访问模块与Servlet容器集成提供通过Http来访问日志的功能。 
 
 ## Log4j 与 LogBack 比较
@@ -108,4 +108,4 @@ jcl-over-slf4j.jar --- (redirect) ---> SLF4j ---> slf4j-log4j12-version.jar --->
 
 所以使用 SLF4J 的比较典型搭配就是把 slf4j-api、JCL 桥接器、java.util.logging（JUL）桥接器、log4j 绑定器、log4j 这5个 jar 放置在 CLASS_PATH 里。
 
-不过并不是所有APP容器都是使用 log4j 的，比如 Google AppEngine 它使用的是 java.util.logging（JUL），这时应用 SLF4J 的搭配就变成 slf4j-api、JCL桥接器、logj4桥接器、JUL绑定器这4个 jar 放置在 WEB-INF/lib 里。
+不过并不是所有APP容器都是使用 log4j 的，比如 Google AppEngine 它使用的是 java.util.logging（JUL），这时应用 SLF4J 的搭配就变成 slf4j-api、JCL桥接器、log4j桥接器、JUL绑定器这4个 jar 放置在 WEB-INF/lib 里。
