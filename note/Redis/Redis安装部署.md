@@ -14,8 +14,8 @@ $ tar -zxvf redis-2.6.13.tar.gz
 ```
 $ cd redis-2.6.13
 $ make
-$make install
-$cp redis.conf /etc/
+$ make install
+$ cp redis.conf /etc/
 ```
 
 参数介绍：
@@ -97,8 +97,25 @@ a) $ ps -ef | grep redis
 redis-server /usr/.../redis.conf 启动redis服务，并指定配置文件
 redis-cli 启动redis 客户端
 
-pkill redis-server 关闭redis服务
-redis-cli shutdown 关闭redis客户端
+#关闭redis服务
+pkill redis-server
+#使用客户端关闭redis服务
+redis-cli shutdown 
 
 netstat -tunlp|grep 6379 查看redis 默认端口号6379占用情况
 ```
+
+pkill 和killall 应用方法差不多，也是直接杀死运行中的程序；如果您想杀掉单个进程，请用kill 来杀掉。
+应用方法：
+```
+#pkill 正在运行的程序名
+```
+举例：
+```
+[root@localhost beinan]# pgrep -l gaim
+2979 gaim
+[root@localhost beinan]# pkill gaim
+```
+也就是说：
+kill 对应的是 PID
+pkill 对应的是COMMAND
