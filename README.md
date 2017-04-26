@@ -122,14 +122,18 @@
 - [SpringMVC验证框架Validation自定义注解实现传递参数到国际化资源文件](https://github.com/Smartboooy/JavaEE_Note/tree/master/note/Spring/SpringMVC验证框架Validation自定义注解实现传递参数到国际化资源文件.md)
 - [关于Spring无法通过注解注入xml配置的bean](https://github.com/Smartboooy/JavaEE_Note/tree/master/note/Spring/关于Spring无法通过注解注入xml配置的bean.md)
 - [Spring容器加载完毕做一件事情（利用ContextRefreshedEvent事件）](https://github.com/Smartboooy/JavaEE_Note/tree/master/note/Spring/Spring容器加载完毕做一件事情（利用ContextRefreshedEvent事件）.md)
+- [IntrospectorCleanupListener作用.md](https://github.com/Smartboooy/JavaEE_Note/tree/master/note/Spring/IntrospectorCleanupListener作用.md)
 
 ## [WebService](https://github.com/Smartboooy/JavaEE_Note/tree/master/note/WebService)
 
 - [【WebService】一、带你走进webservice的世界.md](https://github.com/Smartboooy/JavaEE_Note/tree/master/note/WebService/【WebService】一、带你走进webservice的世界.md)
 - [【WebService】二、自定义WebService服务及其调用.md](https://github.com/Smartboooy/JavaEE_Note/tree/master/note/WebService/【WebService】二、自定义WebService服务及其调用.md)
 - [【WebService】三、wsdl配置详解以及使用注解修改wsdl配置.md](https://github.com/Smartboooy/JavaEE_Note/tree/master/note/WebService/【WebService】三、wsdl配置详解以及使用注解修改wsdl配置.md)
-- [【WebService】四、CXF处理javaBean等复合类型以及Map等复杂类型的数据.md](https://github.com/Smartboooy/JavaEE_Note/tree/master/note/WebService/【WebService】四、CXF处理javaBean等复合类型以及Map等复杂类型的数据.md)
+- [【WebService】四、CXF处理JavaBean等复合类型以及Map等复杂类型的数据.md](https://github.com/Smartboooy/JavaEE_Note/tree/master/note/WebService/【WebService】四、CXF处理JavaBean等复合类型以及Map等复杂类型的数据.md)
 - [【WebService】五、CXF拦截器的设置以及自定义CXF拦截器.md](https://github.com/Smartboooy/JavaEE_Note/tree/master/note/WebService/【WebService】五、CXF拦截器的设置以及自定义CXF拦截器.md)
+- [CXF之WebService整合Spring.md](https://github.com/Smartboooy/JavaEE_Note/tree/master/note/WebService/CXF之WebService整合Spring.md)
+- [CXF之用CXF利用内置jetty发布ws.md](https://github.com/Smartboooy/JavaEE_Note/tree/master/note/WebService/CXF之用CXF利用内置jetty发布ws.md)
+- [CXF之实现一个Restful风格.md](https://github.com/Smartboooy/JavaEE_Note/tree/master/note/WebService/CXF之实现一个Restful风格.md)
 
 ## [WeChat](https://github.com/Smartboooy/JavaEE_Note/tree/master/note/WeChat)
 
