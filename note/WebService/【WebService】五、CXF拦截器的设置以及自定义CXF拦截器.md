@@ -43,7 +43,8 @@ public class MyInterceptor extends AbstractPhaseInterceptor<SoapMessage>  {
         if(headers == null || headers.size() == 0) {
             throw new Fault(new IllegalArgumentException("没有Header,拦截器实施拦截"));
         }
-        Header firstHeader = headers.get(0); //我们等会只传一个头部过来
+        QName qName = new QName("AuthHeader");
+        Header header = soapMessage.getHeader(qName);
         Element elm = (Element) firstHeader.getObject();//将该头部转成一个Element对象
         NodeList userList = elm.getElementsByTagName("username"); //根据标签获取值
         NodeList pwdList = elm.getElementsByTagName("password");
@@ -93,7 +94,7 @@ public class AddHeaderInterceptor extends AbstractPhaseInterceptor<SoapMessage> 
         Document doc = DOMUtils.createDocument();
 
         // 定义三个对象
-        Element elm = doc.createElement("authHeader");
+        Element elm = doc.createElement("AuthHeader");
         Element userElm = doc.createElement("username");
         Element pwdElm = doc.createElement("password");
 
@@ -111,3 +112,43 @@ public class AddHeaderInterceptor extends AbstractPhaseInterceptor<SoapMessage> 
 }
 ```
 从上面的代码中可以看出，首先通过构造函数将用户名和密码传进去，然后获取将要发送的soap消息的头部，紧接着认为构造出几个元素，将用户名和密码封装到元素中去，并放到soap消息的头部，这样等会soap消息就会携带这个用户名和密码的消息了，这样就能在上面的服务端取出，进行身份认证了，这样就前后连通了起来。测试结果我就不贴了，可以查看控制台打印的结果，重点看一下soap消息，里面封装好了一个DOM对象，封装了用户名和密码。
+
+上面运行之后，服务端接收到的数据如下：
+```
+09:48:50.286 [qtp1651754404-19 - /ws] INFO org.apache.cxf.services.MyWebServiceImplService.MyWebServiceImplPort.MyWebServiceImpl - Inbound Message
+----------------------------
+ID: 2
+Address: http://127.0.0.1:8888/ws
+Encoding: UTF-8
+Http-Method: POST
+Content-Type: text/xml; charset=UTF-8
+Headers: {Accept=[*/*], Cache-Control=[no-cache], connection=[keep-alive], Content-Length=[275], content-type=[text/xml; charset=UTF-8], Host=[127.0.0.1:8888], Pragma=[no-cache], SOAPAction=[""], User-Agent=[Apache CXF 3.1.6]}
+Payload: 
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Header>
+        <AuthHeader>
+            <username>admin</username>
+            <password>123</password>
+        </AuthHeader>
+    </soap:Header>
+    <soap:Body>
+        <ns2:getRoles xmlns:ns2="http://server.ws.commons.github.com/"/>
+    </soap:Body>
+</soap:Envelope>
+--------------------------------------
+```
+由此可知，如果同时指定：
+```
+Element elm = doc.createElement("AuthHeader");
+
+...//省略部分代码
+
+headerList.add(new Header(new QName("head"), elm));
+```
+请求头会使用`<AuthHeader></AuthHeader>`作为xml元素。
+
+因此，服务端需要使用如下方式获取该请求头。
+```
+QName qName = new QName("AuthHeader");
+Header header = soapMessage.getHeader(qName);
+```

@@ -51,6 +51,18 @@
 
 <servlet-mapping>
     <servlet-name>CXFService</servlet-name>
+    <url-pattern>/*</url-pattern>
+</servlet-mapping>
+```
+特别的：
+```
+<servlet>
+    <servlet-name>CXFService</servlet-name>
+    <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>CXFService</servlet-name>
     <url-pattern>/webservice/*</url-pattern>
 </servlet-mapping>
 ```
