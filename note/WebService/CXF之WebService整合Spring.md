@@ -1,3 +1,5 @@
+>spring4.2.0以上需要使用cxf3.x以上的版本
+
 首先，CXF和spring整合需要准备如下Jar包：
 ```
 <!-- cxf-webservice start -->
@@ -7,21 +9,27 @@
     <artifactId>cxf-rt-frontend-jaxws</artifactId>
     <version>3.1.6</version>
 </dependency>
+<!-- 该包会被自动依赖引入 -->
+<!-- 
 <dependency>
     <groupId>org.apache.cxf</groupId>
     <artifactId>cxf-core</artifactId>
     <version>3.1.6</version>
 </dependency>
+-->
 <dependency>
     <groupId>org.apache.cxf</groupId>
     <artifactId>cxf-rt-transports-http</artifactId>
     <version>3.1.6</version>
 </dependency>
+<!-- cxf内置的服务器jetty用户测试和调试 -->
+<!-- 
 <dependency>
     <groupId>org.apache.cxf</groupId>
     <artifactId>cxf-rt-transports-http-jetty</artifactId>
     <version>3.1.6</version>
 </dependency>
+-->
 <!-- 加入cxf-restful依赖包 -->
 <dependency>
     <groupId>org.apache.cxf</groupId>
@@ -93,15 +101,27 @@
 添加完这个文件后，还需要在这个文件中导入这么几个文件。文件内容如下： 
 
 ```
+<!-- spring4.2.0以上需要使用cxf3.x以上的版本  -->
+<!--
+    cxf3.x版本以后，导入如下文件会报错：
+    <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
+    cxf3.x版本，该文件不存在。
+ -->
 <import resource="classpath:META-INF/cxf/cxf.xml"/>
-<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
 <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
 ```
-备注：cxf3以后，只需要引入这个配置文件即可，其他两个废弃掉了 
+此外，cxf3.x版本以后，导入如下文件会报错：
 ```
-<import resource="classpath:META-INF/cxf/cxf.xml" />
+<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
 ```
-可以cxf核心包下，看一下，也只有cxf.xml这一个配置文件了，如里配置原来的3个，启服务时，会报错
+错误如下：
+```
+nested exception is java.io.FileNotFoundException: class path resource [META-INF/cxf/cxf-extension-soap.xml] cannot be opened because it does not exist
+```
+`cxf.xml`与`cxf-servlet.xml`文件位置：
+
+![](\images\cxf.xml.png)
+![](\images\cxf-servlet.xml.png)
 
 下面开始写服务器端代码，首先定制服务器端的接口，代码如下： 
 ```
