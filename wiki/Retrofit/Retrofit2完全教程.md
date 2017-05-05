@@ -413,8 +413,8 @@ Retrofit retrofit = new Retrofit.Builder()
 ```
 public interface CallAdapter<T> {
 
-  // 直正数据的类型 如Call<T> 中的 T
-  // 这个 T 会作为Converter.Factory.responseBodyConverter 的第一个参数
+  // 真正数据的类型 如Call<R> 中的 R
+  // 这个 R 会作为Converter.Factory.responseBodyConverter 的第一个参数
   // 可以参照上面的自定义Converter
   Type responseType();
 
@@ -422,18 +422,18 @@ public interface CallAdapter<T> {
 
   // 用于向Retrofit提供CallAdapter的工厂类
   abstract class Factory {
-    // 在这个方法中判断是否是我们支持的类型，returnType 即Call<Requestbody>和`Observable<Requestbody>`
+    // 在这个方法中判断是否是我们支持的类型，returnType 即Call<R>和Observable<R>
     // RxJavaCallAdapterFactory 就是判断returnType是不是Observable<?> 类型
     // 不支持时返回null
     public abstract CallAdapter<?> get(Type returnType, Annotation[] annotations,
     Retrofit retrofit);
 
-    // 用于获取泛型的参数 如 Call<Requestbody> 中 Requestbody
+    // 用于获取泛型的参数 如 Call<R> 中 R
     protected static Type getParameterUpperBound(int index, ParameterizedType type) {
       return Utils.getParameterUpperBound(index, type);
     }
 
-    // 用于获取泛型的原始类型 如 Call<Requestbody> 中的 Call
+    // 用于获取泛型的原始类型 如 Call<R> 中的 Call
     // 上面的get方法需要使用该方法。
     protected static Class<?> getRawType(Type type) {
       return Utils.getRawType(type);
