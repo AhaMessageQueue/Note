@@ -1,11 +1,13 @@
-## 场景
-假如有以下属性文件dev.properties, 需要注入下面的tag:
+**Spring之通过@Value注解注入属性的几种方式:**
+
+### 场景描述
+假如有以下属性文件`dev.properties`, 代码中需要注入下面的tag:
 ```
 tag=123
 ```
-### 通过PropertyPlaceholderConfigurer
+### 一、通过PropertyPlaceholderConfigurer配置
 ```
-<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"><!-- 属性占位符配置 -->
+<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     <property name="location" value="dev.properties" />
 </bean>
 ```
@@ -14,7 +16,7 @@ tag=123
 @Value("${tag}")
 private String tag;
 ```
-### 通过PreferencesPlaceholderConfigurer
+### 二、通过PreferencesPlaceholderConfigurer配置
 ```
 <bean id="appConfig" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
     <property name="location" value="dev.properties" />
@@ -25,7 +27,7 @@ private String tag;
 @Value("${tag}")
 private String tag;
 ```
-## 通过PropertiesFactoryBean
+## 三、通过PropertiesFactoryBean配置
 ```
 <bean id="config" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
     <property name="location" value="dev.properties" />
@@ -37,8 +39,8 @@ private String tag;
 private String tag;
 ```
 
-## 通过util:properties
-效果同PropertiesFactoryBean一样 代码：
+## 四、通过util:properties配置
+效果同`PropertiesFactoryBean`一样 代码：
 ```
 @Value("#{config['tag']}")
 private String tag;
@@ -63,10 +65,9 @@ private String tag;
 private String tag;
 ```
 
-> 20170215补充如下：
 ## 代码方式注入
 直接在Java类中通过注解实现配置文件加载
-**在java类中引入配置文件**
+**在Java类中引入配置文件**
 ```
 @Configuration
 @PropertySource("classpath:client/oauth2.properties")
@@ -94,8 +95,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by 刘春龙 on 2017/2/15.
- * 测试Controller
- * 测试地址：http://127.0.0.1:8080/spring-base4j/spring/tom/say
  */
 @Controller
 @RequestMapping("spring")
@@ -109,9 +108,10 @@ public class SpringController {
     @RequestMapping(value = "{username}/say", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody//通过@ResponseBody返回json数据，否则会被当作视图进行转发
     public String sayHello(@PathVariable("username") String username) {
-        return username + ", env.data_store_dir:" + environment.getProperty("data_store_dir") + ", oauth2Config.redirect_url:" + oauth2Config.redirect_url;
+        return username + ", env.data_store_dir:" + environment.getProperty("data_store_dir") + ", config.redirect_url:" + oauth2Config.redirect_url;
     }
 }
 
 ```
->注：类成员变量不可为static
+>注：
+>类成员变量不可为static

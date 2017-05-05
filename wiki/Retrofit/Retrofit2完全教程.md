@@ -124,6 +124,10 @@ public interface BlogService {
  
 >注2：Query、Field和Part这三者都支持数组和实现了Iterable接口的类型，如List，Set等，方便向后台传递数组。
 
+>PartMap注解支持一个Map作为参数，支持 {@link RequestBody } 类型，
+如果有其它的类型，会被{@link retrofit2.Converter}转换，如后面会介绍的使用{@link com.google.gson.Gson} 的 {@link retrofit2.converter.gson.GsonRequestBodyConverter}
+所以{@link MultipartBody.Part} 就不适用了,所以文件只能用@Part MultipartBody.Part
+
 ```
 Call<ResponseBody> foo(@Query("ids[]") List<Integer> ids);
 //结果：ids[]=0&ids[]=1&ids[]=2
@@ -196,6 +200,19 @@ blog.content = "新建的Blog";
 blog.title = "测试";
 blog.author = "怪盗kidou";
 Call<Result<Blog>> call = service.createBlog(blog);
+call.enqueue(new Callback<Result<Blog>>() {
+    @Override
+    public void onResponse(Call<Result<Blog>> call, Response<Result<Blog>> response) {
+        // 已经转换为想要的类型了
+        Result<Blog> result = response.body();
+        System.out.println(result);
+    }
+
+    @Override
+    public void onFailure(Call<Result<Blog>> call, Throwable t) {
+        t.printStackTrace();
+    }
+});
 ```
 结果：
 ```
@@ -203,15 +220,26 @@ Result{code=200, msg='OK', data=Blog{id=20, date='2016-04-21 05:29:58', author='
 ```
 Result的方法： 
 ```
-public String toString() {
-                    return "Result{" +
-                         "code=" + code +
-                         ", msg='" + msg + '\'' +
-                         ", data=" + data +
-                         ", count=" + count +
-                         ", page=" + page +
-                         '}';
-                }
+package com.github.ikidou.entity;
+
+public class Result<T> {
+    public int code;
+    public String msg;
+    public T data;
+    public long count;
+    public long page;
+
+    @Override
+    public String toString() {
+        return "Result{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                ", count=" + count +
+                ", page=" + page +
+                '}';
+    }
+}
 ```
 示例源码见 [Example07.java](https://github.com/ikidou/Retrofit2Demo/blob/master/client/src/main/java/com/github/ikidou/Example07.java)
 
@@ -311,7 +339,7 @@ public interface Converter<F, T> {
       return null;
     }
 
-    // 在这里创建 从自定类型到ResponseBody 的Converter,不能处理就返回null，
+    // 在这里创建 从自定类型到RequestBody的Converter,不能处理就返回null，
     // 主要用于对Part、PartMap、Body注解的处理
     public Converter<?, RequestBody> requestBodyConverter(Type type,
     Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) {
@@ -365,13 +393,13 @@ public static class StringConverterFactory extends Converter.Factory {
 ```
 Retrofit retrofit = new Retrofit.Builder()
       .baseUrl("http://localhost:4567/")
-      // 如是有Gson这类的Converter 一定要放在其它前面
+      // 如是有Gson这类的Converter 一定要放在其前面
       .addConverterFactory(StringConverterFactory.create())
       .addConverterFactory(GsonConverterFactory.create())
       .build();
 ```
 >注：`addConverterFactory`是有先后顺序的，如果有多个`ConverterFactory`都支持同一种类型，那么就是只有第一个才会被使用，
-而`GsonConverterFactory`是不判断是否支持的，所以这里交换了顺序还会有一个异常抛出，原因是类型不匹配。
+而`GsonConverterFactory`是不判断是否支持的，所以如果这里交换了顺序，则会有一个异常抛出，原因是类型不匹配。
 
 只要返回值类型的泛型参数就会由我们的`StringConverter`处理,不管是`Call<String>`还是`Observable<String>`
 

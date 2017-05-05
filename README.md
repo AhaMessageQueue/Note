@@ -1,5 +1,7 @@
 # 学习笔记
->笔记内容收集于互联网，其版权属原作者所有。如有侵权，请与我联系，我会及时删除或更新来源！
+
+>声明：现大部分文章为寻找问题时在网上相互转载，在此做个记录，方便自己也方便有类似问题的朋友，故原出处已不好查到，如有侵权，请发邮件（631521383@qq.com）表明文章和原出处地址，我一定在文章中注明。谢谢。 
+
 ## [Git](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Git)
 
 - [发布Maven构件到中央仓库](https://github.com/Smartboooy/JavaEE_Note/blob/master/wiki/Git/%E5%8F%91%E5%B8%83Maven%E6%9E%84%E4%BB%B6%E5%88%B0%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93.md)
@@ -7,6 +9,7 @@
 - [Git详解之一Git起步](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Git/Git详解之一Git起步.md)
 - [RSync实现文件备份同步](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Git/RSync实现文件备份同步.md)
 - [带你走进rsync的世界](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Git/带你走进rsync的世界.md)
+- [Git之删除未监视的文件untracked_files](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Git/Git之删除未监视的文件untracked_files.md)
 
 ## [Jackson](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Jackson/Jackson处理复杂类型(List,map)两种方法.md)
 
@@ -39,6 +42,9 @@
 
 - [Fedora20下安装deb包方法](https://github.com/Smartboooy/JavaEE_Note/blob/master/wiki/Linux/Fedora20%E4%B8%8B%E5%AE%89%E8%A3%85deb%E5%8C%85%E6%96%B9%E6%B3%95.md)
 - [Curl之PostJson](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Linux/Curl之PostJson.md)
+- [Linux_top各个标识的含义详解](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Linux/Linux_top各个标识的含义详解.md)
+- [Linux_vmstat命令实战详解](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Linux/Linux_vmstat命令实战详解.md)
+- [Linux查看CPU和内存使用情况](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Linux/Linux查看CPU和内存使用情况.md)
 
 ## [Logging](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Logging)
 
@@ -127,6 +133,8 @@
 - [关于Spring无法通过注解注入xml配置的bean](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/关于Spring无法通过注解注入xml配置的bean.md)
 - [Spring容器加载完毕做一件事情（利用ContextRefreshedEvent事件）](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/Spring容器加载完毕做一件事情（利用ContextRefreshedEvent事件）.md)
 - [IntrospectorCleanupListener作用.md](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/IntrospectorCleanupListener作用.md)
+- [Spring之@Value注解需要注意](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/Spring之@Value注解需要注意.md)
+- [Spring之通过@Value注解注入属性的几种方式](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/Spring之通过@Value注解注入属性的几种方式.md)
 
 ## [WebService](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/WebService)
 
@@ -183,3 +191,8 @@
 - [MapReduce原理与设计思想](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Hadoop/MapReduce原理与设计思想.md)
 - [分布式文件系统HDFS中Block介绍](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Hadoop/分布式文件系统HDFS中Block介绍.md)
 
+## [Thread](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Thread)
+
+- [Java安全管理器SecurityManager](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Thread/Java安全管理器SecurityManager.md)
+- [Java线程池例子](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Thread/Java线程池例子.md)
+- [Java线程池的监控](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Thread/Java线程池的监控.md)

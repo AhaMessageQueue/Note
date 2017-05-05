@@ -1,4 +1,4 @@
-## 一、 简介
+## 一、简介
 [Retrofit](http://square.github.io/retrofit/)是Square公司开发的一款针对Android网络请求的框架，Retrofit2底层基于[OkHttp](http://square.github.io/okhttp/)实现的，
 OkHttp现在已经得到Google官方认可，大量的app都采用OkHttp做网络请求，其源码详见[OkHttp Github](https://github.com/square/okhttp)。
 
@@ -165,7 +165,7 @@ https://api.douban.com/v2/book/1003078
 
 ### Post请求
 
-#### @field
+#### @Field
 ```
 @FormUrlEncoded
 @POST("book/reviews")
