@@ -3,7 +3,7 @@
 ![](\images\Okhttp流程.png)
 
 ## 拦截器Interceptors
-通常情况下拦截器用来添加，移除或者转换请求或者回应的头部信息。 拦截器接口中有intercept(Chain chain)方法，同时返回Response。这里有一个简单的拦截弹，它记录了即将到来的请求和输入的响应。
+通常情况下拦截器用来添加，移除或者转换请求或者回应的头部信息。 拦截器接口中有intercept(Chain chain)方法，同时返回Response。这里有一个简单的拦截器，它记录了即将到来的请求和输入的响应。
 
 chain.proceed(request)是拦截器的关键部分。这个看似简单的方法是所有的HTTP工作发生的地方，产生满足要求的响应。
 
@@ -24,11 +24,12 @@ Request request = new Request.Builder()
 Response response = client.newCall(request).execute();
 response.body().close();
 ```
-URL http://www.publicobject.com/helloworld.txt会重定向到https://publicobject.com/helloworld .txt，OkHttp会自动执行这些重定向。
+URL http://www.publicobject.com/helloworld.txt会重定向到https://publicobject.com/helloworld.txt，OkHttp会自动执行这些重定向。
 application interceptor执行之后，chain.proceed()返回的response会重定向到下面的response：
 ```
 INFO: Sending request http://www.publicobject.com/helloworld.txt on null
 User-Agent: OkHttp Example
+
 INFO: Received response for https://publicobject.com/helloworld.txt in 1179.7ms
 Server: nginx/1.4.6 (Ubuntu)
 Content-Type: text/plain
@@ -52,23 +53,28 @@ response.body().close();
 当我们运行这个代码的时候，拦截程序运行了两次。一次为http://www.publicobject.com/helloworld.txt初始请求， 
 和另一个重定向到https://publicobject.com/helloworld.txt。
 
+![](./images/interceptor_log.png)
+
 ```
 INFO: Sending request http://www.publicobject.com/helloworld.txt on Connection{www.publicobject.com:80, proxy=DIRECT hostAddress=54.187.32.157 cipherSuite=none protocol=http/1.1}
 User-Agent: OkHttp Example
 Host: www.publicobject.com
 Connection: Keep-Alive
 Accept-Encoding: gzip
+
 INFO: Received response for http://www.publicobject.com/helloworld.txt in 115.6ms
 Server: nginx/1.4.6 (Ubuntu)
 Content-Type: text/html
 Content-Length: 193
 Connection: keep-alive
 Location: https://publicobject.com/helloworld.txt
+
 INFO: Sending request https://publicobject.com/helloworld.txt on Connection{publicobject.com:443, proxy=DIRECT hostAddress=54.187.32.157 cipherSuite=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA protocol=http/1.1}
 User-Agent: OkHttp Example
 Host: publicobject.com
 Connection: Keep-Alive
 Accept-Encoding: gzip
+
 INFO: Received response for https://publicobject.com/helloworld.txt in 80.9ms
 Server: nginx/1.4.6 (Ubuntu)
 Content-Type: text/plain
@@ -101,9 +107,12 @@ Connection: keep-alive
 例如，你可以使用一个应用程序拦截来增加request body压缩， 如果你连接的服务器支持这种操作的话。
 
 ```
-/** 该拦截器压缩HTTP请求体。 许多Web服务器无法处理这个！ */
+/** 
+ *   该拦截器压缩HTTP请求体。 许多Web服务器无法处理这个！ 
+ */
 final class GzipRequestInterceptor implements Interceptor {
-  @Override public Response intercept(Chain chain) throws IOException {
+  @Override 
+  public Response intercept(Chain chain) throws IOException {
     Request originalRequest = chain.request();
     // 如果请求体为空，或者已经指定请求体的编码，则不处理
     if (originalRequest.body() == null || originalRequest.header("Content-Encoding") != null) {
@@ -117,13 +126,16 @@ final class GzipRequestInterceptor implements Interceptor {
   }
   private RequestBody gzip(final RequestBody body) {
     return new RequestBody() {
-      @Override public MediaType contentType() {
+      @Override 
+      public MediaType contentType() {
         return body.contentType();
       }
-      @Override public long contentLength() {
+      @Override 
+      public long contentLength() {
         return -1; // 我们预先不知道压缩长度!
       }
-      @Override public void writeTo(BufferedSink sink) throws IOException {
+      @Override 
+      public void writeTo(BufferedSink sink) throws IOException {
         BufferedSink gzipSink = Okio.buffer(new GzipSink(sink));
         body.writeTo(gzipSink);
         gzipSink.close();
@@ -133,9 +145,8 @@ final class GzipRequestInterceptor implements Interceptor {
 }
 ```
 ## 重写Responses
-对应的，拦截器可以重写response headers和转换response body。这是一般比重写请求标头更危险因为它可能违反了服务器的期望！ 
-如果你是在处理一个棘手的问题，并准备面对处理的后果，重写response headers是一个强大的方式来解决问题。
-例如，你可以将服务器的错误配置的缓存控制 响应头修改以便更好地响应缓存：
+如果你是在处理一个棘手的问题，并准备面对处理的后果，重写`response headers`是一个强大的方式来解决问题。
+例如，你可以将服务器的错误配置的缓存控制响应头修改以便更好地响应缓存：
 ```
 /** 危险的拦截器重写服务器的缓存控制头。 */
 private static final Interceptor REWRITE_CACHE_CONTROL_INTERCEPTOR = new Interceptor() {
@@ -167,7 +178,9 @@ okhttp拦截器需要okhttp 2.2或更高。
 OkHttpClient okHttpClient = new OkHttpClient();
 if(mSetCache)
     setCache(okHttpClient);
+    
     .......
+    
 private static void setCache(OkHttpClient okHttpClient) {
     File cacheDirectory = new File(LSApp.getApplication().getExternalCacheDir(), "HttpCache");
     okHttpClient.networkInterceptors().add(REWRITE_CACHE_CONTROL_INTERCEPTOR);
@@ -178,8 +191,9 @@ private static void setCache(OkHttpClient okHttpClient) {
     }
 }
 ```
-上面设置了缓存路径，在项目包的目录下面的HttpCache文件夹中，
-然后设置了名为REWRITE_CACHE_CONTROL_INTERCEPTOR的拦截器。 
+
+上面设置了缓存路径，在项目包的目录下面的`HttpCache`文件夹中，
+然后设置了名为`REWRITE_CACHE_CONTROL_INTERCEPTOR`的拦截器。 
 然后实例化Cache，最后调用okHttpClient.setCache(cache);进入setCache一探究竟。
 ```
 public OkHttpClient setCache(Cache cache) {
@@ -202,7 +216,7 @@ public final class Cache {
 ```
 首先Cache里面有四个常量，第一个可以看出是版本号，后三个的作用后面会介绍。
 
-接下来定义了一个对象private final DiskLruCache cache;这个是装饰模式里面的被装饰的对象，也是Cache里面的核心对象。 
+接下来定义了一个对象`private final DiskLruCache cache;`这个是`装饰模式`里面的`被装饰的对象`，也是Cache里面的核心对象。 
 Cache的作用只是对DiskLruCache的装饰，而DiskLruCache里面有最核心、最原始、最基本的接口或抽象类的实现。
 
 接下来重点分析最核心的一个方法：get方法。

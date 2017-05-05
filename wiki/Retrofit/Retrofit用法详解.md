@@ -2,7 +2,7 @@
 [Retrofit](http://square.github.io/retrofit/)是Square公司开发的一款针对Android网络请求的框架，Retrofit2底层基于[OkHttp](http://square.github.io/okhttp/)实现的，
 OkHttp现在已经得到Google官方认可，大量的app都采用OkHttp做网络请求，其源码详见[OkHttp Github](https://github.com/square/okhttp)。
 
->本文全部是在Retrofit2.0+版本基础上论述，所用例子全部来自豆瓣API
+>注：本文全部是在Retrofit2.0+版本基础上论述，所用例子全部来自豆瓣API
 
 首先先来看一个完整Get请求是如何实现：
 

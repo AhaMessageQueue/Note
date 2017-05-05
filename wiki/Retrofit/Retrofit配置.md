@@ -63,18 +63,18 @@ OkHttpClient.Builder builder = new OkHttpClient.Builder();
         Request request = chain.request();
         if(!StateUtils.isNetworkAvailable(MyApp.mContext)){
          request = request.newBuilder()
-                 .cacheControl(cacheControl)
-                 .build();
+                     .cacheControl(CacheControl.FORCE_CACHE)
+                     .build();
         }
         Response originalResponse = chain.proceed(request);
         if (StateUtils.isNetworkAvailable(MyApp.mContext)) {
-         int maxAge = 0; // read from cache
+         int maxAge = 0; // 有网络时 设置缓存超时时间0个小时
          return originalResponse.newBuilder()
                  .removeHeader("Pragma")
                  .header("Cache-Control", "public ,max-age=" + maxAge)
                  .build();
         } else {
-         int maxStale = 60 * 60 * 24 * 28; // tolerate 4-weeks stale
+         int maxStale = 60 * 60 * 24 * 28; // 无网络时，设置超时为4周
          return originalResponse.newBuilder()
                  .removeHeader("Pragma")
                  .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
