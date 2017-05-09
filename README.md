@@ -115,13 +115,16 @@
 
 ## [Retrofit](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Retrofit)
 
-- [简单说下Retrofit怎么设置请求头信息](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Retrofit/简单说下Retrofit怎么设置请求头信息.md)
-- [Retrofit2完全教程.md](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Retrofit/Retrofit2完全教程.md)
-- [Retrofit用法详解.md](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Retrofit/Retrofit用法详解.md)
-- [Retrofit配置.md](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Retrofit/Retrofit配置.md)
-- [浅谈Retrofit封装-让框架更加简洁易用.md](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Retrofit/浅谈Retrofit封装-让框架更加简洁易用.md)
-- [okhttp缓存浅析](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Retrofit/okhttp缓存浅析.md)
-- [教你如何使用okhttp缓存.md](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Retrofit/教你如何使用okhttp缓存)
+- [Retrofit配置](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Retrofit/Retrofit配置.md)
+- [Retrofit用法详解](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Retrofit/Retrofit用法详解.md)
+- [Retrofit2完全教程](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Retrofit/Retrofit2完全教程.md)
+- [okhttp之缓存使用](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Retrofit/okhttp之缓存使用.md)
+- [okhttp之深入理解Interceptors](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Retrofit/okhttp之深入理解Interceptors.md)
+- [okhttp之拦截器浅析](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Retrofit/okhttp之拦截器浅析.md)
+- [okhttp3使用Interceptor的缓存问题](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Retrofit/okhttp3使用Interceptor的缓存问题.md)
+- [okhttp3_Retrofit2缓存问题](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Retrofit/okhttp3_Retrofit2缓存问题.md)
+- [okhttp3_Retrofit2.0缓存机制以及遇到的问题](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Retrofit/okhttp3_Retrofit2.0缓存机制以及遇到的问题.md)
+
 
 ## [Spring](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring)
 

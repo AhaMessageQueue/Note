@@ -1,16 +1,20 @@
-## 本文注目录：
-- Retrofit入门
-- Retrofit注解详解
-- Gson与Converter
-- RxJava与CallAdapter
-- 自定义Converter
-- 自定义CallAdapter
-- 其它说明
+## 本文主目录：
+
+- Retrofit入门;
+- Retrofit注解详解;
+- Gson与Converter;
+- RxJava与CallAdapter;
+- 自定义Converter;
+- 自定义CallAdapter;
+- 其它说明;
 
 ## 前言
+
 本文中的Retrofit均指代Retrofit2.0。
+
 本文涉及到的代码以及测试使用的接口可在[Github](https://github.com/ikidou/Retrofit2Demo)上找到。
-测试接口服务器在 server 项目下，直接运行 `RESTServer.main()` 即可启动测试服务器，下面代码示例均使用该接口(接口地址 http://localhost:4567/ ).
+
+测试接口服务器在 `server` 项目下，直接运行 `RESTServer.main()` 即可启动测试服务器，下面代码示例均使用该接口(接口地址 http://localhost:4567/ ).
 当然你也可以自己借助 [json-server](https://github.com/typicode/json-server) 或 最新开源的[Parse](https://github.com/ParsePlatform/parse-server) 搭建一个REST API，不过都需要安装Node.js，有兴趣的可以去试试。
 
 接口列表：

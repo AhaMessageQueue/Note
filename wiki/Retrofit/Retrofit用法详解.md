@@ -1,4 +1,5 @@
 ## 一、简介
+
 [Retrofit](http://square.github.io/retrofit/)是Square公司开发的一款针对Android网络请求的框架，Retrofit2底层基于[OkHttp](http://square.github.io/okhttp/)实现的，
 OkHttp现在已经得到Google官方认可，大量的app都采用OkHttp做网络请求，其源码详见[OkHttp Github](https://github.com/square/okhttp)。
 
@@ -311,7 +312,8 @@ public interface BlueService {
         @Query("count") int count);
 }
 ```
-此外也可以通过Interceptor来定义静态请求头
+
+2. 通过Interceptor来定义静态请求头
 ```
 public class RequestInterceptor implements Interceptor {
   @Override
@@ -398,7 +400,7 @@ public class AppClient {
     }  
 }  
 ```
-2. 动态方法
+3. 动态方法
 ```
 public interface BlueService {
   @GET("book/search")
