@@ -4,8 +4,7 @@
 
 ## [Git](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Git)
 
-- [发布Maven构件到中央仓库](https://github.com/Smartboooy/JavaEE_Note/blob/master/wiki/Git/%E5%8F%91%E5%B8%83Maven%E6%9E%84%E4%BB%B6%E5%88%B0%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93.md)
-- [将Smart构建发布到中央仓库](https://github.com/Smartboooy/JavaEE_Note/blob/master/wiki/Git/%E5%B0%86Smart%E6%9E%84%E5%BB%BA%E5%8F%91%E5%B8%83%E5%88%B0%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93.md)
+- [发布构件到中央仓库](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Git/发布构件到中央仓库.md)
 - [Git详解之一Git起步](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Git/Git详解之一Git起步.md)
 - [RSync实现文件备份同步](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Git/RSync实现文件备份同步.md)
 - [带你走进rsync的世界](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Git/带你走进rsync的世界.md)
