@@ -1,4 +1,4 @@
-package com.github.retrofit2;
+package com.github.Smartboooy.retrofit2;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

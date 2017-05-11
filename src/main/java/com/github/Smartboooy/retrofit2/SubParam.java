@@ -1,4 +1,4 @@
-package com.github.retrofit2;
+package com.github.Smartboooy.retrofit2;
 
 /**
  * Created by 刘春龙 on 2017/5/5.
