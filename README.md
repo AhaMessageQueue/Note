@@ -27,7 +27,7 @@
 - [一、开发人员指南](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Google/Google_API_Client_Libraries/guide/一、开发人员指南.md)
 - [二、安装说明](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Google/Google_API_Client_Libraries/guide/二、安装说明.md)
 - [三、下载链接](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Google/Google_API_Client_Libraries/guide/三、下载链接.md)
-- [四、使用Google API进行Oauth2授权](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Google/Google_API_Client_Libraries/guide/四、使用Google API进行Oauth2授权.md)
+- [四、使用GoogleAPI进行Oauth2授权](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Google/Google_API_Client_Libraries/guide/四、使用GoogleAPI进行Oauth2授权.md)
 
 **_home_**
 - [用Java轻松访问GoogleAPI](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Google/Google_API_Client_Libraries/home/用Java轻松访问GoogleAPI.md)
