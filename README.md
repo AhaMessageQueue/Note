@@ -77,6 +77,7 @@
 - [Linux_top各个标识的含义详解](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Linux/Linux_top各个标识的含义详解.md)
 - [Linux_vmstat命令实战详解](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Linux/Linux_vmstat命令实战详解.md)
 - [Linux查看CPU和内存使用情况](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Linux/Linux查看CPU和内存使用情况.md)
+- [Curl命令详解](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Linux/Curl命令详解.md)
 
 ## [Logging](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Logging)
 
@@ -163,13 +164,14 @@
 - [header中Content-Disposition的作用](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/header中Content-Disposition的作用.md)
 - [SpringMVC实现文件下载](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/SpringMVC实现文件下载.md)
 - [Java监测方法运行时间效率方法](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/Java监测方法运行时间效率方法.md)
-- [SpringMVC介绍之Validation](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/SpringMVC介绍之Validation.md)
 - [SpringMVC验证框架Validation自定义注解实现传递参数到国际化资源文件](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/SpringMVC验证框架Validation自定义注解实现传递参数到国际化资源文件.md)
 - [关于Spring无法通过注解注入xml配置的bean](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/关于Spring无法通过注解注入xml配置的bean.md)
 - [Spring容器加载完毕做一件事情（利用ContextRefreshedEvent事件）](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/Spring容器加载完毕做一件事情（利用ContextRefreshedEvent事件）.md)
-- [IntrospectorCleanupListener作用.md](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/IntrospectorCleanupListener作用.md)
-- [Spring之@Value注解需要注意](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/Spring之@Value注解需要注意.md)
-- [Spring之通过@Value注解注入属性的几种方式](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/Spring之通过@Value注解注入属性的几种方式.md)
+- [IntrospectorCleanupListener作用](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/IntrospectorCleanupListener作用.md)
+- [【Spring注解】之@Value注解](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/【Spring注解】之@Value注解.md)
+- [【Spring注解】之@Value注解注入属性的几种方式](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/【Spring注解】之@Value注解注入属性的几种方式.md)
+- [【Spring注解】之@Valid](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/【Spring注解】之@Valid.md)
+- [【Spring注解】之@Validated](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Spring/【Spring注解】之@Validated.md)
 
 ## [WebService](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/WebService)
 

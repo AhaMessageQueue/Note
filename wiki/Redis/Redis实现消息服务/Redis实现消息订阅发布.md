@@ -1,13 +1,13 @@
->注意:以下方式实际上是采用的PUB/SUB方式(发布订阅)
+**注意:以下方式实际上是采用的PUB/SUB方式(发布订阅)**
 
 ### Redis实现消息服务原理
-发布者和订阅者模式(PUB/SUB)：发布者发送消息到TOPIC，每个订阅者都能收到一样的消息。
-生产者和消费者模式(P2P)：生产者将消息放入QUEUE，多个消费者共同监听，谁先抢到资源，谁就从队列中取走消息去处理。注意，每个消息只能最多被一个消费者接收。
+**发布者和订阅者模式(PUB/SUB)**：发布者发送消息到TOPIC，每个订阅者都能收到一样的消息。
+**生产者和消费者模式(P2P)**：生产者将消息放入QUEUE，多个消费者共同监听，谁先抢到资源，谁就从队列中取走消息去处理。注意，每个消息只能最多被一个消费者接收。
 
 ### 引入Maven依赖
 引入Redis相应的maven依赖，这里需要spring-data-redis和jedis
 pom.xml:
-```
+```xml
 <dependency>
     <groupId>org.springframework.data</groupId>
     <artifactId>spring-data-redis</artifactId>
@@ -23,33 +23,32 @@ pom.xml:
 ```
 
 ### JedisConnectionFactory配置
-ApplicationContext-context.xml
-```
+```xml
 <!-- redis -->
-    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <property name="maxTotal" value="${redis.pool.maxTotal}"/>
-        <property name="maxIdle" value="${redis.pool.maxIdle}"/>
-        <property name="timeBetweenEvictionRunsMillis" value="${redis.pool.timeBetweenEvictionRunsMillis}"/>
-        <property name="minEvictableIdleTimeMillis" value="${redis.pool.minEvictableIdleTimeMillis}"/>
-        <property name="testOnBorrow" value="${redis.pool.testOnBorrow}"/>
-    </bean>
+<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+    <property name="maxTotal" value="${redis.pool.maxTotal}"/>
+    <property name="maxIdle" value="${redis.pool.maxIdle}"/>
+    <property name="timeBetweenEvictionRunsMillis" value="${redis.pool.timeBetweenEvictionRunsMillis}"/>
+    <property name="minEvictableIdleTimeMillis" value="${redis.pool.minEvictableIdleTimeMillis}"/>
+    <property name="testOnBorrow" value="${redis.pool.testOnBorrow}"/>
+</bean>
 
-    <bean id="jedisConnFactory"
-          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
-        <property name="hostName" value="${redis.pool.host}"/>
-        <property name="port" value="${redis.pool.port}"/>
-        <property name="usePool" value="true"></property>
-        <property name="poolConfig" ref="jedisPoolConfig"/>
-    </bean>
+<bean id="jedisConnFactory"
+      class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+    <property name="hostName" value="${redis.pool.host}"/>
+    <property name="port" value="${redis.pool.port}"/>
+    <property name="usePool" value="true"/>
+    <property name="poolConfig" ref="jedisPoolConfig"/>
+</bean>
 
-    <!-- Redis Template -->
-    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
-        <property name="connectionFactory" ref="jedisConnFactory" />
-    </bean>
+<!-- Redis Template -->
+<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+    <property name="connectionFactory" ref="jedisConnFactory" />
+</bean>
 ```
 
 ### 消息订阅配置
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:redis="http://www.springframework.org/schema/redis"
@@ -67,7 +66,8 @@ ApplicationContext-context.xml
         <property name="delegate" ref="remindsDelegateListener" />
         <property name="serializer" ref="stringRedisSerializer" />
     </bean>
-    <!-- 消息监听 -->
+    
+    <!-- redis消息监听 -->
     <redis:listener-container connection-factory="jedisConnFactory">
         <redis:listener ref="remindsMessageListener" method="onMessage"
                         serializer="stringRedisSerializer" topic="__keyevent@*__:expired" />
@@ -75,7 +75,7 @@ ApplicationContext-context.xml
 
 </beans>
 ```
-```
+```java
 package com.kingsoft.wps.calendar.message.subscribe;
 
 import com.kingsoft.wps.calendar.api.service.RemindsService;
@@ -187,10 +187,10 @@ public class RemindsDelegateListener implements MessageListener {
 ```
 ### 消息发布配置:
 ```
-    String channel = "user:topic";
-    //其中channel必须为string，而且“序列化”策略也是StringSerializer
-    //消息内容，将会根据配置文件中指定的valueSerializer进行序列化
-    //本例中，默认全部采用StringSerializer
-    //那么在消息的subscribe端也要对“反序列化”保持一致。
-    redisTemplate.convertAndSend(channel, "from app 1");
+String channel = "user:topic";
+//其中channel必须为string，而且“序列化”策略也是StringSerializer
+//消息内容，将会根据配置文件中指定的valueSerializer进行序列化
+//本例中，默认全部采用StringSerializer
+//那么在消息的subscribe端也要对“反序列化”保持一致。
+redisTemplate.convertAndSend(channel, "from app 1");
 ```
