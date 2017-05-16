@@ -1,5 +1,6 @@
 `CASE`语句可以在`SELECT`子句和`ORDER BY`子句中使用.
-`CASE`语句分为两种Case Simple Expression and Case Search Expression
+
+`CASE`语句分为两种`Case Simple Expression and Case Search Expression`
 
 ### Case Simple Expression:
 ```
@@ -18,8 +19,10 @@ ELSE R3
 END
 ```
 
-当在`Orderby`子句中使用`Case`语句时,如果排序是按照ASC的话，会将不满足条件的结果集无序地放在总结果集的前面，然后将满足条件的结果集排序后附加到总结果集中。
-如果使用DESC的话，则将满足条件的结果集放在总结果集的前面，然后将未满足条件的结果集无序地附加到总结果集后面：
+当在`ORDER BY`子句中使用`Case`语句时,
+- 如果排序是按照**ASC**的话，会将**不满足条件的结果集无序地放在总结果集的前面**，然后将**满足条件的结果集排序后附加到总结果集中**。
+- 如果使用**DESC**的话，则将**满足条件的结果集放在总结果集的前面**，然后将**未满足条件的结果集无序地附加到总结果集后面**：
+
 ![](http://pic002.cnblogs.com/images/2012/174228/2012101220105352.jpg)
 
 ![](http://pic002.cnblogs.com/images/2012/174228/2012101220110894.jpg)

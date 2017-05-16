@@ -218,9 +218,15 @@
 - [MongoDB的多表关联操作](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Mongo/MongoDB的多表关联操作.md)
 - [Spring_Data_MongoDB之_id和类型映射](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Mongo/Spring_Data_MongoDB之_id和类型映射.md)
 
+## [Mybatis](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Mybatis)
+
+- [【Mybatis】之整合Spring](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Mybatis/【Mybatis】之整合Spring.md)
+
 ## [Mysql](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Mysql)
 
-- [在Orderby子句中使用CASE语句](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Mysql/在Orderby子句中使用CASE语句.md)
+- [【Mysql】之批量更新](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Mysql/【Mysql】之批量更新.md)
+- [【Mysql】之更新记录时设置自动更新时间戳](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Mysql/【Mysql】之更新记录时设置自动更新时间戳.md)
+- [【Mysql】之在Orderby子句中使用CASE语句](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Mysql/【Mysql】之在Orderby子句中使用CASE语句.md)
 
 ## [Hadoop](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Hadoop)
 
@@ -230,6 +236,6 @@
 
 ## [Thread](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Thread)
 
-- [Java安全管理器SecurityManager](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Thread/Java安全管理器SecurityManager.md)
-- [Java线程池例子](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Thread/Java线程池例子.md)
-- [Java线程池的监控](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Thread/Java线程池的监控.md)
+- [【Java线程池】之线程池监控](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Thread/【Java线程池】之线程池监控.md)
+- [【Java线程池】之最佳实践](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Thread/【Java线程池】之最佳实践.md)
+- [【Java多线程】之安全管理器SecurityManager](https://github.com/Smartboooy/JavaEE_Note/tree/master/wiki/Thread/【Java多线程】之安全管理器SecurityManager.md)

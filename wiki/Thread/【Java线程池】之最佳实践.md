@@ -1,14 +1,21 @@
-在做很多高并发应用的时候，单线程的瓶颈已经满足不了我们的需求，此时使用多线程来提高处理速度已经是比较常规的方案了。在使用多线程的时候，我们可以使用线程池来管理我们的线程，至于使用线程池的优点就不多说了。
+在做很多**高并发应用**的时候，**单线程的瓶颈**已经满足不了我们的需求，此时使用**多线程**来提高处理速度已经是比较常规的方案了。
+
+在使用多线程的时候，我们可以使用线程池来管理我们的线程，至于使用线程池的优点就不多说了。
 
 对于多线程的线程安全处理，这个也非常重要，有些同学还是要多补补课。
 
 Java线程池说起来也简单，简单说下继承关系：
+```java
 ThreadPoolExecutor extends AbstractExecutorService implements ExecutorService extends Executor
+```
 
-还有一个支持延时执行线程和可以重复执行线程的实现类：
+还有一个支持**延时执行线程**和可以**重复执行线程**的实现类：
+```java
 ScheduledThreadPoolExecutor extends ThreadPoolExecutor implements ScheduledExecutorService
+```
 
-大家把这些类中的相关方法弄清楚，使用线程池就不在话下了。其实弄清楚里面各个方法的功能也就够了。
+大家把**这些类中的相关方法**弄清楚，使用线程池就不在话下了。其实弄清楚里面各个方法的功能也就够了。
+
 最重要的还是在实践中总结经验，企业需要的是能实际解决问题的人。
 
 下面是我写的一个例子，包括3个Java文件，分别是：
@@ -18,7 +25,7 @@ ExecutorTest.java
 
 下面贴出代码：
 ### ExecutorServiceFactory.java
-```
+```java
 package com.kingsoft.wps.calendar.api.common.threadpool;
 
 import java.util.concurrent.ExecutorService;
@@ -117,7 +124,7 @@ public class ExecutorServiceFactory {
 ```
 
 ### ExecutorProcessPool.java
-```
+```java
 package com.kingsoft.wps.calendar.api.common.threadpool;
 
 import org.slf4j.Logger;
@@ -185,7 +192,7 @@ public class ExecutorProcessPool {
 
 ```
 ### ExecutorDemo.java
-```
+```java
 package com.kingsoft.wps.calendar.api.common.threadpool;
 
 import java.util.concurrent.Callable;
