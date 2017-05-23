@@ -1,6 +1,6 @@
 # 学习笔记
 
->声明：现大部分文章为寻找问题时在网上相互转载，在此做个记录，方便自己也方便有类似问题的朋友，故原出处已不好查到，如有侵权，请发邮件（631521383@qq.com）表明文章和原出处地址，我一定在文章中注明。谢谢。 
+>声明：现大部分文章为寻找问题时在网上相互转载，在此做个记录，方便自己也方便有类似问题的朋友，故原出处已不好查到，如有侵权，请发邮件<631521383@qq.com>表明文章和原出处地址，我一定在文章中注明。谢谢。 
 
 ## [Git](https://github.com/ongz1992/JavaEE_Note/tree/master/wiki/Git)
 
@@ -120,8 +120,8 @@
 
 ## [Redis](https://github.com/ongz1992/JavaEE_Note/tree/master/wiki/Redis)
 
-- [Redis安装部署](https://github.com/ongz1992/JavaEE_Note/blob/master/wiki/Redis/Redis%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2.md)
-- [spring-data-redis之RedisTemplate操作redis相关用法](https://github.com/ongz1992/JavaEE_Note/blob/master/wiki/Redis/spring-data-redis%E4%B9%8BRedisTemplate%E6%93%8D%E4%BD%9Credis%E7%9B%B8%E5%85%B3%E7%94%A8%E6%B3%95.md)
+- [【Redis】之安装部署](https://github.com/ongz1992/JavaEE_Note/blob/master/wiki/Redis/【Redis】之安装部署.md)
+- [【Redis】之RedisTemplate操作redis相关用法](https://github.com/ongz1992/JavaEE_Note/blob/master/wiki/Redis/【Redis】之RedisTemplate操作redis相关用法.md)
 
 #### [Redis分布式锁](https://github.com/ongz1992/JavaEE_Note/tree/master/wiki/Redis/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81)
 
@@ -129,9 +129,8 @@
 
 #### [Redis实现消息服务](https://github.com/ongz1992/JavaEE_Note/tree/master/wiki/Redis/Redis%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E6%9C%8D%E5%8A%A1)
 
-- [Redis实现消息订阅发布](https://github.com/ongz1992/JavaEE_Note/blob/master/wiki/Redis/Redis%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E6%9C%8D%E5%8A%A1/Redis%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E5%8F%91%E5%B8%83.md)
-- [Redis键空间通知](https://github.com/ongz1992/JavaEE_Note/blob/master/wiki/Redis/Redis%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E6%9C%8D%E5%8A%A1/Redis%E9%94%AE%E7%A9%BA%E9%97%B4%E9%80%9A%E7%9F%A5.md)
-- [Spring-data-redis:pubsub消息订阅](https://github.com/ongz1992/JavaEE_Note/blob/master/wiki/Redis/Redis%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E6%9C%8D%E5%8A%A1/Spring-data-redis:pubsub%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85.md)
+- [【Redis】之基于Spring实现消息订阅发布](https://github.com/ongz1992/JavaEE_Note/blob/master/wiki/Redis/【Redis】之基于Spring实现消息订阅发布.md)
+- [【Redis】之Redis键空间通知](https://github.com/ongz1992/JavaEE_Note/blob/master/wiki/Redis/【Redis】之Redis键空间通知.md)
 
 #### [基于Redis的分布式队列](https://github.com/ongz1992/JavaEE_Note/tree/master/wiki/Redis/基于Redis的分布式队列)
 

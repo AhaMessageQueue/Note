@@ -1,11 +1,13 @@
-**注意:以下方式实际上是采用的PUB/SUB方式(发布订阅)**
+注意:以下方式实际上是采用的**PUB/SUB**方式(**发布订阅**)
 
-### Redis实现消息服务原理
-**发布者和订阅者模式(PUB/SUB)**：发布者发送消息到TOPIC，每个订阅者都能收到一样的消息。
-**生产者和消费者模式(P2P)**：生产者将消息放入QUEUE，多个消费者共同监听，谁先抢到资源，谁就从队列中取走消息去处理。注意，每个消息只能最多被一个消费者接收。
+### Redis实现消息服务
+
+- **发布者和订阅者模式(PUB/SUB)**：**发布者**发送消息到TOPIC，每个**订阅者**都能收到一样的消息。
+- **生产者和消费者模式(P2P)**：**生产者**将消息放入QUEUE，多个消费者共同监听，谁先抢到资源，谁就从队列中取走消息去处理。注意，每个消息只能最多被一个消费者接收。
 
 ### 引入Maven依赖
-引入Redis相应的maven依赖，这里需要spring-data-redis和jedis
+引入Redis相应的**maven依赖**，这里需要`spring-data-redis`和`jedis`
+
 pom.xml:
 ```xml
 <dependency>
@@ -21,7 +23,6 @@ pom.xml:
     <version>2.5.1</version>
 </dependency>
 ```
-
 ### JedisConnectionFactory配置
 ```xml
 <!-- redis -->
@@ -57,10 +58,10 @@ pom.xml:
        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
        http://www.springframework.org/schema/redis
        http://www.springframework.org/schema/redis/spring-redis-1.0.xsd">
-
+       
     <bean id="stringRedisSerializer"
           class="org.springframework.data.redis.serializer.StringRedisSerializer" />
-
+    
     <bean id="remindsMessageListener"
           class="org.springframework.data.redis.listener.adapter.MessageListenerAdapter">
         <property name="delegate" ref="remindsDelegateListener" />
@@ -72,9 +73,10 @@ pom.xml:
         <redis:listener ref="remindsMessageListener" method="onMessage"
                         serializer="stringRedisSerializer" topic="__keyevent@*__:expired" />
     </redis:listener-container>
-
 </beans>
 ```
+
+
 ```java
 package com.kingsoft.wps.calendar.message.subscribe;
 
@@ -126,8 +128,8 @@ public class RemindsDelegateListener implements MessageListener {
         String key = (String) redisTemplate.getStringSerializer().deserialize(message.getBody());
         String channel = (String) redisTemplate.getStringSerializer().deserialize(message.getChannel());
 
-        logger.info("[info-Reminds]redis推送通知,通知key:" + key);//[info-Reminds]redis推送通知,通知内容:cal::remind::<instanceID>::<calendarID>::ready
-        logger.info("[info-Reminds]redis推送通知,通知channel:" + channel);//[info-Reminds]redis推送通知,通知频道:__keyevent@0__:expired
+        logger.info("[Reminds]redis推送通知,通知key:" + key);//[Reminds]redis推送通知,通知内容:cal::remind::<instanceID>::<calendarID>::ready
+        logger.info("[Reminds]redis推送通知,通知channel:" + channel);//[Reminds]redis推送通知,通知频道:__keyevent@0__:expired
 
         //校验key值
         Pattern keyPattern = Pattern.compile(keyReg);
@@ -149,7 +151,7 @@ public class RemindsDelegateListener implements MessageListener {
             String calendarIDStr = keyMatcher.group(2);
             //设置屏障,防止重复重复订阅处理
             String remBarrierKey = remBarrierKeyPattern.replace("<instanceID>", instanceIDStr).replace("<calendarID>", calendarIDStr);
-            logger.info("[info-Reminds]redis推送通知, 通知屏障key:" + remBarrierKey);
+            logger.info("[Reminds]redis推送通知, 通知屏障key:" + remBarrierKey);
 
             String originRemBarrier = (String) redisTemplate.opsForValue().getAndSet(remBarrierKey, remindsIdStr);
             if (!StringUtils.isEmpty(originRemBarrier)) {//如果存在该值,说明该提醒已被其他结点处理,则退出
@@ -185,6 +187,7 @@ public class RemindsDelegateListener implements MessageListener {
 }
 
 ```
+
 ### 消息发布配置:
 ```
 String channel = "user:topic";
