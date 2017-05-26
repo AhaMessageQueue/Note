@@ -10,6 +10,13 @@
 - [带你走进rsync的世界](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Git/带你走进rsync的世界.md)
 - [Git之删除未监视的文件untracked_files](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Git/Git之删除未监视的文件untracked_files.md)
 
+## [Github](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Github)
+
+#### [travis-ci.com](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Github/travis-ci.com)
+
+- [【Github】Getting_started翻译](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Github/travis-ci.com/【Github】Getting_started翻译.md)
+- [【Github】Building_a_Java_project翻译](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Github/travis-ci.com/【Github】Building_a_Java_project翻译.md)
+
 ## [Google](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Google)
 
 #### [Calendar_API_Client_Library_for_Java](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Google/Calendar_API_Client_Library_for_Java)
@@ -167,10 +174,12 @@
 - [关于Spring无法通过注解注入xml配置的bean](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Spring/关于Spring无法通过注解注入xml配置的bean.md)
 - [Spring容器加载完毕做一件事情（利用ContextRefreshedEvent事件）](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Spring/Spring容器加载完毕做一件事情（利用ContextRefreshedEvent事件）.md)
 - [IntrospectorCleanupListener作用](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Spring/IntrospectorCleanupListener作用.md)
-- [【Spring注解】之@Value注解](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Spring/【Spring注解】之@Value注解.md)
-- [【Spring注解】之@Value注解注入属性的几种方式](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Spring/【Spring注解】之@Value注解注入属性的几种方式.md)
-- [【Spring注解】之@Valid](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Spring/【Spring注解】之@Valid.md)
-- [【Spring注解】之@Validated](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Spring/【Spring注解】之@Validated.md)
+- [【Spring注解】@Value注解](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Spring/【Spring注解】@Value注解.md)
+- [【Spring注解】@Value注解注入属性的几种方式](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Spring/【Spring注解】@Value注解注入属性的几种方式.md)
+- [【Spring注解】@Valid](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Spring/【Spring注解】@Valid.md)
+- [【Spring注解】@Validated](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Spring/【Spring注解】@Validated.md)
+- [【Spring新特性】SpringMVC4.1支持jsonp](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Spring/【Spring新特性】SpringMVC4.1支持jsonp.md)
+- [【Spring原理】Spring的启动过程](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Spring/【Spring原理】Spring的启动过程.md)
 
 ## [WebService](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/WebService)
 
@@ -209,13 +218,7 @@
 
 ## [Mongo](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Mongo)
 
-- [MongoDB_Map_Reduce](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Mongo/MongoDB_Map_Reduce.md)
-- [mongodb数据的导出和远程导入](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Mongo/mongodb数据的导出和远程导入.md)
-- [MongoDB备份(mongodump)与恢复(mongorestore)](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Mongo/MongoDB备份(mongodump)与恢复(mongorestore).md)
-- [MongoDB删除文档](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Mongo/MongoDB删除文档.md)
-- [MongoDB查询文档](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Mongo/MongoDB查询文档.md)
-- [MongoDB的多表关联操作](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Mongo/MongoDB的多表关联操作.md)
-- [Spring_Data_MongoDB之_id和类型映射](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Mongo/Spring_Data_MongoDB之_id和类型映射.md)
+
 
 ## [Mybatis](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Mybatis)
 
