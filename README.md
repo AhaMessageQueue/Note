@@ -127,8 +127,8 @@
 
 ## [Redis](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Redis)
 
-- [【Redis】之安装部署](https://github.com/itTalks/JavaEE_Note/blob/master/wiki/Redis/【Redis】之安装部署.md)
-- [【Redis】之RedisTemplate操作redis相关用法](https://github.com/itTalks/JavaEE_Note/blob/master/wiki/Redis/【Redis】之RedisTemplate操作redis相关用法.md)
+- [【Redis】安装部署](https://github.com/itTalks/JavaEE_Note/blob/master/wiki/Redis/【Redis】安装部署.md)
+- [【Redis】RedisTemplate操作redis相关用法](https://github.com/itTalks/JavaEE_Note/blob/master/wiki/Redis/【Redis】RedisTemplate操作redis相关用法.md)
 
 #### [Redis分布式锁](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Redis/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81)
 
@@ -136,8 +136,8 @@
 
 #### [Redis实现消息服务](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Redis/Redis%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E6%9C%8D%E5%8A%A1)
 
-- [【Redis】之基于Spring实现消息订阅发布](https://github.com/itTalks/JavaEE_Note/blob/master/wiki/Redis/【Redis】之基于Spring实现消息订阅发布.md)
-- [【Redis】之Redis键空间通知](https://github.com/itTalks/JavaEE_Note/blob/master/wiki/Redis/【Redis】之Redis键空间通知.md)
+- [【Redis】基于Spring实现消息订阅发布](https://github.com/itTalks/JavaEE_Note/blob/master/wiki/Redis/【Redis】基于Spring实现消息订阅发布.md)
+- [【Redis】Redis键空间通知](https://github.com/itTalks/JavaEE_Note/blob/master/wiki/Redis/【Redis】Redis键空间通知.md)
 
 #### [基于Redis的分布式队列](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Redis/基于Redis的分布式队列)
 
@@ -222,13 +222,13 @@
 
 ## [Mybatis](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Mybatis)
 
-- [【Mybatis】之整合Spring](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Mybatis/【Mybatis】之整合Spring.md)
+- [【Mybatis】整合Spring](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Mybatis/【Mybatis】整合Spring.md)
 
 ## [Mysql](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Mysql)
 
-- [【Mysql】之批量更新](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Mysql/【Mysql】之批量更新.md)
-- [【Mysql】之更新记录时设置自动更新时间戳](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Mysql/【Mysql】之更新记录时设置自动更新时间戳.md)
-- [【Mysql】之在Orderby子句中使用CASE语句](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Mysql/【Mysql】之在Orderby子句中使用CASE语句.md)
+- [【Mysql】批量更新](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Mysql/【Mysql】批量更新.md)
+- [【Mysql】更新记录时设置自动更新时间戳](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Mysql/【Mysql】更新记录时设置自动更新时间戳.md)
+- [【Mysql】在Orderby子句中使用CASE语句](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Mysql/【Mysql】在Orderby子句中使用CASE语句.md)
 
 ## [Hadoop](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Hadoop)
 
@@ -238,6 +238,6 @@
 
 ## [Thread](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Thread)
 
-- [【Java线程池】之线程池监控](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Thread/【Java线程池】之线程池监控.md)
-- [【Java线程池】之最佳实践](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Thread/【Java线程池】之最佳实践.md)
-- [【Java多线程】之安全管理器SecurityManager](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Thread/【Java多线程】之安全管理器SecurityManager.md)
+- [【Java线程池】线程池监控](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Thread/【Java线程池】线程池监控.md)
+- [【Java线程池】最佳实践](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Thread/【Java线程池】最佳实践.md)
+- [【Java多线程】安全管理器SecurityManager](https://github.com/itTalks/JavaEE_Note/tree/master/wiki/Thread/【Java多线程】安全管理器SecurityManager.md)
