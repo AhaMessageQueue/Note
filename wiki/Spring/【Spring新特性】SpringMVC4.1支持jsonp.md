@@ -121,7 +121,33 @@ protected AbstractJsonpResponseBodyAdvice(String... queryParamNames) {
 
 这里必须使用`@ControllerAdvice`注解标注该类，并且配置对哪些Controller起作用。
 
-关于注解@ControllerAdvice 的作用这里不做描述。
+`AbstractJsonpResponseBodyAdvice`类的API描述是这样的：
+```java
+/**
+ * A convenient base class for a {@code ResponseBodyAdvice} to instruct the
+ * {@link org.springframework.http.converter.json.MappingJackson2HttpMessageConverter}
+ * to serialize with JSONP formatting.
+ *
+ * <p>Sub-classes must specify the query parameter name(s) to check for the name
+ * of the JSONP callback function.
+ *
+ * <p>Sub-classes are likely to be annotated with the {@code @ControllerAdvice}
+ * annotation and auto-detected or otherwise must be registered directly with the
+ * {@code RequestMappingHandlerAdapter} and {@code ExceptionHandlerExceptionResolver}.
+ *
+ * @author Rossen Stoyanchev
+ * @since 4.1
+ */
+public abstract class AbstractJsonpResponseBodyAdvice extends AbstractMappingJacksonResponseBodyAdvice {
+```
+上面是这么描述的：
+```markdown
+一个方便的基类(实现了ResponseBodyAdvice接口)为`ResponseBodyAdvice`指示`MappingJackson2HttpMessageConverter`以JSONP格式化序列化。
+
+子类必须指定查询参数名称(可以多个)，以用于检查JSONP回调函数的名称。
+
+子类可能会用`@ControllerAdvice`注解注释和自动检测，否则必须直接注册`RequestMappingHandlerAdapter`和`ExceptionHandlerExceptionResolver`。
+```
 
 Controller实现jsonp，
 ```java
