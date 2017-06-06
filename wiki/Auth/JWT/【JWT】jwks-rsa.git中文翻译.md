@@ -54,7 +54,7 @@ Jwk jwk = provider.get("{kid of the signing key}"); //throws Exception when not 
 ```
 
 ### JwkProviderBuilder
-要创建具有缓存和速率限制的域https://samples.auth0.com的Provider：
+要创建具有缓存和速率限制的域<https://samples.auth0.com>的Provider：
 ```java
 JwkProvider provider = new JwkProviderBuilder("https://samples.auth0.com/")
     .build();

@@ -116,10 +116,9 @@ public ThreadPoolTaskExecutor mvcTaskExecutor(){
     executor.setQueueCapacity(100);
     executor.setMaxPoolSize(25);
     return executor;
-
 }
 
- @Override
+@Override
 public void addViewControllers(ViewControllerRegistry registry) {
    registry.addViewController("/async").setViewName("/async");
 }

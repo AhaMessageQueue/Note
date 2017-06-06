@@ -1,9 +1,9 @@
 # Java JWT
-Github地址:<https://github.com/auth0/java-jwt>
+Github地址：<https://github.com/auth0/java-jwt>
 
 协议：<https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-31>
 
-JSON Web Tokens的Java实现:<draft-ietf-oauth-json-web-token-08>
+JSON Web Tokens的Java实现：draft-ietf-oauth-json-web-token-08
 
 如果您正在寻找一个Android版本的JWT Decoder，请查看我们的[JWTDecode.Android](https://github.com/auth0/JWTDecode.Android)库。
 
@@ -22,7 +22,7 @@ compile 'com.auth0:java-jwt:3.2.0'
 ```
 
 ## Available Algorithms
-该库使用以下**算法**实现**JWT签名和验证**：
+该库使用以下**算法实现JWT签名和验证**：
 
 |JWS    |Algorithm  |Description    |
 |-------|-----------|---------------|
@@ -36,17 +36,16 @@ compile 'com.auth0:java-jwt:3.2.0'
 |ES384 	|ECDSA384 	|ECDSA with curve P-384 and SHA-384     |
 |ES512 	|ECDSA512 	|ECDSA with curve P-521 and SHA-512     |
 
-
 ## Usage
 ### Pick the Algorithm
-**算法**定义了**令牌如何签名和验证**。
+**算法定义了令牌如何签名和验证**。
 
-在`HMAC`算法的情况下，可以使用`the raw value of the secret`实例化，
-或者在`RSA`和`ECDSA`算法的情况下可以使用`the key pairs`或`KeyProvider`来实例化。
+- 在`HMAC`算法的情况下，可以使用`the raw value of the secret`实例化;
+- 在`RSA`和`ECDSA`算法的情况下，可以使用`the key pairs`或`KeyProvider`来实例化。
 
 创建后，该实例**可重用**于令牌签名和验证操作。
 
-##### Using static secrets or keys:
+##### Using static secrets or keys
 ```java
 //HMAC
 Algorithm algorithmHS = Algorithm.HMAC256("secret");
@@ -57,19 +56,42 @@ RSAPrivateKey privateKey = //Get the key instance
 Algorithm algorithmRS = Algorithm.RSA256(publicKey, privateKey);
 ```
 
-##### Using a KeyProvider:
-通过使用`KeyProvider`，您可以在**运行时更改**用于验证令牌签名或为RSA或ECDSA算法签署新令牌的密钥。 
+##### Using a KeyProvider
+通过使用`KeyProvider`，您可以在**运行时更改**用于**验证令牌签名**或**为RSA或ECDSA算法签署新令牌**的密钥。 
+
 这是通过实现`RSAKeyProvider`或`ECDSAKeyProvider`方法来实现的：
 
-- `getPublicKeyById(String kid)`：它在**验证令牌签名**期间调用，它应该返回用于验证令牌的密钥(key)。
-    如果使用key rotation，例如[JWK](https://tools.ietf.org/html/rfc7517)，可以使用id获取正确的rotation key。 （或者只是一直返回相同的键）。
-    
-- `getPrivateKey()`：它在**令牌签名**期间调用，它应该返回将用于签署JWT的密钥。
-
+- `getPublicKeyById(String kid)`：它在**验证令牌签名**期间调用，它应该返回**用于验证令牌的密钥(key)**。
+    如果使用`key rotation`，例如[JWK](https://tools.ietf.org/html/rfc7517)，可以使用id获取正确的`rotation key`。 （或者只是一直返回相同的键）。
+- `getPrivateKey()`：它在**令牌签名**期间调用，它应该返回将**用于签署JWT的密钥**。
 - `getPrivateKeyId()`：它在**令牌签名**期间调用，并且应该返回**标识由`getPrivateKey()`返回的密钥的ID**。 
-    该值优于`JWTCreator.Builder#withKeyId(String)`方法中的一个值。
+    该值优于`JWTCreator.Builder#withKeyId(String)`方法中的值。如果您不需要设置一个`kid`值，则避免使用KeyProvider实例化一个算法。
     
-If you don't need to set a `kid` value avoid instantiating an Algorithm using a KeyProvider.
+`JWTCreator.Builder#withKeyId(String)`方法源码：
+```java
+/**
+ * Add a specific Key Id ("kid") claim to the Header.
+ * If the {@link Algorithm} used to sign this token was instantiated with a KeyProvider, the 'kid' value will be taken from that provider and this one will be ignored.
+ *
+ * @param keyId the Key Id value.
+ * @return this same Builder instance.
+ */
+/**
+ * 向Header添加特定的键ID("kid")声明。
+ * 如果用于签署该令牌的{@link Algorithm}用KeyProvider进行了实例化，那么'kid'值将从KeyProvider获取，而这个值将被忽略。
+ */
+public Builder withKeyId(String keyId) {
+    this.headerClaims.put(PublicClaims.KEY_ID, keyId);
+    return this;
+}
+
+public interface PublicClaims {
+    //Header
+    String ALGORITHM = "alg";
+    String CONTENT_TYPE = "cty";
+    String TYPE = "typ";
+    String KEY_ID = "kid";
+```
 
 以下代码片段使用示例类来显示如何工作：
 ```java
@@ -100,26 +122,25 @@ Algorithm algorithm = Algorithm.RSA256(keyProvider);
 //Use the Algorithm to create and verify JWTs.
 ```
 
->For simple key rotation using JWKs try the [jwks-rsa-java](https://github.com/auth0/jwks-rsa-java) library.
+>对于使用JWK的简单`key rotation`，请尝试使用[jwks-rsa-java]（https://github.com/auth0/jwks-rsa-java）库。
 
 ### Create and Sign a Token
-您**首先**需要通过调用`JWT.create()`创建一个`JWTCreator`实例。
+您首先需要通过调用`JWT.create()`创建一个`JWTCreator`实例。
 使用**builder**定义您的令牌需要具有的**自定义声明**。 
 最后传递`Algorithm`实例并调用`sign()`得到令牌。
 
 - Example using HS256
-
     ```java
     try {
-        Algorithm algorithm = Algorithm.HMAC256("secret");
-        String token = JWT.create()
-            .withIssuer("auth0")
-            .sign(algorithm);
-    } catch (UnsupportedEncodingException exception){
-        //UTF-8 encoding not supported
-    } catch (JWTCreationException exception){
-        //Invalid Signing configuration / Couldn't convert Claims.
-    }
+            Algorithm algorithm = Algorithm.HMAC256("secret");
+            String token = JWT.create()
+                .withIssuer("auth0")
+                .sign(algorithm);
+        } catch (UnsupportedEncodingException exception){
+            //UTF-8 encoding not supported
+        } catch (JWTCreationException exception){
+            //Invalid Signing configuration / Couldn't convert Claims.
+        }
     ```
 - Example using RS256
 
@@ -135,10 +156,11 @@ Algorithm algorithm = Algorithm.RSA256(keyProvider);
         //Invalid Signing configuration / Couldn't convert Claims.
     }
     ```
-如果**声明无法转换为JSON**或**签名过程中使用的密钥无效**，将会抛出`JWTCreationException`异常。
+    
+如果**声明(Claim)无法转换为JSON**或**签名过程中使用的密钥无效**，将会抛出`JWTCreationException`异常。
 
 ### Verify a Token
-您**首先**需要通过调用`JWT.require()`并传递`Algorithm`实例来创建一个`JWTVerifier`实例。
+您首先需要通过调用`JWT.require()`并传递`Algorithm`实例来创建一个`JWTVerifier`实例。
 如果要求**令牌具有特定的声明值**，请**使用builder来定义它们**。 
 方法build()返回的实例是**可重用**的，因此您可以定义一次，并使用它来验证不同的令牌。
 最后调用verifier.verify()传递令牌。
@@ -159,7 +181,6 @@ Algorithm algorithm = Algorithm.RSA256(keyProvider);
         //Invalid signature/claims
     }
     ```
-    
 - Example using RS256
 
     ```java
@@ -177,33 +198,63 @@ Algorithm algorithm = Algorithm.RSA256(keyProvider);
     }
     ```
     
-如果令牌具有**无效的签名**或者**不满足声明要求**，则会抛出`JWTVerificationException`异常。
+如果令牌具有**无效的签名**或者**不满足声明(Claim)要求**，则会抛出`JWTVerificationException`异常。
 
 ##### Time Validation
 JWT令牌可能包含可以用于验证的DateNumber字段：
 
-- 该令牌是在过去的日期产生的 `"iat" < TODAY`
+- 令牌是在以前产生的 `"iat" < TODAY`
 - 令牌尚未过期 `"exp" > TODAY`
 - 令牌可以被使用 `"nbf" > TODAY`
 
 **验证令牌**时，**会自动执行时间验证**，当值无效时，抛出`JWTVerificationException`异常。
 如果之前的任何字段丢失，则此验证不会被考虑。
 
-指定令牌仍应视为有效的余地窗口，请使用`JWTVerifierbuilder`中的`acceptLeeway()`方法并传递正秒值。这适用于上述每个项目。
+指定令牌仍应视为有效的`leeway window`，请使用`JWTVerifier builder`中的`acceptLeeway()`方法并传递正秒值。这适用于上述每个项目。
 ```java
 JWTVerifier verifier = JWT.require(algorithm)
     .acceptLeeway(1) // 1 sec for nbf, iat and exp
     .build();
 ```
 您还可以为**给定的日期声明**指定**自定义值**，并仅**覆盖该声明的默认值**。
+
 ```java
 JWTVerifier verifier = JWT.require(algorithm)
-    .acceptLeeway(1)   //1 sec for nbf and iat
+    .acceptLeeway(1)   // 1 sec for nbf, iat and exp
     .acceptExpiresAt(5)   //5 secs for exp
     .build();
 ```
-如果您需要在您的`lib/app`中测试此行为，将`Verification`实例转换为`BaseVerification`， 
-以获得接受自定义`Clock`的`verification.build()`方法的可见性。 例如：
+源码：
+```java
+/**
+ * Set a specific leeway window in seconds in which the Expires At ("exp") Claim will still be valid.
+ * Expiration Date is always verified when the value is present. This method overrides the value set with acceptLeeway
+ *
+ * @param leeway the window in seconds in which the Expires At Claim will still be valid.
+ * @return this same Verification instance.
+ * @throws IllegalArgumentException if leeway is negative.
+ */
+/**
+ * 以秒为单位设置一个`Expires At ("exp") Claim`仍然有效的特定的`leeway window`。
+ * 
+ * 到期日期当值存在时总是被验证。 此方法将覆盖使用`acceptLeeway`设置的值
+ * 
+ * @param leeway `Expires At Claims`仍然有效的秒数。
+ * @return 同一个验证实例。
+ * @throws IllegalArgumentException 如果`leeway`是负数。
+*/
+@Override
+public Verification acceptExpiresAt(long leeway) throws IllegalArgumentException {
+    assertPositive(leeway);
+    requireClaim(PublicClaims.EXPIRES_AT, leeway);
+    return this;
+}
+```
+
+如果您需要在您的"lib/app"中测试此行为，将`Verification`实例转换为`BaseVerification`， 
+以使用接受自定义`Clock`的`verification.build()`方法。 
+
+例如：
 ```java
 BaseVerification verification = (BaseVerification) JWT.require(algorithm)
     .acceptLeeway(1)
@@ -222,7 +273,6 @@ try {
     //Invalid token
 }
 ```
-
 如果**令牌具有无效的语法**，或者**令牌头或有效载荷不是JSON**，那么将会抛出`JWTDecodeException`异常。
 
 ### Header Claims
@@ -347,10 +397,9 @@ DecodedJWT jwt = verifier.verify("my.jwt.token");
 ##### Custom Classes and Collections
 要获得声明作为集合，您需要提供要转换的内容的类类型。 
 
-as（class）：返回解析为Class Type的值。 对于集合，您应该使用asArray和asList方法。 
-asMap（）：返回解析为Map <String，Object>的值。 
-asArray（class）：返回解析为类型为Class Type的元素的数组的值，如果值不是JSON数组，则返回null。 
-asList（class）：返回解析为类型为Class Type的元素的集合的值，如果该值不是JSON数组，则返回null。
+- as（class）：返回解析为Class Type的值。 对于集合，您应该使用asArray和asList方法。 
+- asMap（）：返回解析为Map <String，Object>的值。 
+- asArray（class）：返回解析为类型为Class Type的元素的数组的值，如果值不是JSON数组，则返回null。 
+- asList（class）：返回解析为类型为Class Type的元素的集合的值，如果该值不是JSON数组，则返回null。
 
 如果值不能转换为给定的类类型，则会抛出JWTDecodeException异常。
-
