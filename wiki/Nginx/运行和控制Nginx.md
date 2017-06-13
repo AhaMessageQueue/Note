@@ -83,9 +83,13 @@ root      2213  0.0  0.0   6784  2036 ?        Ss   03:01   0:00 nginx: master p
 
 改变配置想让它生效而不停止服务,如下两种方式都可以:
 ```
-1) nginx -t;  nginx -s reload
+1) nginx -t;  nginx -s reload 
 2) nginx -t;  kill -HUP
 ```
+```
+-s signal
+``` 
+Send signal to a master process: stop, quit, reopen, reload.
 nginx -t 检查nginx配置的语法,操作前都要检查一下,很重要,发现错误可及时修正.
 
 ### 平滑升级到新的二进制代码
