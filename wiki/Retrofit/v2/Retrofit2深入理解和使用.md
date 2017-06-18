@@ -1,3 +1,5 @@
+[TOCM]
+
 # 第一章、简介
 Retrofit是Square公司开发的一款针对Android网络请求的框架，Retrofit2底层基于OkHttp实现的， OkHttp现在已经得到Google官方认可，大量的app都采用OkHttp做网络请求。
 
@@ -447,6 +449,7 @@ public static MultipartBody files2MultipartBody(String key,
     return builder.build();
 ```
 >源码参考：okhttp3.MultipartBody.java
+
 ```java
 public final class MultipartBody extends RequestBody {
     public static final MediaType MIXED = MediaType.parse("multipart/mixed");
@@ -2545,7 +2548,7 @@ private static void doRequest(final Call call0) {
     }  
 ```
 
-**1.Get请求，并缓存请求数据**
+**1.Get请求，缓存命中返回缓存响应，否则请求网络**
 ```java
 /**
 * Get请求，并缓存请求数据。
