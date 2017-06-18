@@ -153,7 +153,7 @@
 
 ## [Retrofit](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Retrofit)
 
-- [【Retrofit2】深入理解和使用](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Retrofit/v2/【Retrofit2】深入理解和使用.md)
+- [Retrofit2深入理解和使用](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Retrofit/v2/Retrofit2深入理解和使用.md)
 
 ## [Spring](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Spring)
 

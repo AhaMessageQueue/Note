@@ -2549,7 +2549,7 @@ private static void doRequest(final Call call0) {
 ```java
 /**
 * Get请求，并缓存请求数据。
-* 返回的是“缓存数据”，注意，如果超出了maxAge，“缓存数据会被清除”
+* 返回的是“缓存数据”，注意，如果超出了maxAge，“缓存数据会被清除”，会请求网络
 * @param url
 * @param cache_maxAge_inseconds 缓存最大生存时间，单位为秒
 * @return 当前call
@@ -2564,10 +2564,10 @@ public static Call doGetAndCache(String url, int cache_maxAge_inseconds) {
         return call;
 }
 ```
-**2.Get请求，只获取返回网络请求数据**
+**2.Get请求，获取返回网络请求数据**
 ```java
 /**
-* Get请求 ,只获取返回网络请求数据，“不进行缓存”
+* Get请求 ,获取返回网络请求数据
 * 
 * @param url
 * @param responseListener
@@ -2583,7 +2583,7 @@ public static Call doGetOnlyNet(String url) {
 }
 ```
 
-**3.Get请求, 没有超过过时时间StaleTime的话，返回缓存数据，否则重新去获取网络数据**
+**3.Get请求, 没有超过过时时间StaleTime的话，返回缓存数据，否则重新去获取网络数据** 
 ```java
 /**
 * Get请求, 没有超过“过时时间”StaleTime的话，返回缓存数据，否则重新去获取网络数据
