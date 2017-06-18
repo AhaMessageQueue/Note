@@ -153,16 +153,7 @@
 
 ## [Retrofit](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Retrofit)
 
-- [Retrofit配置](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Retrofit/Retrofit配置.md)
-- [Retrofit用法详解](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Retrofit/Retrofit用法详解.md)
-- [Retrofit2完全教程](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Retrofit/Retrofit2完全教程.md)
-- [okhttp之缓存使用](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Retrofit/okhttp之缓存使用.md)
-- [okhttp之深入理解Interceptors](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Retrofit/okhttp之深入理解Interceptors.md)
-- [okhttp之拦截器浅析](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Retrofit/okhttp之拦截器浅析.md)
-- [okhttp3使用Interceptor的缓存问题](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Retrofit/okhttp3使用Interceptor的缓存问题.md)
-- [okhttp3_Retrofit2缓存问题](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Retrofit/okhttp3_Retrofit2缓存问题.md)
-- [okhttp3_Retrofit2.0缓存机制以及遇到的问题](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Retrofit/okhttp3_Retrofit2.0缓存机制以及遇到的问题.md)
-
+- [【Retrofit2】深入理解和使用](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Retrofit/v2/【Retrofit2】深入理解和使用.md)
 
 ## [Spring](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Spring)
 
@@ -180,6 +171,13 @@
 - [【Spring注解】@Validated](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Spring/【Spring注解】@Validated.md)
 - [【Spring新特性】SpringMVC4.1支持jsonp](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Spring/【Spring新特性】SpringMVC4.1支持jsonp.md)
 - [【SpringBoot实战】异步请求处理](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Spring/【SpringBoot实战】异步请求处理.md)
+- [【Spring】如何通过@ResponseBody禁用FAIL_ON_EMPTY_BEANS](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Spring/【Spring】如何通过@ResponseBody禁用FAIL_ON_EMPTY_BEANS.md)
+- [【Spring】自定义HttpMessageConverters](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Spring/【Spring】自定义HttpMessageConverters.md)
+
+## [SpringBoot](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/SpringBoot)
+
+- [【SpringBoot】SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/SpringBoot/【SpringBoot】SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案.md)
+- [【SpringBoot】关于配置文件映射Pojo问题](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/SpringBoot/【SpringBoot】关于配置文件映射Pojo问题.md)
 
 ## [WebService](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/WebService)
 

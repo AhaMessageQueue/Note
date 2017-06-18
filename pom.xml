@@ -7,6 +7,12 @@
     <groupId>com.github.smtboy</groupId>
     <artifactId>JavaEE_Note</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <retrofit2.version>2.2.0</retrofit2.version>
+        <okhttp3.version>3.6.0</okhttp3.version>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -37,6 +43,28 @@
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
             <version>3.2.0</version>
+        </dependency>
+
+        <!-- retrofit2 -->
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>retrofit</artifactId>
+            <version>${retrofit2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>converter-gson</artifactId>
+            <version>${retrofit2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>adapter-rxjava</artifactId>
+            <version>${retrofit2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>logging-interceptor</artifactId>
+            <version>${okhttp3.version}</version>
         </dependency>
     </dependencies>
 
