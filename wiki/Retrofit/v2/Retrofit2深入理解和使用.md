@@ -1,6 +1,92 @@
-[TOCM]
+# 目录
+
+- 第一章、简介
+        - 简介
+        - 引入依赖
+- 第二章、方法注解
+    - 注解分类
+        - 第一类：HTTP请求方法
+        - 第二类：标记类
+        - 第三类：参数类
+    - Get请求
+        - @Query
+        - @QueryMap
+        - Query集合
+        - @Path
+    - Post请求
+        - @Field
+        - @FieldMap
+        - @Body
+    - 其他请求方式
+- 第三章、高级功能
+    - 文件上传
+        - 简单实现
+        - 封装
+            - 实现上传请求
+            - 定义上传接口
+            - MultipartBody.Part/MultipartBody封装
+            - 文本类型的MultipartBody.Part封装
+    - 自定义Header
+        - 静态方法
+            - 通过Interceptor定义静态请求头
+        - 动态方法
+    - 网络请求日志
+        - 引入依赖
+        - 添加拦截器
+    - Converter
+        - Gson与Converter
+        - 自定义Converter
+    - CallAdapter
+        - RxJava与CallAdapter
+        - 自定义CallAdapter
+    - GZIP
+        - 压缩请求体
+        - 解压响应体
+    - 为某个请求设置完整的URL
+    - 设置超时和重连
+    - 取消请求
+    - 简单封装
+- 第四章、深入理解Okhttp3
+    - 深入理解Okhttp3请求流程
+        - 责任链模式
+        - OkHttp3链式流程
+            - 请求流程
+                - 构造OkHttpClient
+                - 发起请求
+                    - 构造请求头
+                    - 构造请求体
+                    - 构造Request
+                - Call
+                    - 调用链
+                        - 总结
+                        - 扩展
+                    - 同步执行
+                    - 异步执行
+            - RetryAndFollowUpInterceptor
+            - BridgeInterceptor
+            - CacheInterceptor
+            - ConnectInterceptor
+            - CallServerInterceptor
+            - 自定义Interceptor
+    - 深入理解Okhttp3缓存
+        - Okhttp3缓存
+            - 设置OkHttpClient
+            - 设置缓存策略
+        - 缓存实践(针对Android)
+            - 设置OkHttpClient
+            - 设置缓存接口
+            - 设置Interceptor
+            - 设置NetworkInterceptor
+        - 查看缓存文件
+        - Cache API
+- 第五章、其它说明
+    - Retrofit.Builder
+    - Url组合规则
+    - Retrofit提供的Converter
+    - Retrofit提供的CallAdapter
 
 # 第一章、简介
+## 简介
 Retrofit是Square公司开发的一款针对Android网络请求的框架，Retrofit2底层基于OkHttp实现的， OkHttp现在已经得到Google官方认可，大量的app都采用OkHttp做网络请求。
 
 首先先来看一个完整Get请求是如何实现：
@@ -61,7 +147,7 @@ public void onFailure(Call<BookSearchResponse> call, Throwable t) {
 
 ---
 
-# 第二章、引入依赖
+## 引入依赖
 Maven
 ```xml
 <dependency>
@@ -84,7 +170,7 @@ Maven
 
 ---
 
-# 第三章、方法注解
+# 第二章、方法注解
 
 ## 注解分类
 ### 第一类：HTTP请求方法
@@ -242,7 +328,7 @@ public class Reviews {
 
 ---
 
-# 第四章、高级功能
+# 第三章、高级功能
 ## 文件上传
 ### 简单实现
 上传因为需要用到Multipart，所以需要单独拿出来介绍，先看一个具体上传的例子。
@@ -448,6 +534,7 @@ public static MultipartBody files2MultipartBody(String key,
     builder.setType(MultipartBody.FORM);
     return builder.build();
 ```
+
 >源码参考：okhttp3.MultipartBody.java
 
 ```java
@@ -500,7 +587,9 @@ public static MultipartBody.Builder addTextPart(MultipartBody.Builder builder,
     return builder;
 }
 ```
+
 >源码参考：okhttp3.MultipartBody.java
+
 ```java
 public final class MultipartBody extends RequestBody {
     public static final MediaType MIXED = MediaType.parse("multipart/mixed");
@@ -569,7 +658,9 @@ public class RequestInterceptor implements Interceptor {
   }
 }
 ```
+
 >源码参考：okhttp3.Request.java
+
 - request.newBuilder()：
 ```java
 public Request.Builder newBuilder() {
@@ -905,7 +996,9 @@ Retrofit retrofit = new Retrofit.Builder()
       .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
       .build();
 ```
+
 >源码参考：GsonConverterFactory.create()
+
 ```
 public static GsonConverterFactory create() {
         return create(new Gson());
@@ -1211,7 +1304,7 @@ public class AppClient {
 }  
 ```
 
-# 第五章、深入理解Okhttp3
+# 第四章、深入理解Okhttp3
 ## 深入理解Okhttp3请求流程
 这里针对Okhttp3.6.X说明。
 
@@ -1233,6 +1326,7 @@ public class AppClient {
 首先我们先看一看它的请求流程，在Okhttp3中请求是基于拦截器原理。
 
 >源码参考：okhttp3.RealCall.java
+
 ```java
 Response getResponseWithInterceptorChain() throws IOException {
     List<Interceptor> interceptors = new ArrayList();
@@ -1318,6 +1412,7 @@ Header本质上就是一个Map，只是在封装了一层而已，但是Okhttp3�
 每一个色块对应一个header，代码如下：
 
 >源码参考：okhttp3.Headers.java
+
 ```java
 public final class Headers {
   private final String[] namesAndValues;
@@ -1349,6 +1444,7 @@ public final class Headers {
 **1、FromBody**
 
 >源码参考：okhttp3.FromBody.java
+
 ```java
 package okhttp3;
 
@@ -1393,6 +1489,7 @@ MultipartBody原理基本一致，区别在于他可以发送表单的同时也�
 有了上面两个步骤，接下了就自然而然产生一个Request，顾名思义它就是对请求的封装，包括请求方式，请求头，请求体，请求路径等,源代码码也是比较简单，一看即明白。
 
 >源码参考：okhttp3.Request.java
+
 ```java
 public final class Request {
   final HttpUrl url;
@@ -1409,6 +1506,7 @@ public final class Request {
 Call是一个接口，实现类只有一个RealCall，上面我们提到的流程就是在RealCall中。
 
 >源码参考：okhttp3.Call.java
+
 ```java
 public interface Call extends Cloneable {
   Request request(); // 请求封装的数据
@@ -1423,7 +1521,9 @@ public interface Call extends Cloneable {
   }
 }
 ```
+
 >源码参考：okhttp3.RealCall.java
+
 ```java
 package okhttp3;
 
@@ -1644,6 +1744,7 @@ Response getResponseWithInterceptorChain() throws IOException {
 拦截器调用链的最开始只传入参数`List<Interceptor> interceptors`、`Request request`、`index`，并且index传入0。
 
 >源码参考：okhttp3.internal.http.RealInterceptorChain.java
+
 ```java
 package okhttp3.internal.http;
 
@@ -1775,6 +1876,7 @@ RealInterceptorChain next = new RealInterceptorChain(
 在`Response response = interceptor.intercept(next);`里又执行了下面的逻辑（我们以BridgeInterceptor拦截器举例）：
 
 >源码参考：okhttp3.internal.http.BridgeInterceptor.java
+
 ```java
 package okhttp3.internal.http;
 
@@ -1834,6 +1936,7 @@ Okhttp3的调用流程基本原理就是这样，重要的是思想，整个流�
 通过以下方式创建Call对象：
 
 >源码参考：okhttp3.OkHttpClient.java
+
 ```java
 package okhttp3;
 
@@ -1858,7 +1961,9 @@ public class OkHttpClient implements Cloneable, Call.Factory, WebSocket.Factory 
   }
 }
 ```
+
 >源码参考：okhttp3.RealCall.java
+
 ```java
 final class RealCall implements Call {
     RealCall(OkHttpClient client, Request originalRequest, boolean forWebSocket) {
@@ -1875,7 +1980,9 @@ final class RealCall implements Call {
     }
 }
 ```
+
 >源码参考：okhttp3.internal.http.RetryAndFollowUpInterceptor.java
+
 ```java
 package okhttp3.internal.http;
 public final class RetryAndFollowUpInterceptor implements Interceptor {
@@ -1896,7 +2003,9 @@ public final class RetryAndFollowUpInterceptor implements Interceptor {
     ...
 }
 ```
+
 >源码参考：okhttp3.internal.connection.StreamAllocation.java
+
 ```java
 public final class StreamAllocation {//TODO StreamAllocation
     ...
@@ -1928,7 +2037,9 @@ finally {
     client.dispatcher().finished(this);
 }
 ```
+
 >源码参考：okhttp3.Dispatcher.java
+
 ```java
 public final class Dispatcher {
     ...
@@ -2155,7 +2266,9 @@ public final class Dispatcher {
     }
 }
 ```
+
 >源码参考：okhttp3.internal.NamedRunnable.java
+
 ```java
 public abstract class NamedRunnable implements Runnable {
     protected final String name;
@@ -2177,7 +2290,9 @@ public abstract class NamedRunnable implements Runnable {
     protected abstract void execute();
     }
 ```
+
 >源码参考：okhttp3.RealCall.AsyncCall.java
+
 ```java
 final class RealCall implements Call {
     ...
@@ -2623,6 +2738,7 @@ public static Call doGetOnlyCache(String url) {
 此外还可以使用`CacheControl.FORCE_CACHE`
 
 >源码参考：CacheControl.FORCE_CACHE
+
 ```java
 static {
     FORCE_CACHE = (new CacheControl.Builder()).onlyIfCached().maxStale(2147483647, TimeUnit.SECONDS).build();//2147483647，它等于2^31-1，是32位操作系统中最大的符号型整型常量
@@ -2731,7 +2847,9 @@ static class NetworkCacheInterceptor implements Interceptor {
 
 ### Cache API
 这里看下类CacheControl、Cache的相关注解说明。
+
 >源码参考：okhttp3.CacheControl.java
+
 ```java
 package okhttp3;
 /**
@@ -2838,7 +2956,9 @@ public final class CacheControl {
     }
 }
 ```
+
 >源码参考：okhttp3.Cache.java
+
 ```java
 package okhttp3;
 
@@ -2958,7 +3078,7 @@ public final class Cache implements Closeable, Flushable {
 }
 ```
 
-# 第六章、其它说明
+# 第五章、其它说明
 ## Retrofit.Builder
 前面用到了 `Retrofit.Builder` 中的`baseUrl`、`addCallAdapterFactory`、`addConverterFactory`、`build`方法， 
 还有`callbackExecutor`、`callFactory`、`client`、`validateEagerly`这四个方法没有用到，这里简单的介绍一下。
@@ -2971,6 +3091,7 @@ public final class Cache implements Closeable, Flushable {
 |validateEagerly(boolean)|是否在调用"create(Class)"时检测接口定义是否正确，而不是在调用方法才检测，适合在开发、测试时使用|
 
 >源码参考：
+
 ```java
 public class OkHttpClient implements Cloneable, Factory, okhttp3.WebSocket.Factory {
     ...
