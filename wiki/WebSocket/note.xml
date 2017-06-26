@@ -1,0 +1,17 @@
+<message to="tangtang@lenovo-pc" id="8akb9-36" type="chat" from="pacoson@lenovo-pc/Smack">
+    <body>hello, abcdefg</body>
+    <thread>1d5f0c93-4eb6-4461-a09a-0da6fc9d3ac6</thread>
+    <delay xmlns="urn:xmpp:delay" from="lenovo-pc" stamp="2016-07-18T00:39:29.759Z"/>
+</message>
+
+org.jivesoftware.openfire.session.LocalClientSession@46cc3cbd
+        status: 3
+        address: tangtang@lenovo-pc/Smack
+        id: 4qrph1nzci
+        presence:
+
+<presence id="2h2Pk-7" from="tangtang@lenovo-pc/Smack">
+<c xmlns="http://jabber.org/protocol/caps" hash="sha-1" node="http://www.igniterealtime.org/projects/smack"
+   ver="os2Kusj3WEOivn5n4iFr/ZEO8ls="/>
+</presence>
+incoming = false, processed = false
