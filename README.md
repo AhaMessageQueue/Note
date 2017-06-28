@@ -174,10 +174,13 @@
 - [【Spring】如何通过@ResponseBody禁用FAIL_ON_EMPTY_BEANS](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Spring/【Spring】如何通过@ResponseBody禁用FAIL_ON_EMPTY_BEANS.md)
 - [【Spring】自定义HttpMessageConverters](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Spring/【Spring】自定义HttpMessageConverters.md)
 
-## [SpringBoot](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/SpringBoot)
+### [WebFlow](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Spring/WebFlow)
+- [SpringWebFlow入门demo简单页面跳转](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Spring/WebFlow/SpringWebFlow入门demo简单页面跳转.md)
 
-- [【SpringBoot】SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/SpringBoot/【SpringBoot】SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案.md)
-- [【SpringBoot】关于配置文件映射Pojo问题](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/SpringBoot/【SpringBoot】关于配置文件映射Pojo问题.md)
+### [SpringBoot](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Spring/SpringBoot)
+
+- [【SpringBoot】SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Spring/SpringBoot/【SpringBoot】SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案.md)
+- [【SpringBoot】关于配置文件映射Pojo问题](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Spring/SpringBoot/【SpringBoot】关于配置文件映射Pojo问题.md)
 
 ## [WebService](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/WebService)
 
