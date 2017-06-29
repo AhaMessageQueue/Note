@@ -216,10 +216,10 @@ function deferred(){
 
 ![](images/async_call.jpg)
 
-![](./images/async_call_success.jpg)
+![](images/async_call_success.jpg)
 
 ##### 点击defer
 
-![](./images/async_defer.jpg)
+![](images/async_defer.jpg)
 
-![](./images/async_defer_success.jpg)
+![](images/async_defer_success.jpg)

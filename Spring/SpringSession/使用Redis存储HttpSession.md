@@ -84,6 +84,13 @@ public class HttpSessionConfig {
 }
 ```
 
+接下来，则需要在application.properties中配置redis服务器的位置了，在这里，我们就用本机：
+
+```text
+spring.redis.host=localhost  
+spring.redis.port=6379 
+```
+
 ## 操作HttpSession
 这里我们将实现两个操作，一个是往Session中写入数据，另一个是查询数据，如下所示：
 ```java
@@ -121,36 +128,36 @@ public class APP {
 ## 运行程序，测试验证
 1、本地启动redis服务；
 
-![](./images/redis_cli.png)
+![](images/redis_cli.png)
 
 2、打开redis客户端，输入flushall清空缓存；
 
-![](./images/redis_cli_flushall.png)
+![](images/redis_cli_flushall.png)
 
 3、浏览器输入http://localhost:8080/set，设置Session
 
-![](./images/browser.png)
+![](images/browser.png)
 
 redis客户端输入keys *命令, 可以发现redis中确实有数据插入：
 
-![](./images/redis_cli_keys.png)
+![](images/redis_cli_keys.png)
 
 4、浏览器输入http://localhost:8080/query，查询Session
 
-![](./images/browser2.png)
+![](images/browser2.png)
 
 5、清空redis缓存，浏览器输入http://localhost:8080/query，再次查询Session
 
 发现HttpSession中已经无数据。
 
-![](./images/browser3.png)
+![](images/browser3.png)
 
 最后，如果查看浏览器的cookie的话，会发现有一个name为"SESSION"的cookie，其值为redis中spring session key的一部分。
 
-![](./images/SESSION.png)
+![](images/SESSION.png)
 
 另外，还可以在redis客户端输入HGETALL来查看spring session具体的值，如下：
 
-![](./images/SESSION_HGETALL.png)
+![](images/SESSION_HGETALL.png)
 
 结论：以上测试结果全部符合预期，HttpSession的实现成功被Spring Session替换，操作HttpSession等同于操作redis中的数据。

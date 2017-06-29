@@ -22,7 +22,7 @@ public void configureMessageBroker(MessageBrokerRegistry registry) {
 
 与上图的关键区别在于：这里不再模拟 STOMP 代理的功能，而是由代理中继将消息传送到一个真正的消息代理来进行处理；
 
-![](./images/stomp_broker_rerlay.png)
+![](images/stomp_broker_rerlay.png)
 
 - A1）enableStompBrokerRelay() and setApplicationDestinationPrefixes() 方法都可以接收变长参数；
 - A2）默认情况下： STOMP 代理中继会假设代理监听 localhost 的 61613 端口，并且 client 的 username 和 password 均为 guest。当然你也可以自行定义；
@@ -75,7 +75,7 @@ Spring 4.0 提供了几个消息转换器如下：
 
 （Attention， 如果是传输json数据的话，一定要添加 Jackson jar 包到你的springmvc 项目中，不然连接不会成功的）
 
-![](./images/message_converters.png)
+![](images/message_converters.png)
 
 ### 处理订阅（@SubscribeMapping注解）
 1）@SubscribeMapping注解的方法：当收到 STOMP 订阅消息的时候，带有 @SubscribeMapping 注解的方法将会触发；其也是通过 AnnotationMethodMessageHandler 来接收消息的；
@@ -223,7 +223,7 @@ function connect() {
     
 >干货 —— @SubscribeMapping注解返回的消息直接发送到 client，不经过代理，而 @SendTo 注解的路径，就会经过代理，然后再发送到目的地
 
-![](./images/@SubscribeMapping2.png)
+![](images/@SubscribeMapping2.png)
 
 ### 在应用的任意地方发送消息
 1）intro：spring 的 SimpMessagingTemplate 能够在应用的任何地方发送消息，不必以接收一条消息为前提；
@@ -313,7 +313,7 @@ stomp.subscribe("/user/queue/notifications", handleNotifications);
 
 如下图所示：
 
-![](./images/user_destination.png)
+![](images/user_destination.png)
 
 Attention）UserDestinationMessageHandler 的主要任务： 是将用户消息重新路由到某个用户独有的目的地上。
 

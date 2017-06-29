@@ -28,4 +28,4 @@ CREATE TABLE `test` (
 
 这样设置之后，即使直接通过Navicat工具修改了name字段，那么update_time也会自动更新，除非手动设置了update_time字段
 
-![](./images/自动更新时间戳.jpg)
+![](images/自动更新时间戳.jpg)
