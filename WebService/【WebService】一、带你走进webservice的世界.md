@@ -1,11 +1,8 @@
-WebService系列文章：
-- 【WebService】带你走进webservice的世界
 - 【WebService】自定义WebService服务及其调用
 - 【WebService】wsdl配置详解以及使用注解修改wsdl配置
 - 【WebService】CXF处理javaBean等复合类型以及Map等复杂类型的数据
 - 【WebService】CXF拦截器的设置以及自定义CXF拦截器
 
-## 1. webservice是啥
 准确的来说，webservice不是一种技术，而是一种规范。是一种跨平台，跨语言的规范，用于不同平台，不同语言开发的应用之间的交互。
 
 举个例子，比如在Windows Server服务器上有个C#.Net开发的应用A，在Linux上有个Java语言开发的应用B，现在B应用要调用A应用，或者是互相调用，用于查看对方的业务数据，就需要webservice的规范。
@@ -20,7 +17,7 @@ WebService系列文章：
 ### 2.1 基于socket创建web服务
 为什么要使用socket呢？看一下下面的原理图： 
 
-![](\images\原理图.png)
+
 
 从图中可以看出，程序A和程序B之间是无法实现直接调用的，那么现在A需要访问B的话，A即创建一个socket并制定B机器的端口号，在此之前B已经在本机创建好了socket等待用户来连接，A和B连接成功后，即可向B发送请求获取数据了，这很好理解，为了回忆一下socket的创建和使用，下面先写一个简单的socket通信的demo，服务端可以将小写字母转大写。
 

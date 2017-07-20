@@ -53,7 +53,7 @@ import com.spring.pojo.Greeting;
 import com.spring.pojo.HelloMessage;  
   
 @Controller  
-public class GreetingController {  
+public class GreetingController {
       
     @MessageMapping("/hello")  
     @SendTo("/topic/greetings")  

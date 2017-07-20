@@ -178,9 +178,11 @@
 - [SpringWebFlow入门demo简单页面跳转](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/WebFlow/SpringWebFlow入门demo简单页面跳转.md)
 
 ### [SpringBoot](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringBoot)
+- [SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringBoot/SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案.md)
+- [关于配置文件映射Pojo问题](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringBoot/关于配置文件映射Pojo问题.md)
 
-- [【SpringBoot】SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringBoot/【SpringBoot】SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案.md)
-- [【SpringBoot】关于配置文件映射Pojo问题](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringBoot/【SpringBoot】关于配置文件映射Pojo问题.md)
+### [SpringSession](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringSession)
+- [SpringBoot使用Redis存储HttpSession](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringSession/SpringBoot使用Redis存储HttpSession.md)
 
 ## [WebService](https://github.com/ittalks/JavaEE_Note/tree/master/WebService)
 
