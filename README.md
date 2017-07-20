@@ -56,7 +56,7 @@
 ## [Java](https://github.com/ittalks/JavaEE_Note/tree/master/Java)
 
 - [System.nanoTime与System.currentTimeMillis的区别](https://github.com/ittalks/JavaEE_Note/tree/master/Java/System.nanoTime与System.currentTimeMillis的区别.md)
-- [ParameterizedType的作用.md](https://github.com/ittalks/JavaEE_Note/tree/master/Java/ParameterizedType的作用.md)
+- [ParameterizedType的作用](https://github.com/ittalks/JavaEE_Note/tree/master/Java/ParameterizedType的作用.md)
 
 ## [JavaScript](https://github.com/ittalks/JavaEE_Note/tree/master/JavaScript)
 
@@ -158,21 +158,28 @@
 ## [Spring](https://github.com/ittalks/JavaEE_Note/tree/master/Spring)
 
 - [@Conumes和@Produces](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/@Conumes和@Produces.md)
+- [DelegatingFilterProxy类的作用](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/DelegatingFilterProxy类的作用.md)
 - [header中Content-Disposition的作用](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/header中Content-Disposition的作用.md)
-- [SpringMVC实现文件下载](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringMVC实现文件下载.md)
-- [Java监测方法运行时间效率方法](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/Java监测方法运行时间效率方法.md)
-- [SpringMVC验证框架Validation自定义注解实现传递参数到国际化资源文件](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringMVC验证框架Validation自定义注解实现传递参数到国际化资源文件.md)
-- [关于Spring无法通过注解注入xml配置的bean](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/关于Spring无法通过注解注入xml配置的bean.md)
-- [Spring容器加载完毕做一件事情（利用ContextRefreshedEvent事件）](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/Spring容器加载完毕做一件事情（利用ContextRefreshedEvent事件）.md)
 - [IntrospectorCleanupListener作用](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/IntrospectorCleanupListener作用.md)
-- [【Spring注解】@Value注解](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/【Spring注解】@Value注解.md)
-- [【Spring注解】@Value注解注入属性的几种方式](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/【Spring注解】@Value注解注入属性的几种方式.md)
-- [【Spring注解】@Valid](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/【Spring注解】@Valid.md)
-- [【Spring注解】@Validated](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/【Spring注解】@Validated.md)
-- [【Spring新特性】SpringMVC4.1支持jsonp](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/【Spring新特性】SpringMVC4.1支持jsonp.md)
-- [【SpringBoot实战】异步请求处理](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/【SpringBoot实战】异步请求处理.md)
-- [【Spring】如何通过@ResponseBody禁用FAIL_ON_EMPTY_BEANS](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/【Spring】如何通过@ResponseBody禁用FAIL_ON_EMPTY_BEANS.md)
-- [【Spring】自定义HttpMessageConverters](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/【Spring】自定义HttpMessageConverters.md)
+- [Java监测方法运行时间效率方法](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/Java监测方法运行时间效率方法.md)
+- [SpringProfiles](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringProfiles.md)
+- [SpringMVC实现文件下载](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringMVC实现文件下载.md)
+- [SpringMVC验证框架Validation自定义注解实现传递参数到国际化资源文件](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringMVC验证框架Validation自定义注解实现传递参数到国际化资源文件.md)
+- [Spring中tx命名空间和配置注解工作原理浅析](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/Spring中tx命名空间和配置注解工作原理浅析.md)
+- [Spring容器加载完毕做一件事情（利用ContextRefreshedEvent事件）](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/Spring容器加载完毕做一件事情（利用ContextRefreshedEvent事件）.md)
+- [web.xml中dispatcher标签详解](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/web.xml中dispatcher标签详解.md)
+- [【新特性】SpringMVC4.1支持jsonp](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/【新特性】SpringMVC4.1支持jsonp.md)
+- [【注解】@Valid](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/【注解】@Valid.md)
+- [【注解】@Validated](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/【注解】@Validated.md)
+- [【注解】@Value注解](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/【注解】@Value注解.md)
+- [【注解】@Value注解注入属性的几种方式](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/【注解】@Value注解注入属性的几种方式.md)
+- [关于Spring无法通过注解注入xml配置的bean](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/关于Spring无法通过注解注入xml配置的bean.md)
+- [如何通过@ResponseBody禁用FAIL_ON_EMPTY_BEANS](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/如何通过@ResponseBody禁用FAIL_ON_EMPTY_BEANS.md)
+- [异步请求处理](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/异步请求处理.md)
+- [自定义HttpMessageConverters](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/自定义HttpMessageConverters.md)
+- [通过spring容器内建的profile功能实现开发环境、测试环境、生产环境配置自动切换](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/通过spring容器内建的profile功能实现开发环境、测试环境、生产环境配置自动切换.md)
+- [Spring配置项annotation-config解释说明](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/Spring配置项annotation-config解释说明.md)
+- [JavaConfig](https://github.com/ittalks/JavaEE_Note/tree/master/SpringJavaConfig.md)
 
 ### [WebFlow](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/WebFlow)
 - [SpringWebFlow入门demo简单页面跳转](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/WebFlow/SpringWebFlow入门demo简单页面跳转.md)
@@ -183,6 +190,7 @@
 
 ### [SpringSession](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringSession)
 - [SpringBoot使用Redis存储HttpSession](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringSession/SpringBoot使用Redis存储HttpSession.md)
+- [使用SpringSession做分布式会话管理](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringSession/使用SpringSession做分布式会话管理.md)
 
 ## [WebService](https://github.com/ittalks/JavaEE_Note/tree/master/WebService)
 

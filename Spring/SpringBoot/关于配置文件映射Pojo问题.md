@@ -116,7 +116,7 @@ public class PropertiesConfig {
 
 还原上述配置，将配置属性重新放入`project.properties`文件，如何使自定义配置文件生效呢？
 
-参见：【SpringBoot】SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案
+参见：SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案
 
 1. 取消`@EnableConfigurationProperties`激活自定义的配置类
 ```java
