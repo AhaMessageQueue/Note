@@ -205,6 +205,11 @@
 - [CXF之设置WebService客户端超时时长](https://github.com/ittalks/JavaEE_Note/tree/master/WebService/CXF之设置WebService客户端超时时长.md)
 - [CXF之配置HTTP代理访问Internet](https://github.com/ittalks/JavaEE_Note/tree/master/WebService/CXF之配置HTTP代理访问Internet.md)
 
+## [WebSocket](https://github.com/ittalks/JavaEE_Note/tree/master/WebSocket)
+
+- [WebSocket和STOMP详解](https://github.com/ittalks/JavaEE_Note/tree/master/WebSocket/v2/WebSocket和STOMP详解.md)
+- [WebSocket实现指定用户消息推送(底层协议)](https://github.com/ittalks/JavaEE_Note/tree/master/WebSocket/v2/WebSocket实现指定用户消息推送(底层协议).md)
+
 ## [WeChat](https://github.com/ittalks/JavaEE_Note/tree/master/WeChat)
 
 - [不同场景下的ACCESS_TOKEN](https://github.com/ittalks/JavaEE_Note/tree/master/WeChat/不同场景下的ACCESS_TOKEN.md)

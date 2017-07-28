@@ -9,8 +9,7 @@ JavaConfig方式只适合支持Serlvet3.0+的容器
 
 FnApplicationInitializer继承自AbstractAnnotationConfigDispatcherServletInitializer
 
-这个类中有两个基本的需要被实现的方法，
-其实现的接口`AbstractDispatcherServletInitializer`有一个需要实现的方法。
+这个类中有两个基本的需要被实现的方法，其实现的接口`AbstractDispatcherServletInitializer`有一个需要实现的方法。
 
 ```java
 // 返回一个Class<?>[]。
@@ -24,7 +23,7 @@ protected abstract Class<?>[] getServletConfigClasses();
 protected abstract String[] getServletMappings();
 ```
 
-为什么使用种方式就可以替代web.xml？？（前提是Web服务器支持Servlet3.0+）
+为什么使用这种方式就可以替代web.xml？？（前提是Web服务器支持Servlet3.0+）
 
 >在Servlet3.0+下，我们服务器启动后，Web容器（Tomcat等）就会在classpatch下查找接口 javax.servlet.ServletContainerInitializer的实现类来完成Web应用的初始化。
 
@@ -45,15 +44,15 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 /**
  * 在Servlet3.0+下，我们服务器启动后，Web容器（Tomcat等）会自动查找实现了{@link javax.servlet.ServletContainerInitializer}接口的类来完成初始化（应该类似于替代web.xml）
  * 然而我们的这个类与ServletContainerInitializer没有半毛钱关系
- * 但是Spring的{@link SpringServletContainerInitializer}实现了这个接口
- * 在SpringServletContainerInitializer中会查找实现类了{@link WebApplicationInitializer}接口的类并将配置任务交给他们完成
+ * 但是Spring的{@link org.springframework.web.SpringServletContainerInitializer}实现了这个接口
+ * 在SpringServletContainerInitializer中会查找实现类了{@link org.springframework.web.WebApplicationInitializer}接口的类并将配置任务交给他们完成
  * 当然我们的FnApplicationInitializer也就是间接实现了这个接口
  * 
  * 而且在继承这个抽象类时，必须实现如下的三个方法
  *  
  */
 public class FnApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
-    /**
+        /**
         * 类似于web.xml中配置ContextLoaderListener的contextConfigLocation
         * 只是这个返回的是一个JavaConfig的Class数组
         */
@@ -113,13 +112,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
-* 作为JavaConfig类，必须有@Configuration注解<br/>
-* 注解@EnableWebMvc启用SpringMVC，类似于xml中配置<mvc:annotation-driven/><br/>
-* 注意不同点在于<br/>
-* 1.该注解不会配置ViewResolver。这样SpringMVC会使用默认配置；
-* 2.不起用注解扫描；
-* 3.默认情况下不使用默认的Servlet处理访问静态资源（一般我们不会这么做）；
-*/
+ * <p>
+ * 作为JavaConfig类，必须有@Configuration注解<br/>
+ * 注解@EnableWebMvc启用SpringMVC，类似于xml中配置<mvc:annotation-driven/><br/>
+ * 注意不同点在于<br/>
+ * <ul>
+ * <li>1.该注解不会配置ViewResolver。这样SpringMVC会使用默认配置；
+ * <li>2.不起用注解扫描；
+ * <li>3.默认情况下不使用默认的Servlet处理访问静态资源（一般我们不会这么做）；
+ * </ul>
+ */
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages={"com.github.ittalks"})
@@ -137,7 +139,6 @@ public class WebApplicationJavaConfig extends WebMvcConfigurerAdapter {
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
-
 }
 ```
 

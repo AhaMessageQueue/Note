@@ -1,6 +1,7 @@
-## 第一步： 添加Spring WebSocket的依赖jar包
+## 第一步： 添加spring websocket依赖的jar包
+
 ```xml
-<!-- 使用spring websocket依赖的jar包 -->
+<!-- spring websocket依赖的jar包 -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-websocket</artifactId>
@@ -12,7 +13,9 @@
     <version>${spring.version}</version>
 </dependency>
 ```
+
 ## 第二步：建立一个类实现WebSocketConfigurer接口
+
 ```java
 package com.quicksand.push;
 
@@ -30,8 +33,10 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 @EnableWebSocket
 public class SpringWebSocketConfig extends WebMvcConfigurerAdapter implements WebSocketConfigurer {
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(webSocketHandler(),"/websocket/socketServer.do").addInterceptors(new SpringWebSocketHandlerInterceptor());
-        registry.addHandler(webSocketHandler(), "/sockjs/socketServer.do").addInterceptors(new SpringWebSocketHandlerInterceptor()).withSockJS();
+        registry.addHandler(webSocketHandler(),"/websocket/socketServer")
+            .addInterceptors(new SpringWebSocketHandlerInterceptor());
+        registry.addHandler(webSocketHandler(), "/sockjs/socketServer")
+            .addInterceptors(new SpringWebSocketHandlerInterceptor()).withSockJS();
     }
  
     @Bean
@@ -40,8 +45,11 @@ public class SpringWebSocketConfig extends WebMvcConfigurerAdapter implements We
     }
 }
 ```
+
 ## 第三步：继承WebSocketHandler对象。
+
 该对象提供了客户端连接,关闭,错误,发送等方法,重写这几个方法即可实现自定义业务逻辑。
+
 ```java
 package com.quicksand.push;
 
@@ -55,7 +63,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 
 public class SpringWebSocketHandler extends TextWebSocketHandler {
-    private static final ArrayList<WebSocketSession> users;//这个会出现性能问题，最好用Map来存储，key用userid
+    private static final ArrayList<WebSocketSession> users;// 这个会出现性能问题，最好用Map来存储，key用userid
     private static Logger logger = Logger.getLogger(SpringWebSocketHandler.class);
     static {
         users = new ArrayList<WebSocketSession>();
@@ -148,7 +156,9 @@ public class SpringWebSocketHandler extends TextWebSocketHandler {
 }
 ```
 ## 第四步：继承HttpSessionHandshakeInterceptor对象。
+
 该对象作为页面连接websocket服务的拦截器,代码如下：
+
 ```java
 package com.quicksand.push;
 import java.util.Map;
@@ -160,18 +170,18 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
-
 /**
  * WebSocket拦截器
- * @author WANG
- *
  */
 public class SpringWebSocketHandlerInterceptor extends HttpSessionHandshakeInterceptor {
+    
+    private static final Logger logger = LoggerFactory.getLogger(SpringWebSocketHandlerInterceptor.class);
+    
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
             Map<String, Object> attributes) throws Exception {
         // TODO Auto-generated method stub
-        System.out.println("Before Handshake");
+        logger.info("Before Handshake");
         if (request instanceof ServletServerHttpRequest) {
             ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
             HttpSession session = servletRequest.getServletRequest().getSession(false);
@@ -197,7 +207,9 @@ public class SpringWebSocketHandlerInterceptor extends HttpSessionHandshakeInter
 }
 ```
 ## 测试
+
 ### 定义一个控制器用来做连接标识和发送消息
+
 ```java
 package com.quicksand.controller;
 
@@ -229,6 +241,7 @@ public class WebsocketController {
 }
 ```
 ### 建立登录页面
+
 ```html
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
@@ -237,7 +250,7 @@ public class WebsocketController {
 <body>
 <h2>Hello World!</h2>
 <body>
-    <form action="websocket/login.do">
+    <form action="websocket/login">
         登录名：<input type="text" name="username"/>
         <input type="submit" value="登录"/>
     </form>
@@ -245,7 +258,9 @@ public class WebsocketController {
 </body>
 </html>
 ```
+
 ### 建立发消息页面
+
 ```html
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
@@ -261,13 +276,13 @@ public class WebsocketController {
 <script type="text/javascript">
     var websocket = null;
     if ('WebSocket' in window) {
-        websocket = new WebSocket("ws://localhost:8080/quicksand/websocket/socketServer.do");
+        websocket = new WebSocket("ws://localhost:8080/quicksand/websocket/socketServer");
     } 
     else if ('MozWebSocket' in window) {
-        websocket = new MozWebSocket("ws://localhost:8080/quicksand/websocket/socketServer.do");
-    } 
+        websocket = new MozWebSocket("ws://localhost:8080/quicksand/websocket/socketServer");
+    }
     else {
-        websocket = new SockJS("http://localhost:8080/quicksand/sockjs/socketServer.do");
+        websocket = new SockJS("http://localhost:8080/quicksand/sockjs/socketServer");
     }
     websocket.onopen = onOpen;
     websocket.onmessage = onMessage;
