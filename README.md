@@ -93,6 +93,10 @@
 - [Logback浅析](https://github.com/ittalks/JavaEE_Note/blob/master/Logging/Logback%E6%B5%85%E6%9E%90.md)
 - [Logback日志系统配置攻略](https://github.com/ittalks/JavaEE_Note/tree/master/Logging/Logback日志系统配置攻略.md)
 
+## [Lombok](https://github.com/ittalks/JavaEE_Note/tree/master/Lombok)
+
+- [Lombok介绍及使用](https://github.com/ittalks/JavaEE_Note/tree/master/Lombok/Lombok介绍及使用.md)
+
 ## [Maven](https://github.com/ittalks/JavaEE_Note/tree/master/Maven)
 
 - [apache maven-release-plugin 版本管理方式](https://github.com/ittalks/JavaEE_Note/blob/master/Maven/apache%20maven-release-plugin%20%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E6%96%B9%E5%BC%8F.md)
@@ -187,8 +191,14 @@
 ### [SpringBoot](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringBoot)
 - [SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringBoot/SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案.md)
 - [关于配置文件映射Pojo问题](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringBoot/关于配置文件映射Pojo问题.md)
+- [@Async的使用、自定义Executor的配置方法](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringBoot/@Async的使用、自定义Executor的配置方法.md)
+
+### [SpringData](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringData)
+
+- [Spring-data-mongodb批量更新操作](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringData/Spring-data-mongodb批量更新操作.md)
 
 ### [SpringSession](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringSession)
+- [@Async的使用、自定义Executor的配置方法](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringSession/@Async的使用、自定义Executor的配置方法.md)
 - [SpringBoot使用Redis存储HttpSession](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringSession/SpringBoot使用Redis存储HttpSession.md)
 - [使用SpringSession做分布式会话管理](https://github.com/ittalks/JavaEE_Note/tree/master/Spring/SpringSession/使用SpringSession做分布式会话管理.md)
 
