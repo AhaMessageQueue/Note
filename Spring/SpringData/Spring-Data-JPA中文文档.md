@@ -18,20 +18,21 @@
             #### 1.2.5 异步查询结果
             #### 1.2.6 创建Repository实体
                 ##### XML配置
-                ##### JavaConfig
+                ##### Java Config
                 ##### 独立使用
         ### 1.3 自定义Repository实现
             #### 1.3.1 在repository中添加自定义方法
                 ##### 配置
                 ##### 人工装载
             #### 1.3.2 为所有的repository添加自定义方法
-        ### 1.4 事件发布
+        ### 1.4 aggregate roots 的事件发布
+        ### 1.5 Spring Data扩展
+            #### 1.5.1 Web支持
 ```
 
 # 简介
 
->本文档对应的是Spring Data JPA 1.4.3 RELEASE
->文档部分内容已更新至version 1.11.6.RELEASE, 2017-07-27
+>文档是在Spring Data JPA 1.4.3 RELEASE基础上修改，部分内容已更新至version 1.11.6.RELEASE, @Date 2017-07-27
 
 ## 依赖管理
 
@@ -233,17 +234,17 @@ interface UserRepository extends MyBaseRepository<User, Long> {
 
 在应用程序中使用唯一的Spring Data模块使事情变得简单，因此定义范围内的所有repository接口都绑定到Spring Data模块。
 
-有时应用程序需要使用多个Spring Data模块。在这种情况下，需要repository definition区分持久性技术。 
+有时应用程序需要使用多个Spring Data模块。在这种情况下，需要`repository definition`(repository接口)区分持久性技术。 
 
-Spring Data进入严格的repository配置模式，因为它在类路径上检测到多个repository factories。
+Spring Data进入严格的repository配置模式，因为它在类路径上检测到多个`repository factories`。
 
-严格的配置需要有关repository或域类的详细信息来确定repository definition的Spring数据模块绑定：
+严格的配置需要有关repository或域类的详细信息来确定`repository definition`的Spring数据模块绑定：
 
-- 如果repository definition扩展了模块特定的repository，那么它是特定Spring Data模块的有效候选项。
+- 如果`repository definition`扩展了模块特定的repository，那么它是特定Spring Data模块的有效候选项。
 - 如果域类使用模块特定类型注释进行注释，那么它是特定Spring Data模块的有效候选项。 
     Spring Data模块接受第三方注释（例如JPA的@Entity）或提供自己的注释，例如Spring Data MongoDB / Spring Data Elasticsearch的@Document。
 
-**1、使用模块特定接口的repository definitions**
+**1、使用模块特定接口的`repository definitions`**
 
 ```java
 interface MyRepository extends JpaRepository<User, Long> { }
@@ -260,7 +261,7 @@ interface UserRepository extends MyBaseRepository<User, Long> {
 
 `MyRepository`和`UserRepository`在其类型层次结构中扩展`JpaRepository`。 它们是**Spring Data JPA**模块的有效候选。
 
-**2、使用通用接口的repository definitions**
+**2、使用通用接口的`repository definitions`**
 
 ```java
 interface AmbiguousRepository extends Repository<User, Long> {
@@ -280,7 +281,7 @@ interface AmbiguousUserRepository extends MyBaseRepository<User, Long> {
 `AmbiguousRepository`和`AmbiguousUserRepository`仅扩展其类型层次结构中的`Repository`和`CrudRepository`。
 虽然使用独特的Spring Data模块是非常好的，但是多个模块无法区分哪一个特定的Spring Data是repositories要绑定的。
 
-**3、使用带有注释的域类的repository definitions**
+**3、使用带有注释的域类的`repository definitions`**
 
 ```java
 interface PersonRepository extends Repository<Person, Long> {
@@ -305,7 +306,7 @@ public class User {
 `PersonRepository`引用用JPA注释@Entity注释的Person，因此这个repository显然属于Spring Data JPA。
 `UserRepository`使用Spring Data MongoDB的@Document注释的User。
 
-**4、使用具有混合注释的域类的repository definitions**
+**4、使用具有混合注释的域类的`repository definitions`**
 
 ```java
 interface JpaPersonRepository extends Repository<Person, Long> {
@@ -332,7 +333,7 @@ Spring Data不再能够区分出导致未定义的行为的repositories。
 `Repository type details` 和 `identifying domain class annotations`用于严格的repository配置，以识别特定Spring Data模块的repository候选。
 在同一个域类型上使用多个持久性特定技术的注释可能会跨多个持久性技术重用域类型，但是Spring Data不再能够确定绑定repository的唯一模块。
 
-区分资源库的最后一个方法是定义repository基础包。基础包定义了扫描repository接口定义的起点，这意味着repository definitions位于相应的包中。
+区分资源库的最后一个方法是定义repository基础包。基础包定义了扫描repository接口定义的起点，这意味着`repository definitions`位于相应的包中。
 
 默认情况下，注释驱动的配置使用配置类所在的包。
 基于XML的配置中的基本包是强制性的。
@@ -354,7 +355,7 @@ Spring Data通过方法名有两种方式去解析出用户的查询意图：一
 或者通过Java config的`Enable${store}Repositories`注解的`queryLookupStrategy`属性来指定:
 
 - CREATE
-    通过解析方法名字来创建查询。这个策略是删除方法中固定的前缀，然后再来解析其余的部分。
+    通过解析方法名字来创建查询。这个策略是通过删除方法中固定的前缀，然后再来解析其余的部分。
     
 - USE_DECLARED_QUERY
     它会根据已经定义好的语句去查询，如果找不到，则会抛出异常信息。这个语句可以在某个注解或者方法上定义。根据给定的规范来查找可用选项，如果在方法被调用时没有找到定义的查
@@ -698,5 +699,135 @@ public interface UserRepository extends CrudRepository<User, Long>, UserReposito
        base-class="….MyRepositoryImpl" />
     ```
     
-### 1.4 事件发布
+### 1.4 aggregate roots 的事件发布
+
+Repositories管理的Entities是aggregate roots。
+在域驱动(Domain-Driven)设计应用程序中，这些aggregate roots通常会发布域事件(domain events)。
+Spring Data提供了一个注解`@DomainEvents`，您可以在aggregate root的方法上使用，来使该发布尽可能简单。
+
+```java
+// 从aggregate root发布域事件
+class AnAggregateRoot {
+
+    @DomainEvents 
+    Collection<Object> domainEvents() {
+        // … return events you want to get published here
+    }
+
+    @AfterDomainEventsPublication 
+    void callbackMethod() {
+       // … potentially clean up domain events list
+    }
+}
+```
+
+- 使用`@DomainEvents`的方法可以返回单个事件实例或事件集合。它不能有任何参数。
+- 所有事件发布后，使用`@AfterDomainEventsPublication`注释的方法。例如可用于潜在清理发布的事件列表。
+
+每当调用Spring数据库`save(…)`方法之一时，将调用这些方法。
+
+### 1.5 Spring Data扩展
+
+本节介绍一组Spring Data扩展。目前大部分的集成针对Spring MVC。
+
+#### 1.5.1 Web支持
+
+Spring Data支持很多web功能。
+
+当然你的应用也要有SpringMVC的Jar包，有的还需要集成Spring HATEOAS。
+
+**通常来说，你可以在你的JavaConfig配置类中加入`@EnableSpringDataWebSupport`即可：**
+
+```java
+// 例1.18 启用web支持
+@Configuration
+@EnableWebMvc
+@EnableSpringDataWebSupport
+class WebConfiguration { }
+```
+
+这个注解注册了几个功能，我们稍后会说，他也能检测Spring HATEOAS，并且注册他们。
+
+如果你用XML配置的话，那么你可以用下面的配置：
+
+```xml
+<!-- 例1.19 在XML中配置 -->
+<bean class="org.springframework.data.web.config.SpringDataWebConfiguration" />
+
+<!-- 如果您使用Spring HATEOAS，请注册这个，而不是前者 -->
+<bean class="org.springframework.data.web.config.HateoasAwareSpringDataWebConfiguration" />
+```
+
+##### 基本的web支持
+
+上面的配置注册了以下的几个组件：
+
+- 一个`DomainClassConverter`使Spring MVC能够从请求参数或路径变量中解析`Repository`管理的`domain classes`的实例。
+- `HandlerMethodArgumentResolver`实现，让Spring MVC从请求参数中解析Pageable和Sort实例。
+
+要自定义此行为可扩展`SpringDataWebConfiguration`或`HateoasAwareSpringDataWebConfiguration`，
+并覆盖`pageableResolver()`或`sortResolver()`方法。
+然后导入自定义配置文件，而不是使用`@EnableSpringDataWebSupport`。
+
+
+**DomainClassConverter**：
+
+这个类允许你在SpringMVC控制层的方法中直接使用你的领域类型(Domain types)，如下：
+
+```java
+// 例1.20 使用领域类型
+@Controller
+@RequestMapping("/users")
+public class UserController {
+
+  @RequestMapping("/{id}")
+  public String showUserForm(@PathVariable("id") User user, Model model) {
+
+    model.addAttribute("user", user);
+    return "userForm";
+  }
+}
+```
+
+正如你所见，上面的方法直接接收了一个User对象，你不需要做任何的搜索操作，这个转换器自动的设id的值进去对象中，并且最终调用了findOne方法查询出实体。
+(注：当前的Repository必须实现CrudRepository)
+
+**HandlerMethodArgumentResolver分页排序**:
+
+这个配置项同时注册了`PageableHandlerMethodArgumentResolver` 和 `SortHandlerMethodArgumentResolver`，使得Pageable跟Sort能作为控制层的参数使用：
+
+```java
+// 使用分页作为控制层参数
+@Controller
+@RequestMapping("/users")
+public class UserController {
+    @Autowired UserRepository repository;
+    @RequestMapping
+    public String showUsers(Model model, Pageable pageable) {
+        model.addAttribute("users", repository.findAll(pageable));
+        return "users";
+    }
+}
+```
+
+这个配置会让SpringMVC传递一个Pageable实体参数,下面是默认的参数：
+
+|属性|说明|
+|-----|-----|
+|page|获取的页数，默认0|
+|size|一页中最大的数据量，默认20|
+|sort|需要被排序的属性(格式：`property,property(,ASC/DESC)`)，默认是asc，使用多个`sort`参数，你可以使用`?sort=firstname&sort=lastname,asc`|
+
+如果你需要对多个表写多个分页或排序，那么你需要用`@Qualifier`来区分，请求参数的前缀是`${qualifire}_`，那么你的方法可能变成这样：
+
+```java
+// 多个分页
+public String showUsers(Model model,
+@Qualifier("foo") Pageable first,
+@Qualifier("bar") Pageable second) { … }
+```
+
+你需要填写`foo_page`和`bar_page`等。
+
+默认的`Pageable`相当于`new PageRequest(0,20)`，你可以用`@PageableDefaults`注解来放在`Pageable`上。
 
