@@ -1,4 +1,4 @@
-上次在[【JWT】使用JWT在Web应用间安全地传递信息](https://github.com/ittalks/JavaEE_Note/tree/master/wiki/Auth/JWT/【JWT】使用JWT在Web应用间安全地传递信息.md)中
+上次在[【JWT】使用JWT在Web应用间安全地传递信息](https://github.com/ittalks/Note/tree/master/wiki/Auth/JWT/【JWT】使用JWT在Web应用间安全地传递信息.md)中
 我提到了`JSON Web Token`可以用来**设计单点登录系统**。
 
 我尝试用八幅漫画先让大家理解如何设计正常的用户认证系统，然后再延伸到单点登录系统。
