@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.smtboy</groupId>
-    <artifactId>JavaEE_Note</artifactId>
+    <artifactId>Note</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
