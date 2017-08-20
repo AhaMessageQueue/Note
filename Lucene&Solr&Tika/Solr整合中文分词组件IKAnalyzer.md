@@ -34,9 +34,9 @@
 
 ![](./images/withoutIK.png)
 
-![](./images/withIKMin.png)
+![](images/withIKMin.png)
 
-![](./images/withIKMax.png)
+![](images/withIKMax_undo.png)
 
 默认分词器进行最细粒度切分。
 
@@ -114,4 +114,4 @@ IKAnalyzer.cfg.xml 部署在代码根目彔下（ 对亍 web 项目，通常是 
 
 现在有效果了。
 
-![](./images/withIKMin_.png)
+![](./images/withIKMax_done.png)
