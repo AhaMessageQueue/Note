@@ -1,4 +1,0 @@
-- 【WebService】自定义WebService服务及其调用
-- 【WebService】wsdl配置详解以及使用注解修改wsdl配置
-- 【WebService】CXF处理javaBean等复合类型以及Map等复杂类型的数据
-- 【WebService】CXF拦截器的设置以及自定义CXF拦截器
