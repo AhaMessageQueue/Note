@@ -18,6 +18,7 @@
 
 比mmseg4j要简单很多，[下载](https://code.google.com/p/ik-analyzer/downloads/list)`IKAnalyzer2012FF_hf1.jar`,
 放到目录：`D:\apache-tomcat-8.0.9\webapps\solr\WEB-INF\lib`，
+
 修改配置文件`schema.xml`，添加代码：
 
 ```xml
@@ -32,11 +33,11 @@
 
 重启服务，来看看IKAnalyzer的分词效果怎么样
 
-![](./images/withoutIK.png)
+![](images/solr_analyze.png)
 
-![](images/withIKMin.png)
+![](images/IK_cn_analyze2.png)
 
-![](images/withIKMax_undo.png)
+![](images/IK_cn_analyze3.png)
 
 默认分词器进行最细粒度切分。
 
@@ -88,7 +89,7 @@ IKAnalyzer.cfg.xml 部署在代码根目彔下（ 对亍 web 项目，通常是 
 >注：改Jar已经集成了`IKAnalyzer.cfg.xml`，请勿重复`基于配置的词典扩充`一节。
 
 如果想通过配置 IKAnalyzer.cfg.xml 文件来扩充您的专有词典以及停止词典（过滤词典），
-只需要fork改项目，然后修改配置，重新打包`IKAnalyzer2012ff.jar`。
+只需要fork改项目，然后修改配置，重新打包`IKAnalyzer2012ff_4.10.3.jar`。
 
 放到目录：`D:\apache-tomcat-8.0.9\webapps\solr\WEB-INF\lib`，
 修改配置文件`schema.xml`，添加代码：
@@ -114,4 +115,4 @@ IKAnalyzer.cfg.xml 部署在代码根目彔下（ 对亍 web 项目，通常是 
 
 现在有效果了。
 
-![](./images/withIKMax_done.png)
+![](images/IK_cn_analyze4.png)

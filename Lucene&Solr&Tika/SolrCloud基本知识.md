@@ -105,15 +105,15 @@ SolrCloud有几个特色功能：
 
 ### 创建索引过程
 
-![](images/solrcloud_collection_create.png)
+![](images/solrcloud_col_create.png)
 
 ### 检索过程
 
-![](images/solrcloud_collection_query.png)
+![](images/solrcloud_col_query.png)
 
 ### Shard Splitting
 
-![](images/solrcloud_collection_shard.png)
+![](images/solrcloud_col_shard.png)
 
 
 ## 常用的查询方法和管理API

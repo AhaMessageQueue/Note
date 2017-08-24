@@ -317,7 +317,7 @@ http://192.168.25.154:8080/solr/admin/collections?
 action=CREATE&name=collection2&numShards=2&replicationFactor=2
 ```
 
-![](images/solrcloud_collection_create_rs.png)
+![](images/solrcloud_col_create_rs.png)
 
 ![](images/solrcloud_graph2.png)
 
@@ -329,7 +329,7 @@ action=CREATE&name=collection2&numShards=2&replicationFactor=2
 http://192.168.25.154:8080/solr/admin/collections?action=DELETE&name=collection1
 ```
 
-![](images/solrcloud_collection_delete_rs.png)
+![](images/solrcloud_col_delete_rs.png)
 
 ![](images/solrcloud_graph3.png)
 
