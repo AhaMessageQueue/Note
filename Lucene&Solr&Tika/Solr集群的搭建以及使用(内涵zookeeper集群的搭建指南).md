@@ -240,40 +240,43 @@ Connecting to localhost:2181
 
 ##### 扩展
 
-上传配置文件到zookeeper
+**上传配置文件到zookeeper**
 
 ```text
 java -classpath .:/usr/local/solrcloud/solr-lib/* org.apache.solr.cloud.ZkCLI -cmd upconfig -zkhost master:2188 -confdir /usr/local/solrcloud/config-files/ -confname myconf
 ```
 
-连接zookeeper的配置内容
+**链接zookeeper的配置内容**
 
 ```text
 java -classpath .:/usr/local/solrcloud/solr-lib/* org.apache.solr.cloud.ZkCLI -cmd linkconfig -collection collection -confname myconf -zkhost master:2188
 ```
 
-##### Config Startup Bootstrap Params
+**Config Startup Bootstrap Params**
 
 有两种不同的方式可以使用系统属性将您的初始配置文件上传到ZooKeeper，在你第一次启动Solr。
-请记住，这些仅用于首次启动或覆盖配置文件时 - 每当您使用这些系统属性启动Solr时，当'conf set'名称匹配时，ZooKeeper中的当前配置文件都可能会被覆盖。
 
-1. 查看`solr.xml`并上传每个SolrCore找到的conf配置。
-    'config set'名称将是SolrCore的collection名称，collections将使用匹配名称的'config set'。
+请记住，这些仅用于首次启动或覆盖配置文件(每当您使用这些系统属性启动Solr时，当`conf set`名称匹配时，ZooKeeper中的配置文件都可能会被覆盖)
+
+1. 查看`solr.xml`并上传找到的每个SolrCore conf。
+    'config set'名称将使用SolrCore的collection名称，collections将使用名称匹配的'config set'。
     
     - bootstrap_conf：
         没有默认值。
-        如果您在启动时传递`-Dbootstrap_conf = true`，则您配置的每个SolrCore将自动上传配置文件，并将其链接到SolrCore所属的collection|
-    
-2. 将给定的目录以给定的名称作为'conf set'上传。没有将集合链接到'conf set'。 但是，如果只存在一个'conf set'，那么collection会自动链接到它。
+        如果您在启动时传递`-Dbootstrap_conf = true`，则您配置的每个SolrCore将自动上传配置文件，并将其链接到SolrCore所属的collection
+
+2. 将给定的目录以给定的名称作为`conf set`上传。没有将collection链接到`conf set`。但是，如果只存在一个`conf set`，那么collection会自动链接到它。
     
     - bootstrap_confdir：
         没有默认值。
-        如果您在启动时通过传递`-Dbootstrap_confdir = <directory>`，那么配置文件的特定目录将被上传到ZooKeeper，并指定由以下系统属性定义的'conf set'名称|
-    - collection.config：
-        Namecollection.configName默认为configuration1。
-        指定由bootstrap_confdir指向的conf集的名称
+        如果您在启动时通过传递`-Dbootstrap_confdir = <directory>`，那么配置文件的指定目录将被上传到ZooKeeper，并由以下系统属性的定义指定`conf set`名称
     
-3. -DzkRun: 在Solr中启动一个内嵌的zooKeeper服务器，该服务会管理集群的相关配置。单机版（测试）使用，如果是集群，用下面的-DzkHost来替换，含义一样
+    - collection.configName：
+        collection.configName默认为configuration1。
+        指定`conf set`的名称
+        
+3. -DzkRun: 在Solr中启动一个**内嵌的zooKeeper服务器**，该服务会管理集群的相关配置。
+    单机版（测试）使用，如果是集群，用下面的-DzkHost来替换，含义一样
     
     ```text
     JAVA_OPTS="$JAVA_OPTS -DzkRun  -Dbootstrap_conf=true -DnumShards=2"  
@@ -320,6 +323,12 @@ action=CREATE&name=collection2&numShards=2&replicationFactor=2
 ![](images/solrcloud_col_create_rs.png)
 
 ![](images/solrcloud_graph2.png)
+
+注意：
+
+如果提示`Error loading class 'solr.DataImportHandler'`错误，则
+把`solr-6.0.1/dist/solr-dataimporthandler-6.0.1.jar`复制到`/usr/local/apache-tomcat-8.5.5/webapps/solr/WEB-INF/lib`
+(即tomcat下的solr项目的lib目录)目录下；再重启就可以了。
 
 #### 6.6、第六步
 
