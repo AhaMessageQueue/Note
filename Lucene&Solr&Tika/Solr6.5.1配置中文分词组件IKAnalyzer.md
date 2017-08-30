@@ -99,8 +99,8 @@ protected Tokenizer(AttributeFactory factory) {
 所以在此基础上做了如下修改:
 
 ```java
-//分析器调用
-public IKTokenizer(Reader in, boolean useSmart) {
+//IKAnalyzer分析器调用
+public IKTokenizer(boolean useSmart) {
     offsetAtt = addAttribute(OffsetAttribute.class);
     termAtt = addAttribute(CharTermAttribute.class);
     typeAtt = addAttribute(TypeAttribute.class);
@@ -136,7 +136,8 @@ protected TokenStreamComponents createComponents(String fieldName, final Reader 
 ```
 
 由于现在的Analyzer的抽象方法createComponents，只需要一个fieldName参数，并不需要Reader，因此直接删除Reader即可。
-同时因为分词器中也不需要Reader对象,在原来的分词器IKAnalyzer是接收Reader对象后又传递给了父类的构造器，但是在新版的solr中不需要了，而且分词器IKAnalyzer中也没有使用该对象。
+
+同时因为分词器中也不需要Reader对象,在原来的分词器IKTokenizer是接收Reader对象后又传递给了父类的构造器，但是在新版的solr中不需要了，而且分词器IKTokenizer中也没有使用该对象。
 
 ```java
 @Override
@@ -154,9 +155,7 @@ protected TokenStreamComponents createComponents(String fieldName) {
 </fieldType>
 ```
 
-直接指定修改后的IK分词器给分析器。
-
-在单独给分析器指定分词器时候，不要在 fieldType(字段类型) 加上positionIncrementGap 参数，否则会报错：
+直接指定修改后的IK分析器。不要在 fieldType(字段类型) 加上positionIncrementGap 参数，否则会报错：
 
 　　java.lang.RuntimeException: Can't set positionIncrementGap on custom analyzer class org.wltea.analyzer.lucene.IKAnalyzer
 
@@ -208,7 +207,7 @@ public final class IKTokenizerFactory extends TokenizerFactory {
 }
 ```
 
-可以看到该分词器实现父类的create方法时候接受了一个AttributeFactory, 是不是很熟悉，在上面修改的IKTokenizer中新增的构造器内接受该类型的参数，并调用父类的构造器，又将参数传递给了父类。
+可以看到该分词器工厂实现父类的create方法时候接受了一个AttributeFactory, 是不是很熟悉，在上面修改的IKTokenizer中新增的构造器内接受该类型的参数，并调用父类的构造器，又将参数传递给了父类。
 
 因此IKTokenizer中的第二个构造器就是用于该工厂调用并传递参数，然后创建实例返回。
 
@@ -216,6 +215,57 @@ public final class IKTokenizerFactory extends TokenizerFactory {
 子类IKTokenizerFactory在初始化过程中，必须调用父类的构造器。即使传递null值给父类。
 
 而Map容器的作用是：在配置文件managed-schema中，设置分词器的时候，可以传递参数。用于设置分词器中的参数，例如上面的 useSmart，就是用于IK分词器是否开启智能分词的开关。
+
+**4、query**
+
+SWMCQueryBuilder类修改如下代码：
+
+```java
+//借助lucene queryparser 生成SWMC Query
+QueryParser qp = new QueryParser(Version.LUCENE_40, fieldName, new StandardAnalyzer(Version.LUCENE_40));
+qp.setDefaultOperator(QueryParser.AND_OPERATOR);
+qp.setAutoGeneratePhraseQueries(true);
+```
+
+在lucene6.6.0版本中，QueryParser类构造方法如下：
+
+```java
+public QueryParser(String f, Analyzer a) {
+    this(new FastCharStream(new StringReader("")));
+    init(f, a);
+}
+```
+
+StandardAnalyzer类构造方法如下：
+
+```java
+public StandardAnalyzer() {
+    this(STOP_WORDS_SET);
+}
+```
+
+故我们需要将原来的代码，去掉版本号的参数传入，改为：
+
+```java
+//借助lucene queryparser 生成SWMC Query
+QueryParser qp = new QueryParser(fieldName, new StandardAnalyzer());
+```
+
+----
+
+在lucene6.6.0版本中，BooleanQuery的构造方法变为私有的，所以我们需要使用其提供的Builder构建
+
+```java
+BooleanQuery resultQuery = new BooleanQuery();
+
+// 改为
+
+BooleanQuery resultQuery = new BooleanQuery.Builder().build();
+```
+
+IKQueryExpressionParser类的修改参照[github源码]()。
+
+----
 
 至此修改全部完毕，最后只需要将修改后的编译文件放入IK的jar包内即可。注意包路径为
 

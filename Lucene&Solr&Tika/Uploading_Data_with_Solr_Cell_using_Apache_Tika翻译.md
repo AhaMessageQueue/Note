@@ -402,3 +402,11 @@ public class SolrCellRequestDemo {
 上面的示例代码调用extract命令，但您可以轻松地替换Solr Cell支持的其他命令。 要使用的关键类是`ContentStreamUpdateRequest`，可以确保`ContentStream`设置正确。
 
 请注意，`ContentStreamUpdateRequest`不仅仅是Solr Cell特有的。
+
+
+>补充：
+
+由SolrCell提取的文件主体。
+
+注意：默认情况下，此字段未创建索引，它在下面使用copyField被复制到"text"字段。
+这是为了节省空间。使用此字段返回和高亮显示。使用"text"字段搜索内容。
