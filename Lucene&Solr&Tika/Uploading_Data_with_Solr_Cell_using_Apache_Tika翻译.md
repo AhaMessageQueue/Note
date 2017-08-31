@@ -249,7 +249,9 @@ Tika应用`fmap.source=target`参数指定的映射规则。
 
 在默认部分，我们将Tika的`Last-Modified`元属性映射到名为`last_modified`的字段。我们也告诉它忽视未定义的字段。这些都是覆盖参数。
 
-`tika.config`指向包含Tika配置的文件。`date.formats`允许您指定用于将提取的输入转换为Date的各种java.text.SimpleDateFormats日期格式。Solr配置了以下日期格式（请参阅Solr中的DateUtil）：
+`tika.config`指向包含Tika配置的文件。
+
+`date.formats`允许您指定用于将提取的输入转换为Date的各种java.text.SimpleDateFormats日期格式。Solr配置了以下日期格式（请参阅Solr中的DateUtil）：
 
 - yyyy-MM-dd’T’HH:mm:ss’Z'
 - yyyy-MM-dd’T’HH:mm:ss
