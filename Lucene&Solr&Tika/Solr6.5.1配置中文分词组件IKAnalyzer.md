@@ -96,6 +96,8 @@ protected Tokenizer(AttributeFactory factory) {
 可以看到上面的代码中，构造器调用了父类的构造器，出现不兼容的原因是因为现在的抽象类Tokenizer的构造方法中接受的是 `AttributeFactory` 这个类型，
 而IKTokenizer传递的`Reader`不匹配。
 
+![](./images/IKAnalyzer_6.6.0_s1.png)
+
 所以在此基础上做了如下修改:
 
 ```java
@@ -136,6 +138,8 @@ protected TokenStreamComponents createComponents(String fieldName, final Reader 
 ```
 
 由于现在的Analyzer的抽象方法createComponents，只需要一个fieldName参数，并不需要Reader，因此直接删除Reader即可。
+
+![](./images/IKAnalyzer_6.6.0_s2.png)
 
 同时因为分词器中也不需要Reader对象,在原来的分词器IKTokenizer是接收Reader对象后又传递给了父类的构造器，但是在新版的solr中不需要了，而且分词器IKTokenizer中也没有使用该对象。
 
