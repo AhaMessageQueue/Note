@@ -3,7 +3,7 @@
 发现原本的`@ConfigurationProperties`注解已将`location`属性移除，因此导致无法正常给配置类的属性赋值
 (spring boot这么做其实也有他的道理，具体可参考<https://github.com/spring-projects/spring-boot/issues/6726>)
 
-![](./images/@ConfigurationProperties_location.png)
+![](../images/@ConfigurationProperties_location_native.png)
 
 ## 解决方案
 之前一直采用的方式是添加`@ConfigurationProperties`注解，配置其`prefix`和`location`属性，然后在`spring boot`启动类中用`@EnableConfigurationProperties`激活配置类
@@ -13,7 +13,7 @@
 1. 在`@EnableConfigurationProperties`取消激活自定义的配置类（重要）
 2. 在配置类中采用`@Component`的方式注册为组件，然后使用`@PropertySource`来指定自定义的资源目录
 
-![](images/@ConfigurationProperties_location2.png)
+![](../images/@ConfigurationProperties_location_nonNative.png)
 
 ## 总结
 这就是`@ConfigurationProperties`的`location`属性被取消后的一种替代方案,
