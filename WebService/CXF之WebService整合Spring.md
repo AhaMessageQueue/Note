@@ -78,7 +78,7 @@
 比如说`http://ip:port/appname/webservice/HelloWorld`，就会指向`web service address`为`HelloWorld`的服务。 
 
 关于`IntrospectorCleanupListener`的介绍，查看：
-[IntrospectorCleanupListener作用](https://github.com/smtboy/Note/blob/master/note/Spring/IntrospectorCleanupListener作用.md)
+[IntrospectorCleanupListener作用](https://github.com/ittalks/Note/blob/master/note/Spring/IntrospectorCleanupListener作用.md)
 
 然后在src目录中，新建一个applicationContext-server.xml文件，文件内容如下： 
 
