@@ -247,3 +247,37 @@ curl "http://localhost:8983/solr/techproducts/update/extract?&extractOnly=true" 
 ```text
 bin/post -c techproducts -params "extractOnly=true&wt=ruby&indent=true" -out yes example/exampledocs/sample.html
 ```
+
+## Sending Documents to Solr with a POST
+
+下面的示例将文件作为POST请求体进行流式传输，然后，向Solr提供有关文件名称的信息。
+
+```text
+curl "http://localhost:8983/solr/techproducts/update/extract?literal.id=doc6&defaultField=text&commit=true" --data-binary @example/exampledocs/sample.html -H 'Content-type:text/html'
+```
+
+## Sending Documents to Solr with Solr Cell and SolrJ
+
+SolrJ是一个Java客户端，可用于向索引添加文档，更新索引或查询索引。您可在[Client APIs](https://lucene.apache.org/solr/guide/6_6/client-apis.html#client-apis)中找到有关SolrJ的更多信息。
+
+以下是使用Solr Cell和SolrJ将文档添加到Solr索引的示例。
+
+首先，我们使用SolrJ创建一个新的`SolrClient`，然后我们构造一个包含`ContentStream`的请求（本质上是一个文件的包装器），并发送给Solr：
+
+```java
+public class SolrCellRequestDemo {
+  public static void main (String[] args) throws IOException, SolrServerException {
+    SolrClient client = new HttpSolrClient.Builder("http://localhost:8983/solr/my_collection").build();
+    ContentStreamUpdateRequest req = new ContentStreamUpdateRequest("/update/extract");
+    req.addFile(new File("my-file.pdf"));
+    req.setParam(ExtractingParams.EXTRACT_ONLY, "true");
+    NamedList<Object> result = client.request(req);
+    System.out.println("Result: " + result);
+}
+```
+
+此操作将文件`my-file.pdf`导入到`my_collection`的Solr索引中。
+
+上面的示例代码调用extract命令，但您可以轻松地替换为Solr Cell支持的其他命令。要使用的关键类是`ContentStreamUpdateRequest`，可以确保`ContentStream`设置正确。SolrJ处理剩余的工作。
+
+请注意，`ContentStreamUpdateRequest`不仅仅是Solr Cell特有的。您可以将CSV发送到CSV Update Handler以及基于Content Streams的任何其它Request Handler进行更新。
