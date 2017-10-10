@@ -84,7 +84,7 @@ IKAnalyzer.cfg.xml 部署在代码根目彔下（ 对亍 web 项目，通常是 
 
 解决办法：
 
-编译<https://github.com/ittalks/Tonic_tika_solr_zookeeper/tree/master/IKAnalyzer2012ff>，将生成的`IKAnalyzer2012ff.jar`
+编译<https://github.com/fnpac/Tonic_tika_solr_zookeeper/tree/master/IKAnalyzer2012ff>，将生成的`IKAnalyzer2012ff.jar`
 
 >注：改Jar已经集成了`IKAnalyzer.cfg.xml`，请勿重复`基于配置的词典扩充`一节。
 

@@ -17,7 +17,7 @@ public class SpringBootFnApplication {
 二、创建一个AsyncTask类，在里面添加两个用@Async注解的task：
 
 ```java
-package com.github.ittalks.fn.task;
+package com.github.fnpac.fn.task;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,9 +66,9 @@ public class AsyncTask {
 三、万事俱备，开始测试：
 
 ```java
-package com.github.ittalks.fn;
+package com.github.fnpac.fn;
 
-import com.github.ittalks.fn.task.AsyncTask;
+import com.github.fnpac.fn.task.AsyncTask;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -116,10 +116,10 @@ public class SpringBootFnApplicationTests {
 
 ```text
 12:58:16.501 [main] INFO  o.s.s.a.AnnotationAsyncExecutionInterceptor - No task executor bean found for async processing: no bean of type TaskExecutor and no bean named 'taskExecutor' either
-12:58:16.554 [SimpleAsyncTaskExecutor-1] INFO  com.github.ittalks.fn.task.AsyncTask - Task1 started.
-12:58:16.556 [SimpleAsyncTaskExecutor-2] INFO  com.github.ittalks.fn.task.AsyncTask - Task2 started.
-12:58:19.563 [SimpleAsyncTaskExecutor-2] INFO  com.github.ittalks.fn.task.AsyncTask - Task2 finished, time elapsed: 3001 ms.
-12:58:21.563 [SimpleAsyncTaskExecutor-1] INFO  com.github.ittalks.fn.task.AsyncTask - Task1 finished, time elapsed: 5001 ms.
+12:58:16.554 [SimpleAsyncTaskExecutor-1] INFO  com.github.fnpac.fn.task.AsyncTask - Task1 started.
+12:58:16.556 [SimpleAsyncTaskExecutor-2] INFO  com.github.fnpac.fn.task.AsyncTask - Task2 started.
+12:58:19.563 [SimpleAsyncTaskExecutor-2] INFO  com.github.fnpac.fn.task.AsyncTask - Task2 finished, time elapsed: 3001 ms.
+12:58:21.563 [SimpleAsyncTaskExecutor-1] INFO  com.github.fnpac.fn.task.AsyncTask - Task1 finished, time elapsed: 5001 ms.
 12:58:22.514 [main] INFO  c.g.i.f.SpringBootFnApplicationTests - Task1 result: Task1 accomplished!
 12:58:22.515 [main] INFO  c.g.i.f.SpringBootFnApplicationTests - Task2 result: Task2 accomplished!
 12:58:22.515 [main] INFO  c.g.i.f.SpringBootFnApplicationTests - All tasks finished.
@@ -134,7 +134,7 @@ public class SpringBootFnApplicationTests {
 一、新建一个Executor配置类，顺便把@EnableAsync注解搬到这里来：
 
 ```java
-package com.github.ittalks.fn.config;
+package com.github.fnpac.fn.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -197,7 +197,7 @@ public class FnExecutorConfigurer {
 二、自定义Executor的使用：
 
 ```java
-package com.github.ittalks.fn.task;
+package com.github.fnpac.fn.task;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -252,10 +252,10 @@ public class AsyncTask {
 ```text
 12:59:57.773 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'asyncExecutor'
 12:59:57.777 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'policyExecutor'
-12:59:57.796 [PolicyExecutor-1] INFO  com.github.ittalks.fn.task.AsyncTask - Task2 started.
-12:59:57.797 [AsyncExecutor-1] INFO  com.github.ittalks.fn.task.AsyncTask - Task1 started.
-13:00:00.797 [PolicyExecutor-1] INFO  com.github.ittalks.fn.task.AsyncTask - Task2 finished, time elapsed: 3001 ms.
-13:00:02.801 [AsyncExecutor-1] INFO  com.github.ittalks.fn.task.AsyncTask - Task1 finished, time elapsed: 5001 ms.
+12:59:57.796 [PolicyExecutor-1] INFO  com.github.fnpac.fn.task.AsyncTask - Task2 started.
+12:59:57.797 [AsyncExecutor-1] INFO  com.github.fnpac.fn.task.AsyncTask - Task1 started.
+13:00:00.797 [PolicyExecutor-1] INFO  com.github.fnpac.fn.task.AsyncTask - Task2 finished, time elapsed: 3001 ms.
+13:00:02.801 [AsyncExecutor-1] INFO  com.github.fnpac.fn.task.AsyncTask - Task1 finished, time elapsed: 5001 ms.
 13:00:03.780 [main] INFO  c.g.i.f.SpringBootFnApplicationTests - Task1 result: Task1 accomplished!
 13:00:03.780 [main] INFO  c.g.i.f.SpringBootFnApplicationTests - Task2 result: Task2 accomplished!
 13:00:03.780 [main] INFO  c.g.i.f.SpringBootFnApplicationTests - All tasks finished.

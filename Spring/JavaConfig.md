@@ -124,7 +124,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages={"com.github.ittalks"})
+@ComponentScan(basePackages={"com.github.fnpac"})
 public class WebApplicationJavaConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ViewResolver internalResourceViewResolver(){
@@ -155,7 +155,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan(basePackages={"com.github.ittalks"},
+@ComponentScan(basePackages={"com.github.fnpac"},
     excludeFilters={@Filter(type=FilterType.ANNOTATION,value={EnableWebMvc.class})})
 public class RootApplicationJavaConfig {
 

@@ -844,7 +844,7 @@ BlogService service = retrofit.create(BlogService.class);
 Blog blog = new Blog();
 blog.content = "新建的Blog";
 blog.title = "测试";
-blog.author = "ittalks";
+blog.author = "fnpac";
 Call<Result<Blog>> call = service.createBlog(blog);
 call.enqueue(new Callback<Result<Blog>>() {
     @Override
@@ -862,7 +862,7 @@ call.enqueue(new Callback<Result<Blog>>() {
 ```
 结果：
 ```
-Result{code=200, msg='OK', data=Blog{id=20, date='2016-04-21 05:29:58', author='ittalks', title='测试', content='新建的Blog'}, count=0, page=0}
+Result{code=200, msg='OK', data=Blog{id=20, date='2016-04-21 05:29:58', author='fnpac', title='测试', content='新建的Blog'}, count=0, page=0}
 ```
 Result的方法： 
 ```
@@ -3108,7 +3108,7 @@ public Retrofit.Builder client(OkHttpClient client) {
 |----------------------------------------|-----------------------------------|--------|
 |http://localhost:4567/path/to/other/    |/post                           |http://localhost:4567/post|
 |http://localhost:4567/path/to/other/    |post                         	|http://localhost:4567/path/to/other/post|
-|http://localhost:4567/path/to/other/    |https://github.com/ittalks       |https://github.com/ittalks|
+|http://localhost:4567/path/to/other/    |https://github.com/fnpac       |https://github.com/fnpac|
 
 从上面不能难看出以下规则：
 

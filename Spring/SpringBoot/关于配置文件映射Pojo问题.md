@@ -1,13 +1,13 @@
 **场景描述**
 自定义一个配置文件`project.properties`
 ```properties
-project.info.groupId=com.github.ittalks
+project.info.groupId=com.github.fnpac
 project.info.artifactId=spring_boot_learning
 project.info.version=0.0.1-SNAPSHOT
 ```
 对应的创建一个类`ProjectInfo`
 ```java
-package com.github.ittalks.spring_boot_learning.config.properties;
+package com.github.fnpac.spring_boot_learning.config.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -25,9 +25,9 @@ public class ProjectInfo {
 ```
 然后是接口：
 ```java
-package com.github.ittalks.spring_boot_learning.api;
+package com.github.fnpac.spring_boot_learning.api;
 
-import com.github.ittalks.spring_boot_learning.config.properties.ProjectInfo;
+import com.github.fnpac.spring_boot_learning.config.properties.ProjectInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -61,7 +61,7 @@ public class PropertiesTController {
 ```json
 {
 
-   "groupId": "com.github.ittalks",
+   "groupId": "com.github.fnpac",
    "artifactId": "spring_boot_learning",
    "version": "0.0.1-SNAPSHOT"
 
@@ -76,7 +76,7 @@ public class PropertiesTController {
 这样Spring Boot检测到`@EnableConfigurationProperties(value = ProjectInfo.class)`注解，会将该注解所指定的类注册为bean。
 
 ```java
-package com.github.ittalks.spring_boot_learning.config.properties;
+package com.github.fnpac.spring_boot_learning.config.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -93,9 +93,9 @@ public class ProjectInfo {
 ```
 
 ```java
-package com.github.ittalks.spring_boot_learning.config;
+package com.github.fnpac.spring_boot_learning.config;
 
-import com.github.ittalks.spring_boot_learning.config.properties.ProjectInfo;
+import com.github.fnpac.spring_boot_learning.config.properties.ProjectInfo;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
