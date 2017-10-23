@@ -175,7 +175,7 @@ Maven
 ## 注解分类
 ### 第一类：HTTP请求方法
 
-![](../images/request_method_annotation.png)
+![](images/request_method_annotation.png)
 
 以上表格中的除HTTP以外都对应了HTTP标准中的请求方法，而HTTP注解则可以代替以上方法中的任意一个注解,有3个属性：method、path,hasBody,
 下面是用HTTP注解实现的例子。
@@ -191,10 +191,10 @@ public interface BlogService {
 }
 ```
 ### 第二类：标记类
-![](../images/tag_type_annotation.png)
+![](images/tag_type_annotation.png)
 
 ### 第三类：参数类
-![](../images/parameter_type_annotation.png)
+![](images/parameter_type_annotation.png)
 
 >Query、Field和Part这三者都支持数组和实现了Iterable接口的类型，如List，Set等，方便向后台传递数组。
 
@@ -1310,7 +1310,7 @@ public class AppClient {
 
 **Interceptors**是OkHttp3整个框架的核心，包含了请求监控、请求重写、调用重试等机制。它主要使用责任链模式，解决请求与请求处理之间的耦合。
 
-![](../images/okhttp3_process.png)
+![](images/okhttp3_process.png)
 
 ### 责任链模式
 将请求对象放入链中，按照链中顺序让多个对象处理请求。请求者不用知道具体是由谁处理。解决请求与请求处理之间的耦合，提高灵活性。
@@ -1318,7 +1318,7 @@ public class AppClient {
 
 **OkHttp3的Interceptors的责任链**
 
-![](../images/okhttp3_chain.png)
+![](images/okhttp3_chain.png)
 
 ### OkHttp3链式流程
 
@@ -1346,7 +1346,7 @@ Response getResponseWithInterceptorChain() throws IOException {
 ```
 研究Okhttp3的源码，从此处开始，一个一个拦截器，读懂即可。不得不说这种方式真的很棒，清晰明了。
 
-![](../images/okhttp3_chain_process.jpg)
+![](images/okhttp3_chain_process.jpg)
 
 通过上图，想必对Okhttp3的实现方式，已经有了基本的认识下面我们就一步一具体分析。
 
@@ -1407,7 +1407,7 @@ Header并非每个请求都需要，要看与服务端是如何定义的，通�
 
 Header本质上就是一个Map，只是在封装了一层而已，但是Okhttp3的实现不是这样，而是一个**String数组**，key + value的形式，即一个头占用数组的两位：
 
-![](../images/header_array.jpg)
+![](images/header_array.jpg)
 
 每一个色块对应一个header，代码如下：
 
@@ -1927,7 +1927,7 @@ public final class BridgeInterceptor implements Interceptor {
 
 Okhttp3的调用流程基本原理就是这样，重要的是思想，整个流程一气呵成，完全解耦。
 
-![](../images/RealInterceptorChain.jpg)
+![](images/RealInterceptorChain.jpg)
 
 ###### 扩展
 最后我们再谈一下调用的结束流程。
@@ -2831,17 +2831,17 @@ static class NetworkCacheInterceptor implements Interceptor {
 
 .0的文件里面是header
 
-![](../images/.0.png)
+![](images/.0.png)
 
 而.1文件里面是返回的具体内容，即json数据。 
 
-![](../images/.1.png)
+![](images/.1.png)
 
 由此可见，这里的缓存机制也是一开始先把json缓存进文件，没有网络的时候再读取json进行解析。
 
 但是还有一个journal.文件，这个里面是什么呢。
 
-![](../images/journal.png)
+![](images/journal.png)
 
 可以看到里面保存的是每一条reponse记录状态。包括读取，删除，写入等动作。
 

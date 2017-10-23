@@ -157,7 +157,7 @@
 
 ## [Retrofit](https://github.com/fnpac/Note/tree/master/Retrofit)
 
-- [Retrofit2深入理解和使用](https://github.com/fnpac/Note/tree/master/Retrofit/v2/Retrofit2深入理解和使用.md)
+- [Retrofit2深入理解和使用](https://github.com/fnpac/Note/tree/master/Retrofit/Retrofit2入门教程.md)
 
 ## [Spring](https://github.com/fnpac/Note/tree/master/Spring)
 
@@ -217,8 +217,8 @@
 
 ## [WebSocket](https://github.com/fnpac/Note/tree/master/WebSocket)
 
-- [WebSocket和STOMP详解](https://github.com/fnpac/Note/tree/master/WebSocket/v2/WebSocket和STOMP详解.md)
-- [WebSocket实现指定用户消息推送(底层协议)](https://github.com/fnpac/Note/tree/master/WebSocket/v2/WebSocket实现指定用户消息推送(底层协议).md)
+- [WebSocket和STOMP详解](https://github.com/fnpac/Note/tree/master/WebSocket/WebSocket和STOMP详解.md)
+- [WebSocket实现指定用户消息推送(底层协议)](https://github.com/fnpac/Note/tree/master/WebSocket/指定用户消息推送(底层协议).md)
 
 ## [WeChat](https://github.com/fnpac/Note/tree/master/WeChat)
 
