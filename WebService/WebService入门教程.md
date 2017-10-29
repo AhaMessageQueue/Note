@@ -1,7 +1,16 @@
+# 目录
+
+- _`Chpt 一、带你走进webservice的世界`_
+    - 1. 什么是webservice
+    - 2. 重温socket
+    - 3. 调用已发布的WebService
+
+
+# _`Chpt 一、带你走进webservice的世界`_
+
 ## 1. 什么是webservice
 
-准确的来说，webservice不是一种技术，而是一种规范。
-是一种跨平台，跨语言的规范，用于不同平台，不同语言开发的应用之间的交互。
+准确的来说，webservice不是一种技术，而是一种规范。是一种跨平台，跨语言的规范，用于不同平台，不同语言开发的应用之间的交互。
 
 举个例子，比如在Windows Server服务器上有个C#.Net开发的应用A，在Linux上有个Java语言开发的应用B，
 现在B应用要调用A应用，或者是互相调用，用于查看对方的业务数据，就需要webservice的规范。
@@ -27,6 +36,7 @@ webservice就是出于以上类似需求而定义出来的规范。
 这很好理解，为了回忆一下socket的创建和使用，下面先写一个简单的socket通信的demo，服务端可以将小写字母转大写。
 
 ### 2.2 经典的socket服务
+
 客户端：
 
 ```java
@@ -77,7 +87,7 @@ public class SocketServer {
 
     public static void main(String[] args) throws Exception {
 
-        // 1:、建立服务器端的tcp socket服务,必须监听一个端口
+        // 1、建立服务器端的TCP socket服务,必须监听一个端口
         ServerSocket ss = new ServerSocket(9999);
         while(true) {
             System.out.println("等待客户端请求……");
@@ -110,6 +120,7 @@ public class SocketServer {
 这个Demo很简单，先开启服务端的程序，在那等待，然后开启客户端程序，如果在控制台输入`hello`过去，就会从服务端返回一个`HELLO`回来，这说明socket通信是成功的。
 
 ### 2.3 web程序访问socket service
+
 上面经典的demo是在本地写的两个java程序，我们现在的很多项目都是web项目，也就是通过浏览器来交互的，
 我们来看下通过浏览器的方式如何来访问socket Service服务。
 
@@ -142,6 +153,7 @@ public class SocketServer {
 ![](..\images\socket_post_response.png)
 
 我用的是chrome浏览器，其他浏览器可能还没有数据，这都有可能。
+
 但是从数据中来看，它只是单纯的把所有信息全部转成了大写……而且它也没有Http的返回格式，也就是说，我所需要的就是个大写的HELLO即可，所以这是有问题的。
 
 所以可以总结一下：不同的协议其实也是支持Socket通信的。
@@ -284,7 +296,7 @@ public void soap(String number) throws Exception {
 ### 3.4 使用wsimport
 每个ws都会有一个WSDL，WSDL即WebService Description Language – Web服务描述语言。
 
-它是通过XML形式说明服务在什么地方－地址。通过XML形式说明服务提供什么样的方法 – 如何调用。
+它是通过XML形式说明服务在什么地方 － 地址。通过XML形式说明服务提供什么样的方法 – 如何调用。
 
 我们可以通过这个WSDL来获取和这个ws有关的信息，包括class和java代码。
 

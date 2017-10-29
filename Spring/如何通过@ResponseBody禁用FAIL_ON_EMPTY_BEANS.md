@@ -5,7 +5,7 @@
 Spring里有没有一个全局的配置，能够对所有标注注解`@ResponseBody`的控制器设置`SerializationFeature.FAIL_ON_EMPTY_BEANS`不可用。
 
 ### A
-这里有一篇[文章](SpringBoot/【SpringBoot】自定义HttpMessageConverters.md)介绍了自定义HttpMessageConverter;
+这里有一篇[文章](spring-boot/【SpringBoot】自定义HttpMessageConverters.md)介绍了自定义HttpMessageConverter;
 
 创建一个自定义的MyJsonMapper类来扩展ObjectMapper，然后使用它
 ```java

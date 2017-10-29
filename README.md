@@ -188,32 +188,23 @@
 ### [WebFlow](https://github.com/fnpac/Note/tree/master/Spring/WebFlow)
 - [SpringWebFlow入门demo简单页面跳转](https://github.com/fnpac/Note/tree/master/Spring/WebFlow/SpringWebFlow入门demo简单页面跳转.md)
 
-### [SpringBoot](https://github.com/fnpac/Note/tree/master/Spring/SpringBoot)
-- [SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案](https://github.com/fnpac/Note/tree/master/Spring/SpringBoot/SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案.md)
-- [关于配置文件映射Pojo问题](https://github.com/fnpac/Note/tree/master/Spring/SpringBoot/关于配置文件映射Pojo问题.md)
-- [@Async的使用、自定义Executor的配置方法](https://github.com/fnpac/Note/tree/master/Spring/SpringBoot/@Async的使用、自定义Executor的配置方法.md)
+### [spring-boot](https://github.com/fnpac/Note/tree/master/Spring/spring-boot)
+- [SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案](https://github.com/fnpac/Note/tree/master/Spring/spring-boot/SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案.md)
+- [关于配置文件映射Pojo问题](https://github.com/fnpac/Note/tree/master/Spring/spring-boot/关于配置文件映射Pojo问题.md)
+- [@Async的使用、自定义Executor的配置方法](https://github.com/fnpac/Note/tree/master/Spring/spring-boot/@Async的使用、自定义Executor的配置方法.md)
 
-### [SpringData](https://github.com/fnpac/Note/tree/master/Spring/SpringData)
+### [spring-data](https://github.com/fnpac/Note/tree/master/Spring/spring-data)
 
-- [Spring-data-mongodb批量更新操作](https://github.com/fnpac/Note/tree/master/Spring/SpringData/Spring-data-mongodb批量更新操作.md)
+- [Spring-data-mongodb批量更新操作](https://github.com/fnpac/Note/tree/master/Spring/spring-data/Spring-data-mongodb批量更新操作.md)
 
-### [SpringSession](https://github.com/fnpac/Note/tree/master/Spring/SpringSession)
-- [@Async的使用、自定义Executor的配置方法](https://github.com/fnpac/Note/tree/master/Spring/SpringSession/@Async的使用、自定义Executor的配置方法.md)
-- [SpringBoot使用Redis存储HttpSession](https://github.com/fnpac/Note/tree/master/Spring/SpringSession/SpringBoot使用Redis存储HttpSession.md)
-- [使用SpringSession做分布式会话管理](https://github.com/fnpac/Note/tree/master/Spring/SpringSession/使用SpringSession做分布式会话管理.md)
+### [spring-session](https://github.com/fnpac/Note/tree/master/Spring/spring-session)
+- [@Async的使用、自定义Executor的配置方法](https://github.com/fnpac/Note/tree/master/Spring/spring-session/@Async的使用、自定义Executor的配置方法.md)
+- [SpringBoot使用Redis存储HttpSession](https://github.com/fnpac/Note/tree/master/Spring/spring-session/SpringBoot使用Redis存储HttpSession.md)
+- [使用SpringSession做分布式会话管理](https://github.com/fnpac/Note/tree/master/Spring/spring-session/使用SpringSession做分布式会话管理.md)
 
 ## [WebService](https://github.com/fnpac/Note/tree/master/WebService)
 
-- [【WebService】一、带你走进webservice的世界](https://github.com/fnpac/Note/tree/master/WebService/【WebService】一、带你走进webservice的世界.md)
-- [【WebService】二、自定义WebService服务及其调用](https://github.com/fnpac/Note/tree/master/WebService/【WebService】二、自定义WebService服务及其调用.md)
-- [【WebService】三、wsdl配置详解以及使用注解修改wsdl配置](https://github.com/fnpac/Note/tree/master/WebService/【WebService】三、wsdl配置详解以及使用注解修改wsdl配置.md)
-- [【WebService】四、CXF处理JavaBean等复合类型以及Map等复杂类型的数据](https://github.com/fnpac/Note/tree/master/WebService/【WebService】四、CXF处理JavaBean等复合类型以及Map等复杂类型的数据.md)
-- [【WebService】五、CXF拦截器的设置以及自定义CXF拦截器](https://github.com/fnpac/Note/tree/master/WebService/【WebService】五、CXF拦截器的设置以及自定义CXF拦截器.md)
-- [CXF之WebService整合Spring](https://github.com/fnpac/Note/tree/master/WebService/CXF之WebService整合Spring.md)
-- [CXF之用CXF利用内置jetty发布ws](https://github.com/fnpac/Note/tree/master/WebService/CXF之用CXF利用内置jetty发布ws.md)
-- [CXF之实现一个Restful风格](https://github.com/fnpac/Note/tree/master/WebService/CXF之实现一个Restful风格.md)
-- [CXF之设置WebService客户端超时时长](https://github.com/fnpac/Note/tree/master/WebService/CXF之设置WebService客户端超时时长.md)
-- [CXF之配置HTTP代理访问Internet](https://github.com/fnpac/Note/tree/master/WebService/CXF之配置HTTP代理访问Internet.md)
+
 
 ## [WebSocket](https://github.com/fnpac/Note/tree/master/WebSocket)
 
