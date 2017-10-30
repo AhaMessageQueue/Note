@@ -1,23 +1,75 @@
-CXF的拦截器和以前学过的servlet的拦截器类似的，都是在开始或结束切入一段代码，执行一些逻辑之类的。我们可以在调用ws服务前设置拦截器，也可以在调用ws服务后设置拦截器，当然了，拦截器也可以添加多个，CXF中有自己内置的拦截器，先来写个简单CXF自带的拦截器实例熟悉一下在CXF中如何添加，然后再来自定义CXF拦截器。
+CXF的拦截器和以前学过的servlet的拦截器类似的，都是在开始或结束切入一段代码，执行一些逻辑之类的。
+我们可以在调用ws服务前设置拦截器，也可以在调用ws服务后设置拦截器，当然了，拦截器也可以添加多个，CXF中有自己内置的拦截器，先来写个简单CXF自带的拦截器实例熟悉一下在CXF中如何添加，然后再来自定义CXF拦截器。
 
 ## 1. CXF内置的拦截器设置
-还是使用上一节的ws，在原来的基础上添加以下拦截器，如下： 
 
-![](\images\server_interceptor.png)
+在`example.ws.cxf.demo1`的基础上添加以下拦截器，如下： 
 
-启动之后，客户端访问一下，看服务端控制台的输出（为了清楚点，我就不缩小了）： 
+```java
+package com.github.ittalks.commons.example.ws.cxf.demo2.client;
 
-![](\images\server_interceptor_log.png)
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.apache.cxf.jaxws.JaxWsServerFactoryBean;
+
+import java.util.logging.Logger;
+
+/**
+ * Created by 刘春龙 on 2017/10/30.
+ */
+public class _Main {
+
+    private static final Logger logger = Logger.getLogger(_Main.class.getName());
+
+    public static void main(String[] args) {
+        logger.info("web service start");
+
+        HelloWorld helloWorld = new HelloWorldImpl();
+        String address = "http://127.0.0.1:9999/ws";
+
+        JaxWsServerFactoryBean factoryBean = new JaxWsServerFactoryBean();
+        // 设置地址
+        factoryBean.setAddress(address);
+        /**
+         * 指定实现该服务的类。
+         *
+         * @param serviceClass 服务实现类
+         */
+        // 方式一
+        factoryBean.setServiceClass(HelloWorldImpl.class);
+        /**
+         * 设置实现服务的bean。
+         * 如果设置了，则会为所提供的bean创建BeanInvoker
+         *
+         * @param serviceBean 一个实例化的实现对象
+         */
+        // 方式二
+//        factoryBean.setServiceBean(helloWorld);
+
+        // 设置拦截器
+        factoryBean.getInInterceptors().add(new LoggingInInterceptor());// 添加in日志拦截器，可以看到soap消息
+        factoryBean.getOutInterceptors().add(new LoggingOutInterceptor());// 添加out日志拦截器，可以看到soap消息
+        
+        factoryBean.create(); // 创建webservice接口
+        logger.info("web service started");
+        logger.info("请求地址为为：" + address + "?WSDL");
+    }
+}
+```
+
+启动之后，客户端访问一下，看服务端控制台的输出： 
+
+![](./images/server_interceptor_log.png)
 
 可以看到，请求的时候会被拦截器拦截，请求结束也会被拦截，从打印的日志消息可以看出，发送的是soap消息，返回的数据由于截屏的范围我就不截取了，这是在服务端添加的拦截器。
 
 那客户端如何添加拦截器呢？由于client端无法直接获取拦截器组，所以我们需要首先获取一个client的代理，然后通过这个代理来获取拦截器组，如下： 
 
-![](\images\client_interceptor.png)
+![](./images/client_interceptor.png)
 
 客户端访问一下，看下客户端控制台的输出结果（为了清楚点，我就不缩小了）： 
 
-![](\images\client_interceptor_log.png)
+![](./images/client_interceptor_log.png)
 
 可以看出，客户端如果设置拦截器的话，也会打印出日志消息，而且客户端和服务端的拦截器执行顺序刚好相反。这就是CXF内置的拦截器，下面我们来自定义CXF的拦截器。
 

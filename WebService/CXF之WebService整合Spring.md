@@ -293,7 +293,7 @@ log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more in
 ```
 
 Tomcat控制台
-![](\images\Console_out.png)
+![](\images\console_out.png)
 
 这个server端是通过Spring整合配置的，下面我们将Client端也通过Spring配置完成整合。
 
