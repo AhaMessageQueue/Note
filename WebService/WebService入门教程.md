@@ -1,4 +1,4 @@
-# 目录
+# _`目录`_
 
 - _`Chpt 一、带你走进webservice的世界`_
     - 1.什么是webservice
@@ -19,8 +19,15 @@
     
 - _`Chpt 五、CXF拦截器的设置以及自定义CXF拦截器`_
     - 1.CXF内置的拦截器设置
-    - 
+    - 2.自定义CXF拦截器
 
+- _`Chpt 六、WebService - CXF整合Spring`_
+    - 1.整合server
+    - 2.整合client
+
+- _`Chpt 七、CXF实现一个Restful风格`_
+    - 
+    - 
 
 # _`Chpt 一、带你走进webservice的世界`_
 
@@ -1095,3 +1102,643 @@ key:admin,role:技术总监 架构师
 
 # _`Chpt 五、CXF拦截器的设置以及自定义CXF拦截器`_
 
+CXF的拦截器和以前学过的servlet的拦截器类似的，都是在开始或结束切入一段代码，执行一些逻辑之类的。
+我们可以在调用ws服务前设置拦截器，也可以在调用ws服务后设置拦截器，当然了，拦截器也可以添加多个，CXF中有自己内置的拦截器，先来写个简单CXF自带的拦截器实例熟悉一下在CXF中如何添加，然后再来自定义CXF拦截器。
+
+## 1. CXF内置的拦截器设置
+
+```java
+package com.github.ittalks.commons.example.ws.cxf.demo2.client;
+
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.apache.cxf.jaxws.JaxWsServerFactoryBean;
+
+import java.util.logging.Logger;
+
+/**
+ * Created by 刘春龙 on 2017/10/30.
+ */
+public class _Main {
+
+    private static final Logger logger = Logger.getLogger(_Main.class.getName());
+
+    public static void main(String[] args) {
+        logger.info("web service start");
+
+        HelloWorld helloWorld = new HelloWorldImpl();
+        String address = "http://127.0.0.1:9999/ws";
+
+        JaxWsServerFactoryBean factoryBean = new JaxWsServerFactoryBean();
+        // 设置地址
+        factoryBean.setAddress(address);
+        /**
+         * 指定实现该服务的类。
+         *
+         * @param serviceClass 服务实现类
+         */
+        // 方式一
+        factoryBean.setServiceClass(HelloWorldImpl.class);
+        /**
+         * 设置实现服务的bean。
+         * 如果设置了，则会为所提供的bean创建BeanInvoker
+         *
+         * @param serviceBean 一个实例化的实现对象
+         */
+        // 方式二
+//        factoryBean.setServiceBean(helloWorld);
+
+        // 设置拦截器
+        factoryBean.getInInterceptors().add(new LoggingInInterceptor());// 添加in日志拦截器，可以看到soap消息
+        factoryBean.getOutInterceptors().add(new LoggingOutInterceptor());// 添加out日志拦截器，可以看到soap消息
+        
+        factoryBean.create(); // 创建webservice接口
+        logger.info("web service started");
+        logger.info("请求地址为为：" + address + "?WSDL");
+    }
+}
+```
+
+启动之后，客户端访问一下，看服务端控制台的输出： 
+
+```text
+10:20:40.176 [qtp106297322-18] INFO org.apache.cxf.services.HelloWorldImplService.HelloWorldImplPort.HelloWorldImpl - Inbound Message
+----------------------------
+ID: 2
+Address: http://127.0.0.1:9999/ws
+Encoding: UTF-8
+Http-Method: POST
+Content-Type: text/xml; charset=UTF-8
+Headers: {Accept=[*/*], Cache-Control=[no-cache], connection=[keep-alive], Content-Length=[231], content-type=[text/xml; charset=UTF-8], Host=[127.0.0.1:9999], Pragma=[no-cache], SOAPAction=[""], User-Agent=[Apache-CXF/3.2.0]}
+Payload: <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ns2:sayHello xmlns:ns2="http://client.demo2.cxf.ws.example.commons.ittalks.github.com/"><arg0>hello</arg0></ns2:sayHello></soap:Body></soap:Envelope>
+--------------------------------------
+
+10:20:40.373 [qtp106297322-18] INFO org.apache.cxf.services.HelloWorldImplService.HelloWorldImplPort.HelloWorldImpl - Outbound Message
+---------------------------
+ID: 2
+Response-Code: 200
+Encoding: UTF-8
+Content-Type: text/xml
+Headers: {}
+Payload: <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ns2:sayHelloResponse xmlns:ns2="http://client.demo2.cxf.ws.example.commons.ittalks.github.com/"><return>hello，hello</return></ns2:sayHelloResponse></soap:Body></soap:Envelope>
+--------------------------------------
+```
+
+可以看到，请求的时候会被拦截器拦截，请求结束也会被拦截，从打印的日志消息可以看出，发送的是soap消息，这是在服务端添加的拦截器。
+
+那客户端如何添加拦截器呢？由于client端无法直接获取拦截器组，所以我们需要首先获取一个client的代理，然后通过这个代理来获取拦截器组，如下： 
+
+```java
+package com.github.ittalks.commons.example.ws.cxf.demo2.server;
+
+import org.apache.cxf.endpoint.Client;
+import org.apache.cxf.frontend.ClientProxy;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
+
+/**
+ * Created by 刘春龙 on 2017/10/30.
+ */
+public class _Main {
+
+    public static void main(String[] args) {
+        // 获取ws服务名称（获取一个ws服务）
+        HelloWorldImplService service = new HelloWorldImplService();
+
+        //获取服务的类型，有get post soap1.1 soap1.2 jdk1.7及以上才支持soap1.2
+        HelloWorldImpl port = service.getHelloWorldImplPort();
+
+        Client client = ClientProxy.getClient(port);
+        // 设置拦截器
+        client.getInInterceptors().add(new LoggingInInterceptor());// 添加in日志拦截器，可以看到soap消息
+        client.getOutInterceptors().add(new LoggingOutInterceptor());// 添加out日志拦截器，可以看到soap消息
+        
+        //调用服务提供的方法
+        System.out.println(port.sayHello("hello"));
+    }
+}
+```
+
+可以看出，客户端如果设置拦截器的话，也会打印出日志消息，而且客户端和服务端的拦截器执行顺序刚好相反。这就是CXF内置的拦截器，下面我们来自定义CXF的拦截器。
+
+## 2. 自定义CXF拦截器
+自定义拦截器的话，我们来弄个需求，使用拦截器进行权限的认证。
+自定义拦截器需要继承`AbstractPhaseInterceptor<SoapMessage>`，其中SoapMessage是用来封装soap消息的，我们具体来看下如何自定义CXF拦截器，
+首先看服务端，在上面的代码的定义的两个内置拦截器下面添加一个自定义拦截器即可：
+
+```java
+factoryBean.getInInterceptors().add(new MyInterceptor());
+```
+
+然后重点是这个`MyInterceptor`，如下：
+
+```
+package com.github.ittalks.commons.example.ws.cxf.demo3.server;
+
+import org.apache.cxf.binding.soap.SoapMessage;
+import org.apache.cxf.headers.Header;
+import org.apache.cxf.interceptor.Fault;
+import org.apache.cxf.phase.AbstractPhaseInterceptor;
+import org.apache.cxf.phase.Phase;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import javax.xml.namespace.QName;
+import java.util.List;
+
+/**
+ * Created by 刘春龙 on 2017/10/31.
+ * <p>
+ * 自定义拦截器
+ */
+public class MyInterceptor extends AbstractPhaseInterceptor<SoapMessage> {
+
+    public MyInterceptor() {
+        super(Phase.PRE_INVOKE); // 在调用方法之前调用自定义拦截器
+
+    }
+
+    @Override
+    public void handleMessage(SoapMessage message) throws Fault {
+        List<Header> headers = message.getHeaders(); // 根据soap消息获取头部
+        if (headers == null || headers.size() == 0) {
+            throw new Fault(new IllegalArgumentException("没有Header,拦截器实施拦截"));
+        }
+
+        QName qName = new QName("AuthHeader");
+        Header header = message.getHeader(qName);
+        Element elm = (Element) header.getObject();// 将该头部转成一个Element对象
+
+        NodeList userList = elm.getElementsByTagName("username"); // 根据标签获取值
+        NodeList pwdList = elm.getElementsByTagName("password");
+
+        // 进行身份认证
+        if (userList.getLength() != 1) {// 只有一个用户
+            throw new Fault(new IllegalArgumentException("用户名格式不对"));
+        }
+        if (pwdList.getLength() != 1) {// 只有一个密码
+            throw new Fault(new IllegalArgumentException("密码格式不对"));
+        }
+
+        String username = userList.item(0).getTextContent(); // 因为就一个,所以获取第一个即可
+        String password = pwdList.item(0).getTextContent();
+
+        if (!username.equals("admin") || !password.equals("123")) {
+            throw new Fault(new IllegalArgumentException("用户名或者密码错误"));
+        }
+    }
+}
+```
+
+上面的代码逻辑很简单，等会儿客户端会传过来一个soap消息，我们会将用户名和密码封装到头部中传过来，
+那么在这边，通过解析soap消息中头部的数据，来进行身份认证。
+
+所以接下来完成客户端那边的拦截器。
+
+客户端这边要自定义一个out拦截器了，因为这边是发送数据，同上，首先在原来客户端定义的两个内置CXF拦截器上面添加一个自定义拦截器，如下：
+
+```java
+client.getOutInterceptors().add(new AddHeaderInterceptor("admin", "123"));//添加自定义拦截器
+```
+
+在自定义拦截器中，将用户名和密码传进去，重点来看一下这个自定义拦截器，如下：
+
+```java
+package com.github.ittalks.commons.example.ws.cxf.demo3.client;
+
+import org.apache.cxf.binding.soap.SoapMessage;
+import org.apache.cxf.headers.Header;
+import org.apache.cxf.helpers.DOMUtils;
+import org.apache.cxf.interceptor.Fault;
+import org.apache.cxf.phase.AbstractPhaseInterceptor;
+import org.apache.cxf.phase.Phase;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import javax.xml.namespace.QName;
+import java.util.List;
+
+/**
+ * Created by 刘春龙 on 2017/10/31.
+ */
+public class AddHeaderInterceptor extends AbstractPhaseInterceptor<SoapMessage> {
+
+    private String username;
+    private String password;
+
+    public AddHeaderInterceptor(String username, String password) {
+        super(Phase.PREPARE_SEND); // 准备发送soap消息的时候调用拦截器
+        this.username = username;
+        this.password = password;
+    }
+
+    @Override
+    public void handleMessage(SoapMessage message) throws Fault {
+        List<Header> headers = message.getHeaders();
+        Document doc = DOMUtils.createDocument();
+
+        // 定义三个对象
+        Element elm = doc.createElement("AuthHeader");
+        Element userElm = doc.createElement("username");
+        Element pwdElm = doc.createElement("password");
+
+        // 给用户名和密码对象赋值
+        userElm.setTextContent(username);
+        pwdElm.setTextContent(password);
+
+        // 将用户名和密码的对象添加到elm中
+        elm.appendChild(userElm);
+        elm.appendChild(pwdElm);
+
+        headers.add(new Header(new QName("head"), elm));// 往soap消息头部中添加这个elm元素
+    }
+}
+```
+从上面的代码中可以看出，首先通过构造函数将用户名和密码传进去，然后获取将要发送的soap消息的头部，
+紧接着构造出几个元素，将用户名和密码封装到元素中去，并放到soap消息的头部，这样等会soap消息就会携带这个用户名和密码的消息了，
+这样就能在上面的服务端取出，进行身份认证了，这样就前后连通了起来。
+
+测试结果我就不贴了，可以查看控制台打印的结果，重点看一下soap消息，里面封装好了一个DOM对象，封装了用户名和密码。
+
+上面运行之后，服务端接收到的数据如下：
+```
+09:48:50.286 [qtp1651754404-19 - /ws] INFO org.apache.cxf.services.MyWebServiceImplService.MyWebServiceImplPort.MyWebServiceImpl - Inbound Message
+----------------------------
+ID: 2
+Address: http://127.0.0.1:9999/ws
+Encoding: UTF-8
+Http-Method: POST
+Content-Type: text/xml; charset=UTF-8
+Headers: {Accept=[*/*], Cache-Control=[no-cache], connection=[keep-alive], Content-Length=[275], content-type=[text/xml; charset=UTF-8], Host=[127.0.0.1:8888], Pragma=[no-cache], SOAPAction=[""], User-Agent=[Apache CXF 3.1.6]}
+Payload: 
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Header>
+        <AuthHeader>
+            <username>admin</username>
+            <password>123</password>
+        </AuthHeader>
+    </soap:Header>
+    <soap:Body>
+        <ns2:getRoles xmlns:ns2="http://server.ws.commons.github.com/"/>
+    </soap:Body>
+</soap:Envelope>
+--------------------------------------
+```
+>补充：
+
+由此可知，如果同时指定：
+
+```
+Element elm = doc.createElement("AuthHeader");
+
+...//省略部分代码
+
+headerList.add(new Header(new QName("head"), elm));
+```
+请求头会使用`<AuthHeader></AuthHeader>`作为xml元素。
+
+因此，服务端需要使用如下方式获取该请求头。
+```
+QName qName = new QName("AuthHeader");
+Header header = soapMessage.getHeader(qName);
+```
+
+# _`Chpt 六、WebService - CXF整合Spring`_
+
+>spring4.2.x以上需要使用apache cxf3.x以上的版本
+
+首先，cxf和spring整合需要准备如下Jar包：
+
+```xml
+<!-- cxf-webservice start -->
+<!-- CXF -->
+<!-- 加入cxf-webservice依赖包 -->
+<dependency>
+    <groupId>org.apache.cxf</groupId>
+    <artifactId>cxf-rt-frontend-jaxws</artifactId>
+    <version>${cxf.version}</version>
+</dependency>
+<!-- 该包会被自动依赖引入 -->
+<!--
+<dependency>
+    <groupId>org.apache.cxf</groupId>
+    <artifactId>cxf-core</artifactId>
+    <version>${cxf.version}</version>
+</dependency>
+-->
+<dependency>
+    <groupId>org.apache.cxf</groupId>
+    <artifactId>cxf-rt-transports-http</artifactId>
+    <version>${cxf.version}</version>
+</dependency>
+<!-- cxf内置的服务器jetty用户测试和调试 -->
+<dependency>
+    <groupId>org.apache.cxf</groupId>
+    <artifactId>cxf-rt-transports-http-jetty</artifactId>
+    <version>${cxf.version}</version>
+</dependency>
+<!-- 加入cxf-restful依赖包 -->
+<dependency>
+    <groupId>org.apache.cxf</groupId>
+    <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+    <version>${cxf.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.cxf</groupId>
+    <artifactId>cxf-rt-rs-client</artifactId>
+    <version>${cxf.version}</version>
+</dependency>
+
+<dependency>
+    <groupId>org.apache.cxf</groupId>
+    <artifactId>cxf-rt-rs-extension-providers</artifactId>
+    <version>${cxf.version}</version>
+</dependency>
+
+<!-- 添加wadl描述 -->
+<!--
+CXF JAX-RS支持（Web应用程序描述语言|http://www.w3.org/Submission/wadl] (WADL)。
+用户可以使用WADL文档生成初始代码，并根据需要自动生成WADL。
+-->
+<dependency>
+    <groupId>org.apache.cxf</groupId>
+    <artifactId>cxf-rt-rs-service-description</artifactId>
+    <version>${cxf.version}</version>
+</dependency>
+<!-- cxf-webservice end -->
+```
+
+这里我是用Spring的Jar包是Spring官方提供的，并没有使用CXF中的Spring的Jar包。
+
+添加这么多文件后，首先在web.xml中添加如下配置： 
+
+```
+<!-- spring context listener -->  
+<listener>  
+    <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>  
+</listener>  
+<listener>  
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  
+</listener>
+
+<servlet>
+    <servlet-name>CXFService</servlet-name>
+    <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>CXFService</servlet-name>
+    <url-pattern>/ws/*</url-pattern>
+</servlet-mapping>
+```
+
+特别的：
+
+```
+<servlet>
+    <servlet-name>CXFService</servlet-name>
+    <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>CXFService</servlet-name>
+    <url-pattern>/ws/*</url-pattern>
+</servlet-mapping>
+```
+
+这里把`/ws/*`作为对外暴露的路径，和`web service address`要结合起来。
+
+比如说`http://ip:port/appname/ws/helloworld`，就会指向`web service address`为`helloworld`的服务。 
+
+>关于`IntrospectorCleanupListener`：
+>1. 此监听器主要用于解决java.beans.Introspector导致的内存泄漏的问题
+>2. 此监听器应该配置在web.xml中与Spring相关监听器中的第一个位置(也要在ContextLoaderListener的前面)
+>3. JDK中的java.beans.Introspector类的用途是发现Java类是否符合JavaBean规范如果有的框架或程序用到了Introspector类,那么就会启用一个系统级别的缓存,此缓存会 存放一些曾加载并分析过的JavaBean的引用。当Web服务器关闭时,由于此缓存中存放着这些JavaBean的引用,所以垃圾回收器无法回收Web容器中的JavaBean对象,最后导致 内存变大。而org.springframework.web.util.IntrospectorCleanupListener就是专门用来处理Introspector内存泄漏问题的辅助类。IntrospectorCleanupListener会在 Web服务器停止时清理Introspector缓存,使那些Javabean能被垃圾回收器正确回收。Spring自身不会出现这种问题，因为Spring在加载并分析完一个类之后会马上刷新 JavaBeans Introspector缓存,这就保证Spring中不会出现这种内存泄漏的问题。但有些程序和框架在使用了JavaBeans Introspector之后,没有进行清理工作(如Quartz,Struts),最后导致内存泄漏
+
+## 1. 整合server
+
+在src目录中，新建一个`ws-cxf-server.xml`文件，文件内容如下： 
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jaxws="http://cxf.apache.org/jaxws"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://cxf.apache.org/jaxws 
+    http://cxf.apache.org/schemas/jaxws.xsd">
+```
+
+添加完这个文件后，还需要在这个文件中导入这么几个配置文件。
+
+内容如下： 
+
+```xml
+<!--
+    cxf3.x版本以后，导入如下文件会报错：cxf3.x版本，该文件不存在。
+    <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
+ -->
+<import resource="classpath:META-INF/cxf/cxf.xml"/>
+<!-- cxf-servlet.xml 为空配置文件，可以不导入 -->
+<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+```
+
+cxf3.x版本以后，导入如下文件会报错：
+
+```
+<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
+```
+
+错误如下：
+
+```
+nested exception is java.io.FileNotFoundException: class path resource [META-INF/cxf/cxf-extension-soap.xml] cannot be opened because it does not exist
+```
+
+`cxf.xml`与`cxf-servlet.xml`文件位置：
+
+![](./images/cxf.xml.png)
+
+![](./images/cxf-servlet.xml.png)
+
+下面开始写服务器端代码，首先定制服务器端的接口，代码如下： 
+
+```java
+package com.github.ittalks.commons.example.ws.cxf.integration.server;
+
+import com.github.ittalks.commons.example.ws.cxf.integration.model.User;
+
+/**
+ * Created by 刘春龙 on 2017/10/31.
+ */
+public interface IComplexUserService {
+
+    User getUserByName(String name);
+    void setUser(User user);
+}
+```
+
+下面编写WebService的实现类，服务器端实现代码如下： 
+
+```java
+package com.github.ittalks.commons.example.ws.cxf.integration.server;
+
+import com.github.ittalks.commons.example.ws.cxf.integration.model.User;
+
+import javax.jws.WebParam;
+import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
+import java.util.UUID;
+
+/**
+ * Created by 刘春龙 on 2017/10/31.
+ */
+@WebService
+@SOAPBinding(style = SOAPBinding.Style.RPC)
+public class ComplexUserService implements IComplexUserService {
+    
+    @Override
+    public User getUserByName(@WebParam(name = "name") String name) {
+        User user = new User();
+        user.setId(UUID.randomUUID().toString());
+        user.setName(name);
+        user.setAddress("china");
+        user.setEmail(name + "@gmail.com");
+        return user;
+    }
+
+    @Override
+    public void setUser(User user) {
+        System.out.println("############Server setUser###########");
+        System.out.println("setUser:" + user);
+    }
+}
+```
+
+注意的是和Spring集成，这里一定要完成接口实现，如果没有接口的话会有错误的。
+
+下面要在`ws-cxf-server.xml`文件中添加如下配置： 
+
+```xml
+<bean id="loggingInInterceptor" class="org.apache.cxf.interceptor.LoggingInInterceptor"/>
+<bean id="loggingOutInterceptor" class="org.apache.cxf.interceptor.LoggingOutInterceptor"/>
+
+
+<!--
+    <bean id="userServiceBean" class="com.github.ittalks.commons.example.ws.cxf.integration.server.ComplexUserService"/>
+-->
+<jaxws:server id="userService" serviceClass="com.github.ittalks.commons.example.ws.cxf.integration.server.ComplexUserService" address="/users">
+    <!--
+        <jaxws:serviceBean>
+            <ref bean="userServiceBean"/>
+        </jaxws:serviceBean>
+    -->
+    <jaxws:inInterceptors>
+        <ref bean="loggingInInterceptor"/>
+    </jaxws:inInterceptors>
+    <jaxws:outInterceptors>
+        <ref bean="loggingOutInterceptor"/>
+    </jaxws:outInterceptors>
+</jaxws:server>
+```
+
+下面启动tomcat服务器后，在Web Browser中请求：
+
+```text
+http://localhost:9090/futureN4J/ws/users?wsdl
+```
+
+如果你能看到wsdl的xml文件的内容，就说明你成功了，注意的是上面地址的`users`就是上面xml配置中的address的名称，是一一对应的。
+
+下面编写客户端请求的代码，代码如下： 
+
+```java
+package com.github.ittalks.commons.example.ws.cxf.integration.client;
+
+import org.apache.cxf.endpoint.Client;
+import org.apache.cxf.frontend.ClientProxy;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
+
+/**
+ * Created by 刘春龙 on 2017/10/31.
+ */
+public class _Main {
+
+    public static void main(String[] args) {
+        /**
+         * 方式一、
+         */
+//        JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
+//        factory.setServiceClass(ComplexUserService.class);
+//        factory.setAddress("http://localhost:9090/futureN4J/ws/users");
+//        IComplexUserService service = (IComplexUserService) factory.create();
+
+//        System.out.println("#############Client getUserByName##############");
+//        User user = service.getUserByName("fnpac");
+//        System.out.println("获取用户信息：" + user);
+//
+//        user.setAddress("China");
+//        service.setUser(user);
+
+        /**
+         * 方式二、
+         */
+        ComplexUserServiceService service = new ComplexUserServiceService();
+        ComplexUserService port = service.getComplexUserServicePort();
+        Client client = ClientProxy.getClient(port);
+        // 设置拦截器
+        client.getOutInterceptors().add(new LoggingOutInterceptor());
+
+        System.out.println("#############Client getUserByName##############");
+        User user = port.getUserByName("fnpac");
+        System.out.println("获取用户信息：" + user);
+
+        user.setAddress("China");
+        port.setUser(user);
+    }
+}
+```
+
+这个server端是通过Spring整合配置的，下面我们将Client端也通过Spring配置完成整合。
+
+## 2. 整合client
+
+首先增加`ws-cxf-client.xml`配置文件，文件内容如下： 
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://cxf.apache.org/jaxws
+    http://cxf.apache.org/schemas/jaxws.xsd">
+
+    <!--
+        cxf3.x版本以后，导入如下文件会报错：cxf3.x版本，该文件不存在。
+        <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
+     -->
+    <import resource="classpath:META-INF/cxf/cxf.xml"/>
+    <!-- cxf-servlet.xml 为空配置文件，可以不导入 -->
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+
+    <bean id="loggingInInterceptor" class="org.apache.cxf.interceptor.LoggingInInterceptor"/>
+    <bean id="loggingOutInterceptor" class="org.apache.cxf.interceptor.LoggingOutInterceptor"/>
+
+
+    <jaxws:client id="userWsClient" serviceClass="com.github.ittalks.commons.example.ws.cxf.integration.server.ComplexUserService"
+                  address="http://localhost:9090/futureN4J/ws/users"/>
+</beans>
+```
+
+这样我们就可以通过spring获取ID为`userWsClient`的ComplexUserService Bean使用了。
+
+>除了在Spring中配置jaxws:client外，我们还可以把`JaxWsProxyFactoryBean`用Spring类配置。
