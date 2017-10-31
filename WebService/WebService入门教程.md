@@ -26,8 +26,24 @@
     - 2.整合client
 
 - _`Chpt 七、CXF实现一个Restful风格`_
-    - 
-    - 
+    - 1.创建Webservice对外接口
+    - 2.实现Webservice接口
+    - 3.配置Spring xml，让Webservice提供服务
+    - 4.接下来我们编写一个基于WebClient简单客户端
+    
+- _`Chpt 八、CXF利用内置jetty发布ws`_
+    - 1.maven导入Jar包
+    - 2.编写ws接口，及其实现类
+    - 3.编写一个JaxWsServer类来发布WS
+    
+- _`Chpt 九、CXF设置WebService客户端超时时长`_
+    - 1.客户端
+    - 2.服务器
+    
+- _`Chpt 十、CXF配置HTTP代理访问Internet`_
+    - 1.在java的Http请求中使用代理
+    - 2.使用`JaxWsProxyFactoryBean`创建client
+    - 3.通过`http-conf:condui`配置
 
 # _`Chpt 一、带你走进webservice的世界`_
 
@@ -1742,3 +1758,479 @@ public class _Main {
 这样我们就可以通过spring获取ID为`userWsClient`的ComplexUserService Bean使用了。
 
 >除了在Spring中配置jaxws:client外，我们还可以把`JaxWsProxyFactoryBean`用Spring类配置。
+
+# _`Chpt 七、CXF实现一个Restful风格`_
+
+现在实现一个Restful风格的CXF。
+
+## 1. 创建Webservice对外接口
+
+```java
+package com.github.ittalks.commons.example.ws.cxf.restful.server;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+
+/**
+ * Created by 刘春龙 on 2017/10/31.
+ */
+@Path("/logisticsApi")
+public interface ILogisticsApi {
+
+    @GET
+    @Path("/doGet/{first}/{last}")
+    @Produces(MediaType.APPLICATION_XML)
+    String doGet(@PathParam(value = "first") String firstName, @PathParam(value = "last") String lastName);
+
+    @POST
+    @Path("/itemConfirm")
+    @Produces(MediaType.APPLICATION_XML)
+    String itemConfirm(String xmlParam,
+                       @Context HttpServletRequest servletRequest,
+                       @Context HttpServletResponse servletResponse);
+}
+```
+## 2. 实现Webservice接口
+
+```java
+package com.github.ittalks.commons.example.ws.cxf.restful.server;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Created by 刘春龙 on 2017/10/31.
+ */
+public class LogisticsApiImpl implements ILogisticsApi {
+
+    private Logger log = LoggerFactory.getLogger(getClass());
+
+    @Override
+    public String doGet(String firstName, String lastName) {
+        // TODO Auto-generated method stub
+        log.debug("doGet : " + firstName + ", lastName : " + lastName);
+        // to to something ...
+        return "doGet response";
+    }
+
+    @Override
+    public String itemConfirm(String xmlParam, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
+        // TODO Auto-generated method stub
+        // to do something ...
+        return "itemConfirm response";
+    }
+}
+```
+
+## 3. 配置Spring xml，让Webservice提供服务
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://cxf.apache.org/jaxws
+    http://cxf.apache.org/schemas/jaxws.xsd
+    http://cxf.apache.org/jaxrs
+    http://cxf.apache.org/schemas/jaxrs.xsd">
+
+    <!--
+        cxf3.x版本以后，导入如下文件会报错：cxf3.x版本，该文件不存在。
+        <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
+     -->
+    <import resource="classpath:META-INF/cxf/cxf.xml"/>
+    <!-- cxf-servlet.xml 为空配置文件，可以不导入 -->
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+
+    <bean id="loggingInInterceptor" class="org.apache.cxf.interceptor.LoggingInInterceptor"/>
+    <bean id="loggingOutInterceptor" class="org.apache.cxf.interceptor.LoggingOutInterceptor"/>
+
+    <!-- ==========================  restful demo ======================== -->
+    <bean id="encodingLoggingInInterceptor" class="com.github.ittalks.commons.example.ws.cxf.restful.server.EncodingLoggingInInterceptor"/>
+    <bean id="logisticsApi" class="com.github.ittalks.commons.example.ws.cxf.restful.server.LogisticsApiImpl"/>
+
+    <jaxrs:server id="restWsServer" address="/rest">
+        <jaxrs:serviceBeans>
+            <ref bean="logisticsApi" />
+        </jaxrs:serviceBeans>
+
+        <jaxrs:inInterceptors>
+            <ref bean="encodingLoggingInInterceptor"/>
+        </jaxrs:inInterceptors>
+        <jaxrs:outInterceptors>
+            <ref bean="loggingOutInterceptor"/>
+        </jaxrs:outInterceptors>
+
+        <jaxrs:extensionMappings>
+            <!--
+                <entry key="json" value="application/json" />
+            -->
+            <entry key="xml" value="application/xml" />
+        </jaxrs:extensionMappings>
+
+        <jaxrs:languageMappings>
+            <entry key="en" value="en-gb"/>
+        </jaxrs:languageMappings>
+    </jaxrs:server>
+</beans>
+```
+
+其中`EncodingLoggingInInterceptor`类主要是为了解决传输内容在`LoggingInInterceptor`类内构建并输出时的乱码问题
+
+```java
+package com.github.ittalks.commons.example.ws.cxf.restful.server;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.cxf.interceptor.Fault;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.message.Message;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Created by 刘春龙 on 2017/10/31.
+ */
+public class EncodingLoggingInInterceptor extends LoggingInInterceptor {
+
+    private Logger log = LoggerFactory.getLogger(getClass());
+
+    public EncodingLoggingInInterceptor() {
+        // TODO Auto-generated constructor stub  
+        super();
+    }
+
+    /**
+     * @see org.apache.cxf.interceptor.LoggingInInterceptor#handleMessage(org.apache.cxf.message.Message)
+     */
+    @Override
+    public void handleMessage(Message message) throws Fault {
+
+        // TODO Auto-generated method stub
+        String encoding = System.getProperty("file.encoding");
+        encoding = StringUtils.isEmpty(encoding) ? "UTF-8" : encoding;
+        log.debug("encoding : " + encoding);
+
+        message.put(Message.ENCODING, encoding);
+        super.handleMessage(message);
+    }
+}
+```
+
+至此，Webservice服务器端代码已经编写完成，那么访问该Webservice接口的地址为：http://localhost:9090/futureN4J/ws/
+
+## 4. 接下来我们编写一个基于WebClient简单客户端
+
+```java
+package com.github.ittalks.commons.example.ws.cxf.restful.client;
+
+import org.apache.cxf.jaxrs.client.WebClient;
+
+import javax.ws.rs.core.MediaType;
+
+/**
+ * Created by 刘春龙 on 2017/10/31.
+ */
+public class _Main {
+
+    private static String baseAddress = "http://localhost:9090/futureN4J/ws/rest/logisticsApi";
+
+    public static void main(String[] args) {
+        WebClient client = WebClient.create(baseAddress)
+                .header("charset", "UTF-8")
+                .encoding("UTF-8")
+                .acceptEncoding("UTF-8");
+
+        Object xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                + "<itemName>诺基亚</itemName>";
+        String responseMessage = client.path("itemConfirm")
+                .accept(MediaType.APPLICATION_XML)
+                .post(xml, String.class);
+        System.out.println("responseMessage : " + responseMessage);
+
+        client = WebClient.create(baseAddress)
+                .header("charset", "UTF-8")
+                .encoding("UTF-8")
+                .acceptEncoding("UTF-8");
+        responseMessage = client.path("doGet/{first}/{last}", "fnpac", "凡派,")
+                .accept(MediaType.APPLICATION_XML)
+                .get(String.class);
+        System.out.println("responseMessage : " + responseMessage);
+    }
+}
+
+```
+
+到这里我们就完成了基于Apache cxf JaxRs的服务端和客户端的Demo编写。
+
+# _`Chpt 八、CXF利用内置jetty发布ws`_
+
+## 1. maven导入Jar包
+
+这里要导入一个cxf的Jar包和cxf中内置jetty服务器的包
+
+```
+<dependency>
+    <groupId>org.apache.cxf</groupId>
+    <artifactId>cxf-rt-frontend-jaxws</artifactId>
+    <version>3.2.0</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.cxf</groupId>
+    <artifactId>cxf-rt-transports-http-jetty</artifactId>
+    <version>3.2.0</version>
+</dependency>
+```
+
+## 2. 编写ws接口，及其实现类
+
+```java
+package com.github.ittalks.commons.example.ws.cxf.jetty.server;
+
+import javax.jws.WebService;
+
+/**
+ * Created by liuchunlong on 2017/10/31.
+ */
+
+/**
+ * 如果不加该注解，会报错：
+ * javax.xml.ws.WebServiceException: Service endpoint interface does not have a @WebService annotation.
+ */
+@WebService
+public interface HelloService {
+
+    String say(String name);
+}
+```
+
+```java
+package com.github.ittalks.commons.example.ws.cxf.jetty.server;
+
+import javax.jws.WebService;
+
+/**
+ * Created by liuchunlong on 2017/10/31.
+ */
+@WebService(
+        serviceName = "helloService",
+        portName = "helloServicePort",
+        endpointInterface ="com.github.ittalks.commons.example.ws.cxf.jetty.server.HelloService"
+)
+public class HelloServiceImpl {
+
+    public String say(String name){
+
+        return "hello, " + name;
+    }
+}
+```
+
+## 3. 编写一个JaxWsServer类来发布WS
+
+```java
+package com.github.ittalks.commons.example.ws.cxf.jetty.server;
+
+import org.apache.cxf.jaxws.JaxWsServerFactoryBean;
+
+/**
+ * Created by liuchunlong on 2017/10/31.
+ */
+public class _Main {
+
+    public static void main(String[] args) {
+        JaxWsServerFactoryBean factory=new JaxWsServerFactoryBean();
+        factory.setAddress("http://localhost:9999/ws");
+        factory.setServiceBean(new HelloServiceImpl());
+        factory.create();
+    }
+}
+```
+
+访问<http://localhost:9999/ws?wsdl>就可以得到wsdl，
+这种方式使用的是CXF内置的服务器jetty非常容易测试和调试，大大提高了开发效率，
+但是不适合生产环境，所以我们需要会和spring,tomcat结合。
+
+# _`Chpt 九、CXF设置WebService客户端超时时长`_
+
+在使用WebService时，我们通常都会在客户端中设置请求超时的限制，以避免长时间的去连接不可用的服务器。
+
+在CXF的环境下，客户端可通过两个属性配置超时限制：
+
+- ConnectionTimeout - WebService以TCP连接为基础,这个属性可以理解为TCP握手时的时间设置,超过设置的时间就认为是连接超时.以毫秒为单位,默认是30000毫秒,即30秒。
+- ReceiveTimeout - 这个属性是发送WebService的请求后等待响应的时间,超过设置的时长就认为是响应超时.以毫秒为单位,默认是60000毫秒,即60秒.
+
+## 1. 客户端
+
+这里可通过两种方式对**_客户端_**进行配置：
+
+### 1.1 在spring的配置文件中进行设置
+
+```
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans    
+                 http://www.springframework.org/schema/beans/spring-beans-2.0.xsd     
+                 http://www.springframework.org/schema/jee    
+                 http://www.springframework.org/schema/jee/spring-jee-2.0.xsd     
+                 http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd     
+                 http://cxf.apache.org/transports/http/configuration    
+                 http://cxf.apache.org/schemas/configuration/http-conf.xsd">
+    <http-conf:conduit name="{WSDL Namespace}portName.http-conduit">
+        <http-conf:client ConnectionTimeout="10000" ReceiveTimeout="20000"/>
+    </http-conf:conduit>
+</beans>   
+```
+
+这里需要注意的有几个地方: 
+
+1. 需要指定`http-conf`名称空间：`xmlns:http-conf=http://cxf.apache.org/transports/http/configuration`
+2. 指定schema位置: `http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd`
+3. `http-conf:conduit`中的`name`属性,指定设置生效的服务。
+    `name`属性由`service namespace`、WSDL中的`port name`和".http-conduit"组成，
+    如`{http://apache.org/hello_world}HelloWorld.http- conduit`。
+    如果将name属性设置为`*.http-conduit`，则会对所有服务生效。
+    
+### 1.2 通过Java代码进行设置
+
+```java
+Client client = ClientProxy.getClient(port);
+
+HTTPConduit http = (HTTPConduit) client.getConduit();
+
+HTTPClientPolicy httpClientPolicy =  new  HTTPClientPolicy();
+httpClientPolicy.setConnectionTimeout( 36000 );   
+httpClientPolicy.setAllowChunking( false );   
+httpClientPolicy.setReceiveTimeout( 32000 );   
+http.setClient(httpClientPolicy);  
+```
+
+## 2. 服务器
+
+另：也可以对**_服务器_**端进行设置：
+
+```xml
+<!-- 在服务器端设置响应超时限制，现在使用的是默认值30秒 -->
+<http-conf:destination name="*.http-conduit">
+    <http-conf:server ReceiveTimeout="30000" />
+</http-conf:destination> 
+```
+
+# _`Chpt 十、CXF配置HTTP代理访问Internet`_
+
+一个典型的例子，`CXF WebService`项目部署到正式环境后，服务器不能访问外网，只能通过代理访问外网。
+
+找了很多资料，刚开始想法是不用Spring的配置文件，直接用java编程访问webservice。
+
+### 1. 在java的Http请求中使用代理
+
+方法如下：
+
+```java
+// 用户 + ":" + 密码
+String authentication = "username:password";
+String encodedLogin = new BASE64Encoder().encode(authentication.getBytes());
+Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(IP, PORT));
+
+URL u = new URL(url);
+HttpsURLConnection conn = (HttpsURLConnection) u.openConnection(proxy);
+// Proxy-Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+conn.setRequestProperty("Proxy-Authorization", "Basic " + encodedLogin);
+```
+
+### 2. 使用`JaxWsProxyFactoryBean`创建client
+
+```java
+System.setProperty("http.proxySet", "true");
+System.setProperty("http.proxyHost", IP);
+System.setProperty("http.proxyPort", PORT);
+
+JaxWsProxyFactoryBean f = new JaxWsProxyFactoryBean();
+f.setAddress(THE URL OF WEBSERVICE);
+f.setServiceClass(Service.class);
+Service client = (Service) f.create();
+```
+
+### 3. 通过`http-conf:condui`配置
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:cxf="http://cxf.apache.org/core" 
+        xmlns:sec="http://cxf.apache.org/configuration/security" 
+        xmlns:http-conf="http://cxf.apache.org/transports/http/configuration" 
+        xsi:schemaLocation=" 
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+                http://cxf.apache.org/configuration/security
+                http://cxf.apache.org/schemas/configuration/security.xsd
+                http://cxf.apache.org/transports/http/configuration
+                http://cxf.apache.org/schemas/configuration/http-conf.xsd">
+                
+        <http-conf:conduit name="*.http-conduit"> 
+            <http-conf:proxyAuthorization>
+                    <!-- 用户名 -->
+                    <sec:UserName>***</sec:UserName>
+                    <!-- 密码 -->
+                    <sec:Password>***</sec:Password>
+             </http-conf:proxyAuthorization>
+             <!--
+                 ProxyServer IP
+                 ProxyServerPort PORT
+                 ProxyServerType: HTTP or SOCKS
+              -->
+             <http-conf:client
+                 ProxyServer="192.168.1.4" 
+                 ProxyServerPort="808"
+                 ProxyServerType="HTTP"
+                 Connection="Keep-Alive" 
+                 AllowChunking="false"
+                 ConnectionTimeout="50000" 
+                 ReceiveTimeout="120000"
+                 /> 
+        </http-conf:conduit> 
+</beans>
+```
+
+`<http-conf:conduit name="*.http-conduit">` 这里的name为`*.http-conduit`时，
+将会对所有的client类启用这个代理，如果要配置某个client类使用代理，可以这么写：
+
+```xml
+<http-conf:conduit name="{http://hafeyang.blogjava.net}BasicHttpBinding_IService.http-conduit>
+ ... 
+</http-conf:conduit>
+```
+
+`{}`里面的内容是webservice的wsdl的targetNamespace属性
+
+```
+<wsdl:definitions name="serviceName" targetNamespace="http://hafeyang.blogjava.net"
+```
+
+`{}`之后.之前的内容是的name属性
+
+```
+…
+<wsdl:port name="BasicHttpBinding_IService" binding="i0:BasicHttpBinding_IService">
+    <soap:address location="the address" />
+</wsdl:port>
+…
+```
