@@ -157,7 +157,7 @@
 
 ## [Retrofit](https://github.com/fnpac/Note/tree/master/Retrofit)
 
-- [Retrofit2深入理解和使用](https://github.com/fnpac/Note/tree/master/Retrofit/Retrofit2入门教程.md)
+- [Retrofit2入门教程](https://github.com/fnpac/Note/tree/master/Retrofit/Retrofit2入门教程.md)
 
 ## [Spring](https://github.com/fnpac/Note/tree/master/Spring)
 
