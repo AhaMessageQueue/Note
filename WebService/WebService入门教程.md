@@ -2143,29 +2143,59 @@ http.setClient(httpClientPolicy);
 方法如下：
 
 ```java
-// 用户 + ":" + 密码
-String authentication = "username:password";
-String encodedLogin = new BASE64Encoder().encode(authentication.getBytes());
-Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(IP, PORT));
-
+String encodedLogin = new BASE64Encoder().encode((proxyUser + ":" + proxyPass).getBytes());
+Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHost, proxyPort));
 URL u = new URL(url);
+HttpsURLConnection.setFollowRedirects(true);
 HttpsURLConnection conn = (HttpsURLConnection) u.openConnection(proxy);
-// Proxy-Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 conn.setRequestProperty("Proxy-Authorization", "Basic " + encodedLogin);
 ```
 
 ### 2. 使用`JaxWsProxyFactoryBean`创建client
 
 ```java
+// 设置系统变量
 System.setProperty("http.proxySet", "true");
-System.setProperty("http.proxyHost", IP);
-System.setProperty("http.proxyPort", PORT);
+System.setProperty("http.proxyHost", proxyHost);
+System.setProperty("http.proxyPort", "" + proxyPort);
+// 针对https也开启代理
+System.setProperty("https.proxyHost", proxyHost);
+System.setProperty("https.proxyPort", "" + proxyPort);
+// 设置默认校验器
+BasicAuthenticator auth = new BasicAuthenticator(proxyUser, proxyPass);
+Authenticator.setDefault(auth);
 
 JaxWsProxyFactoryBean f = new JaxWsProxyFactoryBean();
-f.setAddress(THE URL OF WEBSERVICE);
-f.setServiceClass(Service.class);
-Service client = (Service) f.create();
+f.setAddress(wsAddress);
+f.setServiceClass(ServiceImpl.class);
+ServiceImpl client = (ServiceImpl) f.create();
 ```
+
+```java
+public class BasicAuthenticator extends Authenticator {
+
+    private String userName;
+    private String password;
+
+    public BasicAuthenticator(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
+
+    /**
+     * Called when password authorization is needed.  Subclasses should
+     * override the default implementation, which returns null.
+     *
+     * @return The PasswordAuthentication collected from the
+     * user, or null if none is provided.
+     */
+    @Override
+    protected PasswordAuthentication getPasswordAuthentication() {
+        return new PasswordAuthentication(userName, password.toCharArray());
+    }
+}
+```
+
 
 ### 3. 通过`http-conf:condui`配置
 
@@ -2210,27 +2240,10 @@ Service client = (Service) f.create();
 </beans>
 ```
 
-`<http-conf:conduit name="*.http-conduit">` 这里的name为`*.http-conduit`时，
-将会对所有的client类启用这个代理，如果要配置某个client类使用代理，可以这么写：
+`<http-conf:conduit name="*.http-conduit">` 这里的name为`*.http-conduit`时，将会对所有的client类启用这个代理。
 
-```xml
-<http-conf:conduit name="{http://hafeyang.blogjava.net}BasicHttpBinding_IService.http-conduit>
- ... 
-</http-conf:conduit>
-```
+格式如下：`<http-conf:conduit name="{WSDL Namespace}portName.http-conduit">`
 
-`{}`里面的内容是webservice的wsdl的targetNamespace属性
+`{}`里面的内容是webservice的wsdl的targetNamespace属性。
 
-```
-<wsdl:definitions name="serviceName" targetNamespace="http://hafeyang.blogjava.net"
-```
-
-`{}`之后.之前的内容是的name属性
-
-```
-…
-<wsdl:port name="BasicHttpBinding_IService" binding="i0:BasicHttpBinding_IService">
-    <soap:address location="the address" />
-</wsdl:port>
-…
-```
+`{}`之后.之前的内容是port name属性。
