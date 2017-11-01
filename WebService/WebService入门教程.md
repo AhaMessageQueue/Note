@@ -1,3 +1,7 @@
+# 概述
+
+本文档所有源码参见：<https://github.com/fnpac/futureN4J/tree/master/commons-collections/src/main/java/com/github/ittalks/commons/example/ws>
+
 # _`目录`_
 
 - _`Chpt 一、带你走进webservice的世界`_
