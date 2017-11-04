@@ -68,6 +68,10 @@
 - [JDO快速入门](https://github.com/fnpac/Note/tree/master/JDO/JDO快速入门.md)
 - [JDO使用数据库连接池](https://github.com/fnpac/Note/tree/master/JDO/JDO使用数据库连接池.md)
 
+## [JMS](https://github.com/fnpac/Note/tree/master/JMS)
+
+- [消息队列RabbitMQ与Spring集成](https://github.com/fnpac/Note/tree/master/JMS/消息队列RabbitMQ与Spring集成.md)
+
 ## [Joda-Time](https://github.com/fnpac/Note/tree/master/Joda-Time)
 
 - [Java日期计算之Joda-Time](https://github.com/fnpac/Note/blob/master/Joda-Time/Java%E6%97%A5%E6%9C%9F%E8%AE%A1%E7%AE%97%E4%B9%8BJoda-Time.md)
