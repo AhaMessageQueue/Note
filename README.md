@@ -71,6 +71,7 @@
 ## [JMS](https://github.com/fnpac/Note/tree/master/JMS)
 
 - [消息队列RabbitMQ与Spring集成](https://github.com/fnpac/Note/tree/master/JMS/消息队列RabbitMQ与Spring集成.md)
+- [消息队列RabbitMQ安装](https://github.com/fnpac/Note/tree/master/JMS/消息队列RabbitMQ安装.md)
 
 ## [Joda-Time](https://github.com/fnpac/Note/tree/master/Joda-Time)
 
