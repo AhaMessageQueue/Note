@@ -19,7 +19,8 @@ public void configureMessageBroker(MessageBrokerRegistry registry) {
 
 对以上代码的分析：
 - A1）方法第一行启用了 STOMP 代理中继功能：
-    并将其目的地前缀设置为 "/topic" 和 "/queue" ；
+    并将其目的地前缀设置为 "/topic" 和 "/queue" 。
+    默认只有"/topic"。
     spring就能知道所有目的地前缀为 "/topic" or "/queue" 的消息都会发送到 STOMP 代理中；
 - A2）方法第二行设置了应用的前缀为 "app"：
     所有目的地以 "/app" 打头的消息（发送消息url，而不是连接url）都会路由到带有 `@MessageMapping` 注解的方法中，而不会发布到代理队列或主题中；
@@ -70,7 +71,7 @@ public class GreetingController {
         System.out.println("connecting successfully.");  
         return new Greeting("Hello, " + message.getName() + "!");  
     }  
-}  
+}
 ```
 
 对以上代码的分析：
@@ -185,29 +186,40 @@ public Shout handleSubscription() {
 1）描述：如果你想要在接收消息的时候，在响应中发送一条消息，修改方法签名不是void 类型即可， 如下：
 
 ```java
+@MessageMapping("/hello")
+public Greeting greeting(HelloMessage message) throws Exception {  
+    System.out.println("receiving " + message.getName());  
+    System.out.println("connecting successfully.");  
+    return new Greeting("Hello, " + message.getName() + "!");  
+}
+```
+
+对以上代码的分析：
+
+返回的对象将会进行转换（通过消息转换器） 并放到 STOMP 帧的负载中，
+然后发送给**消息代理**（消息代理分为 STOMP代理中继 和 内存消息代理）；
+
+2）**默认情况下：帧所发往的目的地会与触发处理器方法的目的地相同**。
+
+**只不过会添加"/topic"前缀**，所以返回的对象会写入到 STOMP 帧的负载中，并发布到 "/topic/hello" 目的地。
+
+不过，可以通过 `@SendTo` 注解，重载目的地；
+
+```java
 @MessageMapping("/hello")  
 @SendTo("/topic/greetings") // highlight line.  
 public Greeting greeting(HelloMessage message) throws Exception {  
     System.out.println("receiving " + message.getName());  
     System.out.println("connecting successfully.");  
     return new Greeting("Hello, " + message.getName() + "!");  
-}  
+}
 ```
 
-对以上代码的分析：
-
-返回的对象将会进行转换（通过消息转换器） 并放到 STOMP 帧的负载中，
-**然后发送给消息代理（消息代理分为 STOMP代理中继 和 内存消息代理）**；
-
-2）**默认情况下：帧所发往的目的地会与触发处理器方法的目的地相同**。
-
-**只不过会添加"/topic"前缀，所以返回的对象会写入到 STOMP 帧的负载中，并发布到 "/topic/hello" 目的地**。
-
-不过，可以通过 `@SendTo` 注解，重载目的地；
-
-代码同上。
-
 对以上代码的分析：消息将会发布到 `/topic/greetings`， 所有订阅这个主题的应用都会收到这条消息；
+
+>注意：
+>1. `@MessageMapping`默认情况下，帧所发往的目的地会与触发处理器方法的目的地相同，**只不过会添加"/topic"前缀**；
+>2. `@MessageMapping`和`@SendTo`都会将消息发往消息代理；
 
 3）`@SubscriptionMapping` 注解标注的方式也能发送一条消息，作为订阅的回应。
 
@@ -253,8 +265,10 @@ function connect() {
 
 - A2）`@SubscribeMapping` 注解的区别在于： **这里的 Greeting 消息将会直接发送给 client，不用经过消息代理**；
      但，如果为方法添加 @SendTo 注解的话，那么消息将会发送到指定的目的地，这样就会经过代理；
-         
->干货 —— @SubscribeMapping注解返回的消息直接发送到 client，不经过代理，而 @SendTo 注解的路径，就会经过代理，然后再发送到目的地
+
+>注意：
+>`@SubscribeMapping`注解返回的消息直接发送到 client，**不经过代理**，
+>而`@MessageMapping`和`@SendTo`都会将消息发往消息代理。
 
 ![](images/@SubscribeMapping_test.png)
 

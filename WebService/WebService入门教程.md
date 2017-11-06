@@ -1425,7 +1425,9 @@ Header header = soapMessage.getHeader(qName);
 
 # _`Chpt 六、WebService - CXF整合Spring`_
 
->spring4.2.x以上需要使用apache cxf3.x以上的版本
+>Spring4.2.x以上需要使用Apache cxf3.x以上的版本
+
+
 
 首先，cxf和spring整合需要准备如下Jar包：
 
@@ -1488,7 +1490,7 @@ CXF JAX-RS支持（Web应用程序描述语言|http://www.w3.org/Submission/wadl
 <!-- cxf-webservice end -->
 ```
 
-这里我是用Spring的Jar包是Spring官方提供的，并没有使用CXF中的Spring的Jar包。
+这里我用的Spring的Jar包是Spring官方提供的，并没有使用CXF中的Spring的Jar包。
 
 添加这么多文件后，首先在web.xml中添加如下配置： 
 
@@ -1528,7 +1530,7 @@ CXF JAX-RS支持（Web应用程序描述语言|http://www.w3.org/Submission/wadl
 
 这里把`/ws/*`作为对外暴露的路径，和`web service address`要结合起来。
 
-比如说`http://ip:port/appname/ws/helloworld`，就会指向`web service address`为`helloworld`的服务。 
+比如说`http://ip:port/app-name/ws/helloworld`，就会指向`web service address`为`helloworld`的服务。 
 
 >关于`IntrospectorCleanupListener`：
 >1. 此监听器主要用于解决java.beans.Introspector导致的内存泄漏的问题
@@ -1590,14 +1592,19 @@ nested exception is java.io.FileNotFoundException: class path resource [META-INF
 ```java
 package com.github.ittalks.commons.example.ws.cxf.integration.server;
 
-import com.github.ittalks.commons.example.ws.cxf.integration.model.User;
+import javax.jws.WebParam;
+import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
 
 /**
  * Created by 刘春龙 on 2017/10/31.
  */
+@WebService(name = "cUSName",
+        serviceName = "cUSServiceName")
+@SOAPBinding(style = SOAPBinding.Style.RPC)
 public interface IComplexUserService {
 
-    User getUserByName(String name);
+    User getUserByName(@WebParam(name = "uName") String name);
     void setUser(User user);
 }
 ```
@@ -1607,7 +1614,7 @@ public interface IComplexUserService {
 ```java
 package com.github.ittalks.commons.example.ws.cxf.integration.server;
 
-import com.github.ittalks.commons.example.ws.cxf.integration.model.User;
+import org.springframework.stereotype.Service;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -1617,12 +1624,11 @@ import java.util.UUID;
 /**
  * Created by 刘春龙 on 2017/10/31.
  */
-@WebService
-@SOAPBinding(style = SOAPBinding.Style.RPC)
+@Service
 public class ComplexUserService implements IComplexUserService {
-    
+
     @Override
-    public User getUserByName(@WebParam(name = "name") String name) {
+    public User getUserByName(String name) {
         User user = new User();
         user.setId(UUID.randomUUID().toString());
         user.setName(name);
@@ -1633,35 +1639,32 @@ public class ComplexUserService implements IComplexUserService {
 
     @Override
     public void setUser(User user) {
-        System.out.println("############Server setUser###########");
-        System.out.println("setUser:" + user);
+        System.out.println("================= Server setUser =================");
+        System.out.println("设置用户信息：" + user);
     }
 }
 ```
 
-注意的是和Spring集成，这里一定要完成接口实现，如果没有接口的话会有错误的。
-
 下面要在`ws-cxf-server.xml`文件中添加如下配置： 
 
 ```xml
-<bean id="loggingInInterceptor" class="org.apache.cxf.interceptor.LoggingInInterceptor"/>
-<bean id="loggingOutInterceptor" class="org.apache.cxf.interceptor.LoggingOutInterceptor"/>
+<bean id="inMessageInterceptor"
+      class="com.github.ittalks.commons.example.ws.cxf.integration.server.interceptor.MessageInterceptor"
+      c:_0="#{T(org.apache.cxf.phase.Phase).RECEIVE}" />
+<bean id="outMessageInterceptor"
+      class="com.github.ittalks.commons.example.ws.cxf.integration.server.interceptor.MessageInterceptor"
+      c:_0="#{T(org.apache.cxf.phase.Phase).SEND}" />
 
-
-<!--
-    <bean id="userServiceBean" class="com.github.ittalks.commons.example.ws.cxf.integration.server.ComplexUserService"/>
--->
-<jaxws:server id="userService" serviceClass="com.github.ittalks.commons.example.ws.cxf.integration.server.ComplexUserService" address="/users">
-    <!--
-        <jaxws:serviceBean>
-            <ref bean="userServiceBean"/>
-        </jaxws:serviceBean>
-    -->
+<!-- ==========================  integration demo ======================== -->
+<jaxws:server id="userServiceWsServer" address="/users">
+    <jaxws:serviceBean>
+        <ref bean="complexUserService"/>
+    </jaxws:serviceBean>
     <jaxws:inInterceptors>
-        <ref bean="loggingInInterceptor"/>
+        <ref bean="inMessageInterceptor"/>
     </jaxws:inInterceptors>
     <jaxws:outInterceptors>
-        <ref bean="loggingOutInterceptor"/>
+        <ref bean="outMessageInterceptor"/>
     </jaxws:outInterceptors>
 </jaxws:server>
 ```
@@ -1679,9 +1682,10 @@ http://localhost:9090/futureN4J/ws/users?wsdl
 ```java
 package com.github.ittalks.commons.example.ws.cxf.integration.client;
 
-import org.apache.cxf.endpoint.Client;
-import org.apache.cxf.frontend.ClientProxy;
-import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import com.github.ittalks.commons.example.ws.cxf.integration.server.IComplexUserService;
+import com.github.ittalks.commons.example.ws.cxf.integration.server.ComplexUserService;
+import com.github.ittalks.commons.example.ws.cxf.integration.server.User;
+import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 
 /**
  * Created by 刘春龙 on 2017/10/31.
@@ -1690,35 +1694,39 @@ public class _Main {
 
     public static void main(String[] args) {
         /**
-         * 方式一、
+         * 方式一：
          */
-//        JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
-//        factory.setServiceClass(ComplexUserService.class);
-//        factory.setAddress("http://localhost:9090/futureN4J/ws/users");
-//        IComplexUserService service = (IComplexUserService) factory.create();
+        JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
+        factory.setServiceClass(ComplexUserService.class);
+        factory.setAddress("http://localhost:9090/futureN4J/ws/users");
+        IComplexUserService service = (IComplexUserService) factory.create();
 
-//        System.out.println("#############Client getUserByName##############");
-//        User user = service.getUserByName("fnpac");
-//        System.out.println("获取用户信息：" + user);
-//
-//        user.setAddress("China");
-//        service.setUser(user);
-
-        /**
-         * 方式二、
-         */
-        ComplexUserServiceService service = new ComplexUserServiceService();
-        ComplexUserService port = service.getComplexUserServicePort();
-        Client client = ClientProxy.getClient(port);
-        // 设置拦截器
-        client.getOutInterceptors().add(new LoggingOutInterceptor());
-
-        System.out.println("#############Client getUserByName##############");
-        User user = port.getUserByName("fnpac");
+        System.out.println("================= Client getUserByName =================");
+        User user = service.getUserByName("fnpac|凡派,");
         System.out.println("获取用户信息：" + user);
 
         user.setAddress("China");
-        port.setUser(user);
+        service.setUser(user);
+
+        /**
+         * 方式二：
+         */
+//        ComplexUserServiceService service = new ComplexUserServiceService();
+//        ComplexUserService port = service.getComplexUserServicePort();
+//        Client client = ClientProxy.getClient(port);
+//        // 设置拦截器
+//        client.getOutInterceptors().add(new LoggingOutInterceptor());
+//
+//        System.out.println("#############Client getUserByName##############");
+//        User user = port.getUserByName("fnpac|凡派,");
+//        System.out.println("获取用户信息：" + user);
+//
+//        user.setAddress("China");
+//        port.setUser(user);
+
+        /**
+         * 方式三：参见ws-cxf-client.xml
+         */
     }
 }
 ```
@@ -1735,33 +1743,40 @@ public class _Main {
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:jaxws="http://cxf.apache.org/jaxws"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
+       xmlns:jaxrs-client="http://cxf.apache.org/jaxrs-client"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context-3.0.xsd
     http://cxf.apache.org/jaxws
-    http://cxf.apache.org/schemas/jaxws.xsd">
+    http://cxf.apache.org/schemas/jaxws.xsd
+    http://cxf.apache.org/transports/http/configuration
+    http://cxf.apache.org/schemas/configuration/http-conf.xsd http://cxf.apache.org/jaxrs-client http://cxf.apache.org/schemas/jaxrs-client.xsd">
 
-    <!--
-        cxf3.x版本以后，导入如下文件会报错：cxf3.x版本，该文件不存在。
-        <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
-     -->
-    <import resource="classpath:META-INF/cxf/cxf.xml"/>
-    <!-- cxf-servlet.xml 为空配置文件，可以不导入 -->
-    <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+    <!-- 超时设置 -->
+    <http-conf:conduit name="*.http-conduit">
+        <http-conf:client ConnectionTimeout="10000" ReceiveTimeout="60000" />
+    </http-conf:conduit>
 
-    <bean id="loggingInInterceptor" class="org.apache.cxf.interceptor.LoggingInInterceptor"/>
-    <bean id="loggingOutInterceptor" class="org.apache.cxf.interceptor.LoggingOutInterceptor"/>
-
-
-    <jaxws:client id="userWsClient" serviceClass="com.github.ittalks.commons.example.ws.cxf.integration.server.ComplexUserService"
+    <!-- ========================== WebService integration demo ======================== -->
+    <jaxws:client id="userServiceWsClient"
+                  serviceClass="com.github.ittalks.commons.example.ws.cxf.integration.server.IComplexUserService"
                   address="http://localhost:9090/futureN4J/ws/users"/>
 </beans>
 ```
 
-这样我们就可以通过spring获取ID为`userWsClient`的ComplexUserService Bean使用了。
+```xml
+<!-- jax-rs json转换器 -->
+<bean id="jacksonObjectMapper"
+      class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean"></bean>
+<bean id="jacksonProvider"
+      class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider">
+    <property name="mapper" ref="jacksonObjectMapper" />
+</bean>
+```
 
->除了在Spring中配置jaxws:client外，我们还可以把`JaxWsProxyFactoryBean`用Spring类配置。
+这样我们就可以通过spring获取ID为`userServiceWsClient`的ComplexUserService Bean使用了。
 
 # _`Chpt 七、CXF实现一个Restful风格`_
 
