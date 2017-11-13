@@ -80,7 +80,7 @@
 ## [Junit4](https://github.com/fnpac/Note/tree/master/Junit4)
 
 - [聊聊单元测试（一）——EasyMock](https://github.com/fnpac/Note/blob/master/Junit4/%E8%81%8A%E8%81%8A%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94EasyMock.md)
-- [聊聊单元测试（三）——Spring%20Test%20JUnit完美组合](https://github.com/fnpac/Note/blob/master/Junit4/%E8%81%8A%E8%81%8A%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Spring%20Test%20JUnit%E5%AE%8C%E7%BE%8E%E7%BB%84%E5%90%88.md)
+- [聊聊单元测试（三）——Spring&nbsp;Test&nbsp;JUnit完美组合](https://github.com/fnpac/Note/blob/master/Junit4/%E8%81%8A%E8%81%8A%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Spring%20Test%20JUnit%E5%AE%8C%E7%BE%8E%E7%BB%84%E5%90%88.md)
 
 ## [Linux](https://github.com/fnpac/Note/tree/master/Linux)
 
@@ -201,7 +201,7 @@
 
 ### [spring-data](https://github.com/fnpac/Note/tree/master/Spring/spring-data)
 
-- [Spring%20Data%20Mongodb批量更新操作](https://github.com/fnpac/Note/tree/master/Spring/spring-data/Spring%20Data%20Mongodb批量更新操作.md)
+- [Spring&nbsp;Data&nbsp;Mongodb批量更新操作](https://github.com/fnpac/Note/tree/master/Spring/spring-data/Spring%20Data%20Mongodb批量更新操作.md)
 
 ### [spring-session](https://github.com/fnpac/Note/tree/master/Spring/spring-session)
 - [@Async的使用、自定义Executor的配置方法](https://github.com/fnpac/Note/tree/master/Spring/spring-session/@Async的使用、自定义Executor的配置方法.md)
