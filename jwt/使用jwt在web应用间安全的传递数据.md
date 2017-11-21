@@ -1,11 +1,14 @@
 JSON Web Token(JWT)是一个非常轻巧的[规范](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32)。
+
 这个规范允许我们使用JWT在用户和服务器之间传递安全可靠的信息。
 
 让我们来假想一下一个场景。在A用户关注了B用户的时候，系统发邮件给B用户，并且附有一个链接“点此关注A用户”。链接的地址可以是这样的
+
 ```text
 https://your.awesome-app.com/make-friend/?from_user=B&target_user=A
 ```
-上面的URL主要通过URL来描述这个当然这样做有一个弊端，那就是要求用户B用户是一定要先登录的。可不可以简化这个流程，让B用户不用登录就可以完成这个操作。JWT就允许我们做到这点。
+
+上面主要通过URL来描述这个当然这样做有一个弊端，那就是要求用户B用户是一定要先登录的。可不可以简化这个流程，让B用户不用登录就可以完成这个操作。JWT就允许我们做到这点。
 
 ![](images/jwt.png)
 
@@ -63,16 +66,26 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
 ```
 
 ### 签名（Signature）
+
 将上面的两个编码后的字符串都用句号.连接在一起（头部在前），就形成了
 
 ```text
 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcm9tX3VzZXIiOiJCIiwidGFyZ2V0X3VzZXIiOiJBIn0
 ```
+
+其中`eyJmcm9tX3VzZXIiOiJCIiwidGFyZ2V0X3VzZXIiOiJBIn0`是如下字符串编码后的值
+
+```json
+{"from_user":"B","target_user":"A"}
+```
+
 最后，我们将上面拼接完的字符串用HS256算法进行加密。
 在加密的时候，我们还需要提供一个密钥（secret）。如果我们用`mystar`作为密钥的话，那么就可以得到我们加密后的内容
+
 ```text
 rSWamyAYwuHCo7IFAgd1oRpSP7nzL7BF5t7ItqpKViM
 ```
+
 这一部分又叫做签名。
 
 ![](images/sig1.png)
@@ -84,6 +97,7 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcm9tX3VzZXIiOiJCIiwidGFyZ2V0X3VzZXIiOiJ
 ```
 
 于是，我们就可以将邮件中的URL改成
+
 ```text
 https://your.awesome-app.com/make-friend/?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcm9tX3VzZXIiOiJCIiwidGFyZ2V0X3VzZXIiOiJBIn0.rSWamyAYwuHCo7IFAgd1oRpSP7nzL7BF5t7ItqpKViM
 ```
@@ -91,6 +105,7 @@ https://your.awesome-app.com/make-friend/?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1Ni
 这样就可以安全地完成添加好友的操作了！
 
 且慢，我们一定会有一些问题：
+
 ```text
 签名的目的是什么？
 Base64是一种编码，是可逆的，那么我的信息不就被暴露了吗？
@@ -99,6 +114,7 @@ Base64是一种编码，是可逆的，那么我的信息不就被暴露了吗�
 让我逐一为你说明。
 
 ### 签名的目的
+
 最后一步签名的过程，实际上是对头部以及载荷内容进行签名。
 一般而言，加密算法对于不同的输入产生的输出总是不一样的。
 对于两个不同的输入，产生同样的输出的概率极其地小（有可能比我成世界首富的概率还小）。
@@ -113,6 +129,7 @@ Base64是一种编码，是可逆的，那么我的信息不就被暴露了吗�
 如果服务器应用对头部和载荷再次以同样方法签名之后发现，自己计算出来的签名和接受到的签名不一样，那么就说明这个Token的内容被别人动过的，我们应该拒绝这个Token，返回一个HTTP 401 Unauthorized响应。
 
 ### 信息会暴露？
+
 是的。
 
 所以，在JWT中，不应该在载荷里面加入任何敏感的数据。在上面的例子中，我们传输的是用户的User ID。这个值实际上不是什么敏感内容，一般情况下被知道也是安全的。
@@ -120,6 +137,7 @@ Base64是一种编码，是可逆的，那么我的信息不就被暴露了吗�
 但是像密码这样的内容就不能被放在JWT中了。如果将用户的密码放在了JWT中，那么怀有恶意的第三方通过Base64解码就能很快地知道你的密码了。
 
 ### JWT的适用场景
+
 我们可以看到，JWT适合用于向Web应用传递一些非敏感信息。例如在上面提到的完成加好友的操作，还有诸如下订单的操作等等。
 
 其实JWT还经常用于设计用户认证和授权系统，甚至实现Web应用的单点登录。在下一次的文章中，我将为大家系统地总结JWT在用户认证和授权上的应用。如果想要及时地收到下一篇文章的更新。
