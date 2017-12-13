@@ -2,6 +2,10 @@
 
 >声明：现大部分文章为寻找问题时在网上相互转载，在此做个记录，方便自己也方便有类似问题的朋友，故原出处已不好查到，如有侵权，请发邮件<631521383@qq.com>表明文章和原出处地址，我一定在文章中注明。谢谢。 
 
+## [Angular](https://github.com/fnpac/Note/tree/master/Angular)
+
+- [Angular&nbsp;4.x&nbsp;自定义验证指令](https://github.com/fnpac/Note/tree/master/Angular/Angular%204.x%20自定义验证指令.md)
+
 ## [Git](https://github.com/fnpac/Note/tree/master/Git)
 
 - [发布构件到中央仓库](https://github.com/fnpac/Note/tree/master/Git/发布构件到中央仓库.md)
@@ -14,8 +18,8 @@
 
 #### [travis-ci.com](https://github.com/fnpac/Note/tree/master/Github/travis-ci.com)
 
-- [【Github】Getting_started翻译](https://github.com/fnpac/Note/tree/master/Github/travis-ci.com/【Github】Getting_started翻译.md)
-- [【Github】Building_a_Java_project翻译](https://github.com/fnpac/Note/tree/master/Github/travis-ci.com/【Github】Building_a_Java_project翻译.md)
+- [Getting_started翻译](https://github.com/fnpac/Note/tree/master/Github/travis-ci.com/Getting_started翻译.md)
+- [Building_a_Java_project翻译](https://github.com/fnpac/Note/tree/master/Github/travis-ci.com/Building_a_Java_project翻译.md)
 
 ## [Google](https://github.com/fnpac/Note/tree/master/Google)
 
