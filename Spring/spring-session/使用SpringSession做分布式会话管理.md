@@ -64,20 +64,67 @@
 <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
     <property name="connectionFactory" ref="jedisConnFactory" />
 </bean>
- 
-<!-- 将session放入redis -->
+
+<!--
+    Spring Session分布式会话管理配置类
+    
+    `maxInactiveIntervalInSeconds`表示超时时间，默认是1800秒。
+ -->
 <bean id="redisHttpSessionConfiguration"
 class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
     <property name="maxInactiveIntervalInSeconds" value="1800" />
 </bean>
 ```
 
-这里前面几个bean都是操作redis时候使用的，最后一个bean才是spring-session需要用到的，其中的id可以不写或者保持不变，这也是一个约定优于配置的体现。
+`RedisHttpSessionConfiguration`通过`@Configuration`注释，是一个配置类。在其中配置了Spring Session分布式会话管理所需要的Bean。
 
-这个bean中又会自动产生多个bean，用于相关操作，极大的简化了我们的配置项。
-其中有个比较重要的是springSessionRepositoryFilter，它将在下面的代理filter中被调用到。
+声明如下：
 
-`maxInactiveIntervalInSeconds`表示超时时间，默认是1800秒。
+```java
+@Configuration
+@EnableScheduling
+public class RedisHttpSessionConfiguration extends SpringHttpSessionConfiguration
+		implements EmbeddedValueResolverAware, ImportAware {
+```
+
+其中，下面的Bean就需要用到上面咱们配置的`jedisConnFactory`bean。`JedisConnectionFactory`实现了`RedisConnectionFactory`。
+
+```java
+@Bean
+public RedisTemplate<Object, Object> sessionRedisTemplate(
+        RedisConnectionFactory connectionFactory) {
+    RedisTemplate<Object, Object> template = new RedisTemplate<Object, Object>();
+    template.setKeySerializer(new StringRedisSerializer());
+    template.setHashKeySerializer(new StringRedisSerializer());
+    if (this.defaultRedisSerializer != null) {
+        template.setDefaultSerializer(this.defaultRedisSerializer);
+    }
+    template.setConnectionFactory(connectionFactory);
+    return template;
+}
+```
+
+`RedisHttpSessionConfiguration`的父类`SpringHttpSessionConfiguration`通过如下方式配置了`SessionRepositoryFilter`。
+
+```java
+@Bean
+public <S extends ExpiringSession> SessionRepositoryFilter<? extends ExpiringSession> springSessionRepositoryFilter(
+        SessionRepository<S> sessionRepository) {
+    SessionRepositoryFilter<S> sessionRepositoryFilter = new SessionRepositoryFilter<S>(
+            sessionRepository);
+    sessionRepositoryFilter.setServletContext(this.servletContext);
+    if (this.httpSessionStrategy instanceof MultiHttpSessionStrategy) {
+        sessionRepositoryFilter.setHttpSessionStrategy(
+                (MultiHttpSessionStrategy) this.httpSessionStrategy);
+    }
+    else {
+        sessionRepositoryFilter.setHttpSessionStrategy(this.httpSessionStrategy);
+    }
+    return sessionRepositoryFilter;
+}
+```
+
+`springSessionRepositoryFilter` bean 比较重要，它将在下面的代理filter中被调用到。
 
 写上述配置的时候我个人习惯采用xml来定义，官方文档中有采用注解来声明一个配置类。
 
