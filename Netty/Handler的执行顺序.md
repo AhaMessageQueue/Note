@@ -50,6 +50,6 @@ Jan 08, 2018 3:46:41 PM handler.Out3Handler write
 >**在使用Handler的过程中，需要注意**：
 >1. `ChannelInboundHandler`之间的传递，通过调用 `ctx.fireChannelRead(msg)` 实现；
 调用`ctx.write(msg)` 将传递到`ChannelOutboundHandler`。
-2. `ctx.write()`方法执行后，需要调用`flush()`方法才能令它立即执行。
-3. `ChannelOutboundHandler` 在注册的时候需要放在最后一个`ChannelInboundHandler`之前，
+>2. `ctx.write()`方法执行后，需要调用`flush()`方法才能令它立即执行。
+>3. `ChannelOutboundHandler` 在注册的时候需要放在最后一个`ChannelInboundHandler`之前，
 否则将无法传递到ChannelOutboundHandler(比如 `Out5Handler`),当然也可以使用`ctx.channel().write`。
