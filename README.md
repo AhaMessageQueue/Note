@@ -91,12 +91,12 @@
 - [聊聊单元测试（一）——EasyMock](https://github.com/fnpac/Note/blob/master/Junit4/%E8%81%8A%E8%81%8A%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94EasyMock.md)
 - [聊聊单元测试（三）——Spring&nbsp;Test+JUnit完美组合](https://github.com/fnpac/Note/blob/master/Junit4/%E8%81%8A%E8%81%8A%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Spring%20Test+JUnit%E5%AE%8C%E7%BE%8E%E7%BB%84%E5%90%88.md)
 
-## [jwt](https://github.com/fnpac/Note/tree/master/jwt)
+## [Jwt](https://github.com/fnpac/Note/tree/master/Jwt)
 
-- [java-jwt&nbsp;README](https://github.com/fnpac/Note/tree/master/jwt/java-jwt%20README.md)
-- [jwks-rsa&nbsp;README](https://github.com/fnpac/Note/tree/master/jwt/jwks-rsa%20README.md)
-- [使用jwt在web应用间安全的传递数据](https://github.com/fnpac/Note/tree/master/jwt/使用jwt在web应用间安全的传递数据.md)
-- [八幅漫画理解使用jwt设计单点登录系统](https://github.com/fnpac/Note/tree/master/jwt/八幅漫画理解使用jwt设计单点登录系统.md)
+- [java-jwt&nbsp;README](https://github.com/fnpac/Note/tree/master/Jwt/java-jwt%20README.md)
+- [jwks-rsa&nbsp;README](https://github.com/fnpac/Note/tree/master/Jwt/jwks-rsa%20README.md)
+- [使用jwt在web应用间安全的传递数据](https://github.com/fnpac/Note/tree/master/Jwt/使用jwt在web应用间安全的传递数据.md)
+- [八幅漫画理解使用jwt设计单点登录系统](https://github.com/fnpac/Note/tree/master/Jwt/八幅漫画理解使用jwt设计单点登录系统.md)
 
 ## [Linux](https://github.com/fnpac/Note/tree/master/Linux)
 

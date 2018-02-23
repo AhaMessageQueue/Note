@@ -106,22 +106,28 @@ AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(
 
 ```java
 @Configuration
- @ComponentScan("com.acme.app.services")
- public class AppConfig {
-     // various @Bean definitions ...
- }
+@ComponentScan("com.acme.app.services")
+public class AppConfig {
+    // various @Bean definitions ...
+}
 ```
 
 有关详细信息，请参阅`@ComponentScan` javadoc。
 
 >**_@ComponentScan_**
 >
->配置用于`@Configuration`类的组件扫描指令。提供与Spring XML `<context:component-scan>`元素并行的支持。
+>配置用于`@Configuration`类的组件扫描指令。
+>提供与Spring XML `<context:component-scan>`元素并行的支持。
 >
->可以指定basePackageClasses()或basePackages()（或其别名value()）来定义要扫描的特定类包。如果未定义特定的包，则将从声明此注解的类的包中进行扫描。
+>可以指定basePackageClasses()或basePackages()（或其别名value()）来定义要扫描的特定类包。
+如果未定义特定的包，则将从声明此注解的类的包中进行扫描。
 >
->请注意，`<context:component-scan>`元素具有`annotation-config`属性; 但是，这个注解没有。这是因为在几乎所有使用`@ComponentScan`的情况下，默认的_annotation config processing_（例如处理@Autowired之类）_is assumed_。此外，当使用`AnnotationConfigApplicationContext`和web版本`AnnotationConfigWebApplicationContext`时，_annotation config processors_总是被注册，这意味着任何试图在`@ComponentScan`级别禁用它们的尝试都将被忽略。有关使用示例，请参阅@Configuration的Javadoc。
-
+>请注意，`<context:component-scan>`元素具有`annotation-config`属性; 但是，这个注解没有。
+这是因为在几乎所有使用`@ComponentScan`的情况下，默认的_annotation config processing_（例如处理@Autowired之类）_is assumed_。
+此外，当使用`AnnotationConfigApplicationContext`和web版本`AnnotationConfigWebApplicationContext`时，_annotation config processors_总是被注册，这意味着任何试图在`@ComponentScan`级别禁用它们的尝试都将被忽略。
+>
+>有关使用示例，请参阅@Configuration的Javadoc。
+>
 > 💡 
 >- `<context:annotation-config/>`启用`ConfigurationClassPostProcessor`和其他与注解有关的后置处理器来处理`@Configuration`类。
 >- `<context:component-scan>`的`annotation-config`属性作用同`<context:annotation-config/>`。
