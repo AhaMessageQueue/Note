@@ -58,6 +58,10 @@
 - [三、Web服务器应用程序中使用OAuth2.0](https://github.com/fnpac/Note/tree/master/Google/Google_OAuth_2.0_认证指南/三、Web服务器应用程序中使用OAuth2.0.md)
 - [四、服务类应用中使用OAuth2.0](https://github.com/fnpac/Note/tree/master/Google/Google_OAuth_2.0_认证指南/四、服务类应用中使用OAuth2.0.md)
 
+## [Handlebars](https://github.com/fnpac/Note/tree/master/Handlebars)
+
+- [Handlebars中文文档（译自官方版）](https://github.com/fnpac/Note/tree/master/Handlebars/Handlebars中文文档（译自官方版）.md)
+
 ## [Jackson](https://github.com/fnpac/Note/tree/master/Jackson/Jackson处理复杂类型(List,map)两种方法.md)
 
 - [Jackson处理复杂类型(List,map)两种方法](https://github.com/fnpac/Note/tree/master/Jackson)
@@ -210,6 +214,7 @@
 - [关于Spring无法通过注解注入xml配置的bean](https://github.com/fnpac/Note/tree/master/Spring/关于Spring无法通过注解注入xml配置的bean.md)
 - [如何通过@ResponseBody禁用FAIL_ON_EMPTY_BEANS](https://github.com/fnpac/Note/tree/master/Spring/如何通过@ResponseBody禁用FAIL_ON_EMPTY_BEANS.md)
 - [异步请求处理](https://github.com/fnpac/Note/tree/master/Spring/异步请求处理.md)
+- [理解Callable和Spring DeferredResult](https://github.com/fnpac/Note/tree/master/Spring/理解Callable和Spring DeferredResult.md)
 - [自定义HttpMessageConverters](https://github.com/fnpac/Note/tree/master/Spring/自定义HttpMessageConverters.md)
 - [通过spring容器内建的profile功能实现开发环境、测试环境、生产环境配置自动切换](https://github.com/fnpac/Note/tree/master/Spring/通过spring容器内建的profile功能实现开发环境、测试环境、生产环境配置自动切换.md)
 - [Spring配置项&lt;annotation-config&gt;解释说明](https://github.com/fnpac/Note/tree/master/Spring/Spring配置项&lt;annotation-config&gt;解释说明.md)
