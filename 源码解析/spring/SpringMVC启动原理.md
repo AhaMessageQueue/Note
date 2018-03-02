@@ -12,7 +12,7 @@ Tomcat容器的`ServletContainerInitializer`机制的实现，主要交由**Cont
 ContextConfig监听器负责在容器启动时读取每个web应用的`WEB-INF/lib`目录下包含的jar包的`META-INF/services/javax.servlet.ServletContainerInitializer`，以及`web根目录`下的`META-INF/services/javax.servlet.ServletContainerInitializer`，
 通过反射完成这些`ServletContainerInitializer`的实例化，然后再设置到Context容器中，最后Context容器启动时就会分别调用每个`ServletContainerInitializer`的`onStartup`方法，并将感兴趣的类作为参数传入。
 
-![image.png](./images/ServletContainerInitializer.png)
+![image.png](../images/ServletContainerInitializer.png)
 
 基本的实现机制如图，首先通过**ContextConfig监听器**遍历每个jar包或web根目录的`META-INF/services/javax.servlet.ServletContainerInitializer`文件，根据读到的类路径实例化每个`ServletContainerInitializer`；然后再分别将实例化好的`ServletContainerInitializer`设置进Context容器中；最后Context容器启动时分别调用所有`ServletContainerInitializer`对象的`onStartup`方法。
 
@@ -626,7 +626,7 @@ public abstract class AbstractContextLoaderInitializer implements WebApplication
 上面说了这么多，简单总结下。
 
 如图所示：
-![SpringMVC启动原理.jpg](./images/SpringMVC启动原理.jpg)
+![SpringMVC启动原理.jpg](../images/SpringMVC启动原理.jpg)
 
 ---
 
