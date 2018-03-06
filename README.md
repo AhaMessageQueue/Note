@@ -214,32 +214,41 @@
 - [关于Spring无法通过注解注入xml配置的bean](https://github.com/fnpac/Note/tree/master/Spring/关于Spring无法通过注解注入xml配置的bean.md)
 - [如何通过@ResponseBody禁用FAIL_ON_EMPTY_BEANS](https://github.com/fnpac/Note/tree/master/Spring/如何通过@ResponseBody禁用FAIL_ON_EMPTY_BEANS.md)
 - [异步请求处理](https://github.com/fnpac/Note/tree/master/Spring/异步请求处理.md)
-- [理解Callable和Spring DeferredResult](https://github.com/fnpac/Note/tree/master/Spring/理解Callable和Spring DeferredResult.md)
+- [理解Callable和Spring&nbsp;DeferredResult](https://github.com/fnpac/Note/tree/master/Spring/理解Callable和Spring%20DeferredResult.md)
 - [自定义HttpMessageConverters](https://github.com/fnpac/Note/tree/master/Spring/自定义HttpMessageConverters.md)
 - [通过spring容器内建的profile功能实现开发环境、测试环境、生产环境配置自动切换](https://github.com/fnpac/Note/tree/master/Spring/通过spring容器内建的profile功能实现开发环境、测试环境、生产环境配置自动切换.md)
 - [Spring配置项&lt;annotation-config&gt;解释说明](https://github.com/fnpac/Note/tree/master/Spring/Spring配置项&lt;annotation-config&gt;解释说明.md)
 - [JavaConfig](https://github.com/fnpac/Note/tree/master/SpringJavaConfig.md)
 
-### [spring-boot](https://github.com/fnpac/Note/tree/master/Spring/spring-boot)
-- [SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案](https://github.com/fnpac/Note/tree/master/Spring/spring-boot/SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案.md)
-- [关于配置文件映射Pojo问题](https://github.com/fnpac/Note/tree/master/Spring/spring-boot/关于配置文件映射Pojo问题.md)
-- [@Async的使用、自定义Executor的配置方法](https://github.com/fnpac/Note/tree/master/Spring/spring-boot/@Async的使用、自定义Executor的配置方法.md)
+### [boot](https://github.com/fnpac/Note/tree/master/Spring/boot)
+- [SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案](https://github.com/fnpac/Note/tree/master/Spring/boot/SpringBoot1.5以上版本@ConfigurationProperties取消location后的替代方案.md)
+- [关于配置文件映射Pojo问题](https://github.com/fnpac/Note/tree/master/Spring/boot/关于配置文件映射Pojo问题.md)
+- [@Async的使用、自定义Executor的配置方法](https://github.com/fnpac/Note/tree/master/Spring/boot/@Async的使用、自定义Executor的配置方法.md)
 
-### [spring-data](https://github.com/fnpac/Note/tree/master/Spring/spring-data)
+### [data](https://github.com/fnpac/Note/tree/master/Spring/data)
 
-- [Spring&nbsp;Data&nbsp;Mongodb批量更新操作](https://github.com/fnpac/Note/tree/master/Spring/spring-data/Spring%20Data%20Mongodb批量更新操作.md)
+- [Spring&nbsp;Data&nbsp;Mongodb批量更新操作](https://github.com/fnpac/Note/tree/master/Spring/data/Spring%20Data%20Mongodb批量更新操作.md)
 
-### [spring-session](https://github.com/fnpac/Note/tree/master/Spring/spring-session)
-- [@Async的使用、自定义Executor的配置方法](https://github.com/fnpac/Note/tree/master/Spring/spring-session/@Async的使用、自定义Executor的配置方法.md)
-- [SpringBoot使用Redis存储HttpSession](https://github.com/fnpac/Note/tree/master/Spring/spring-session/SpringBoot使用Redis存储HttpSession.md)
-- [使用SpringSession做分布式会话管理](https://github.com/fnpac/Note/tree/master/Spring/spring-session/使用SpringSession做分布式会话管理.md)
+### [session](https://github.com/fnpac/Note/tree/master/Spring/session)
+- [@Async的使用、自定义Executor的配置方法](https://github.com/fnpac/Note/tree/master/Spring/session/@Async的使用、自定义Executor的配置方法.md)
+- [SpringBoot使用Redis存储HttpSession](https://github.com/fnpac/Note/tree/master/Spring/session/SpringBoot使用Redis存储HttpSession.md)
+- [使用SpringSession做分布式会话管理](https://github.com/fnpac/Note/tree/master/Spring/session/使用SpringSession做分布式会话管理.md)
+
+### [transaction](https://github.com/fnpac/Note/tree/master/Spring/transaction)
+
+- [事务回滚策略](https://github.com/fnpac/Note/tree/master/Spring/transaction/事务回滚策略.md)
 
 ## [源码解析](https://github.com/fnpac/Note/tree/master/源码解析)
 
-#### [spring](https://github.com/fnpac/Note/tree/master/源码解析/spring)
+#### [Spring](https://github.com/fnpac/Note/tree/master/源码解析/Spring)
 
-- [SpringMVC启动原理](https://github.com/fnpac/Note/tree/master/源码解析/spring/SpringMVC启动原理.md)
-- [SpringMVC配置原理](https://github.com/fnpac/Note/tree/master/源码解析/spring/SpringMVC配置原理.md)
+- [SpringMVC启动原理](https://github.com/fnpac/Note/tree/master/源码解析/Spring/SpringMVC启动原理.md)
+- [SpringMVC配置原理](https://github.com/fnpac/Note/tree/master/源码解析/Spring/SpringMVC配置原理.md)
+- [EnableTransactionManagement&nbsp;API](https://github.com/fnpac/Note/tree/master/源码解析/Spring/EnableTransactionManagement%20API.md)
+
+#### [SpringBoot](https://github.com/fnpac/Note/tree/master/源码解析/SpringBoot)
+
+- [HttpMessageConverter的配置原理](https://github.com/fnpac/Note/tree/master/源码解析/SpringBoot/HttpMessageConverter的配置原理.md)
 
 ## [WebService](https://github.com/fnpac/Note/tree/master/WebService)
 
